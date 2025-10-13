@@ -9,6 +9,7 @@ extern "C" {
 #include "main.h"
 #include "gpio.h"
 #include "usart.h"
+#include "i2c.h"
 // #include "iwdg.h"
 #include <stdbool.h>
 #include "tim.h"
@@ -22,7 +23,13 @@ extern "C" {
 #define BSP_IO_ENABLE 0
 #define BSP_IWDG_ENABLE 0
 #define BSP_FLASH_ENABLE 0
+#define BSP_IIC_ENABLE 1
 #define BSP_SIM_ENABLE 1
+
+#if BSP_IIC_ENABLE 
+#define BSP_BUS_NUM 1
+#endif
+
 #if BSP_ANALOG_ENABLE
 #define BSP_NUM_ADC_CHANNEL 5
 #endif
@@ -55,7 +62,7 @@ extern "C" {
  * This macro specifies the total count of gas sensor that are present and can be controlled
  * via the board support package (BSP). Adjust this value according to the hardware configuration.
  */
-#define BSP_GAS_NUM 3
+#define BSP_GAS_NUM 0
 /**
  * @def BSP_LED_NUM
  * @brief Defines the number of LEDs available on the board.
@@ -105,11 +112,12 @@ extern "C" {
  * on the board. Update this value if the RS485 interface is connected to a
  * different port.
  */
-#define BSP_RS485_COM_PORT 0
+#define BSP_RS485_1_COM_PORT 2
+#define BSP_RS485_2_COM_PORT 3
 #define BSP_SIM_COM_PORT 1
-#define BSP_GPS_COM_PORT 2
-#define BSP_SPS30_COM_PORT 3
-#define BSP_GAS_COM_PORT 4
+// #define BSP_GPS_COM_PORT 2
+// #define BSP_SPS30_COM_PORT 3
+// #define BSP_GAS_COM_PORT 4
 /**
  * @def TIMER0
  * @brief Macro definition for timer 0 identifier.
@@ -311,14 +319,20 @@ extern "C" {
  *         of data flow in RS485 communication (enabling transmission mode).
  * @note   Make sure USART2_DE_GPIO_Port and USART2_DE_Pin are properly defined.
  */
-#define bsp_uart2_de_on() HAL_GPIO_WritePin(GPIOB,GPIO_PIN_3,GPIO_PIN_SET)
+#define bsp_485_de_on(com) do { \
+    if (com == BSP_RS485_1_COM_PORT) HAL_GPIO_WritePin(UART4_DE_GPIO_Port, UART4_DE_Pin, GPIO_PIN_SET);\
+    else if (com == BSP_RS485_2_COM_PORT) HAL_GPIO_WritePin(UART5_DE_GPIO_Port, UART5_DE_Pin, GPIO_PIN_SET);\
+} while(0)
 /**
  * @brief Disables the UART2 Driver Enable (DE) pin by setting it to a low logic level.
  *
  * This macro sets the USART2_DE_Pin on the USART2_DE_GPIO_Port to GPIO_PIN_RESET,
  * effectively turning off the driver enable signal for RS485 communication.
  */
-#define bsp_uart2_de_off() HAL_GPIO_WritePin(GPIOB,GPIO_PIN_3,GPIO_PIN_RESET)
+#define bsp_485_de_off(com) do { \
+    if (com == BSP_RS485_1_COM_PORT) HAL_GPIO_WritePin(UART4_DE_GPIO_Port, UART4_DE_Pin, GPIO_PIN_RESET);\
+    else if (com == BSP_RS485_2_COM_PORT) HAL_GPIO_WritePin(UART5_DE_GPIO_Port, UART5_DE_Pin, GPIO_PIN_RESET);\
+} while(0)
 
 #if BSP_TIMER_NUM > 0
 /**
@@ -495,6 +509,11 @@ uint32_t bsp_com_init();
 
 #if BSP_ADDRESS_NUM > 0
 uint8_t bsp_get_address();
+#endif
+
+#if BSP_IIC_ENABLE 
+uint32_t bsp_iic_write(int bus_num, uint8_t address, uint8_t *data, uint16_t size);
+uint32_t bsp_iic_read(int bus_num, uint8_t address, uint8_t *data, uint16_t size);
 #endif
 
 void bsp_init();

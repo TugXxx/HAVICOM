@@ -59,6 +59,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define ETH_RST_Pin GPIO_PIN_2
 #define ETH_RST_GPIO_Port GPIOH
+#define UART5_DE_Pin GPIO_PIN_12
+#define UART5_DE_GPIO_Port GPIOH
+#define UART4_DE_Pin GPIO_PIN_15
+#define UART4_DE_GPIO_Port GPIOH
 #define LTE_RST_Pin GPIO_PIN_4
 #define LTE_RST_GPIO_Port GPIOI
 #define LTE_PWR_Pin GPIO_PIN_5

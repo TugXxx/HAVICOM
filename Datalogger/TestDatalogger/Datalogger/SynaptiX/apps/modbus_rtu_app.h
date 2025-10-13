@@ -1,0 +1,1 @@
+void mbm_rtu_app_init(void);

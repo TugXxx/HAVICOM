@@ -13,6 +13,11 @@
         "semphr.h": "c",
         "mqtt_server_app.h": "c",
         "config_manager.h": "c",
-        "event_groups.h": "c"
+        "event_groups.h": "c",
+        "rtc_app.h": "c",
+        "rtc_rx8130ce.h": "c",
+        "time.h": "c",
+        "stdbool.h": "c",
+        "iic_master.h": "c"
     }
 }

@@ -17,7 +17,7 @@ static bool uart_tranfer_done[BSP_UART_NUM] = {false};
 static uint8_t uart_data[BSP_UART_NUM];
 static uint8_t uart_data_dma[BSP_UART_NUM][MAX_UART_BUFF_SIZE];
 
-UART_HandleTypeDef *puart[BSP_UART_NUM] = {&hlpuart1, &huart8};// &huart2, &huart3, &huart4,&huart5};
+UART_HandleTypeDef *puart[BSP_UART_NUM] = {&hlpuart1, &huart8, &huart4, &huart5};// &huart4,&huart5};
 
 uint32_t bsp_com_write(int com_num, uint8_t *buff, uint32_t len)
 {
@@ -43,7 +43,7 @@ typedef struct BSP_COM_Tx_Callback
     void *arg;
 } BSP_COM_Tx_Callback_t;
 
-BSP_COM_Tx_Callback_t com_tx_callback[3];
+BSP_COM_Tx_Callback_t com_tx_callback[BSP_UART_NUM];
 
 void bsp_com_set_tx_callback(int com, void (*callback)(void *arg), void *arg)
 {
@@ -51,6 +51,24 @@ void bsp_com_set_tx_callback(int com, void (*callback)(void *arg), void *arg)
         return;
     com_tx_callback[com].cb = callback;
     com_tx_callback[com].arg = arg;
+}
+
+typedef void (*com_rx_cb)(void *arg);
+typedef struct BSP_COM_Rx_Callback
+{
+    /* data */
+    com_rx_cb cb;
+    void *arg;
+} BSP_COM_Rx_Callback_t;
+
+BSP_COM_Rx_Callback_t com_rx_callback[BSP_UART_NUM];
+
+void bsp_com_set_rx_callback(int com, void (*callback)(void *arg), void *arg)
+{
+    if (com < 0 || com >= BSP_UART_NUM)
+        return;
+    com_rx_callback[com].cb = callback;
+    com_rx_callback[com].arg = arg;
 }
 
 uint32_t  bsp_com_read(int com_num, uint8_t *buff, uint32_t len)
@@ -81,6 +99,8 @@ uint32_t bsp_com_init()
     {
         HAL_UART_Receive_IT(puart[i], &uart_data[i], 1);
         cqueue_init_static(&uart_queue[i], uart_buff[i], MAX_UART_BUFF_SIZE, sizeof(uint8_t));
+        bsp_com_set_rx_callback(i, NULL, NULL);
+        bsp_com_set_tx_callback(i, NULL, NULL);
     }
     return 0;
 }
@@ -107,6 +127,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         {
             cqueue_send(&uart_queue[i], &uart_data[i]);
             HAL_UART_Receive_IT(puart[i], &uart_data[i], 1);
+            if (com_rx_callback[i].cb != NULL)
+                com_rx_callback[i].cb(com_rx_callback[i].arg);
+            return;
             return;
         }
     }
@@ -254,11 +277,48 @@ static void log_puts(const char *s)
 }
 #endif
 #endif
+
+I2C_HandleTypeDef *bus_iic[BSP_BUS_NUM] = {&hi2c1};
+
+#if BSP_IIC_ENABLE
+uint32_t bsp_iic_bus_init()
+{
+    for (int i = 0; i < BSP_BUS_NUM; i++)
+    {
+        if (HAL_I2C_GetState(bus_iic[i]) == HAL_I2C_STATE_RESET)
+        {
+            if (HAL_I2C_Init(bus_iic[i]) != HAL_OK)
+            {
+                log_error(TAG, "bsp_iic_bus_init || I2C bus %d init failed", i);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+uint32_t bsp_iic_write(int bus_num, uint8_t address, uint8_t *data, uint16_t size)
+{
+    if (bus_num < 0 || bus_num >= BSP_BUS_NUM)
+        return 1;
+    return HAL_I2C_Master_Transmit(bus_iic[bus_num], address, data, size, HAL_MAX_DELAY);
+}
+
+uint32_t bsp_iic_read(int bus_num, uint8_t address, uint8_t *data, uint16_t size)
+{
+    if (bus_num < 0 || bus_num >= BSP_BUS_NUM)
+        return 1;
+    return HAL_I2C_Master_Receive(bus_iic[bus_num], address, data, size, HAL_MAX_DELAY);
+}
+#endif
 void bsp_init()
 {
     bsp_eth_reset_on();
 #if BSP_UART_NUM > 0
     bsp_com_init();
+#endif
+#if BSP_IIC_ENABLE
+    bsp_iic_bus_init();
 #endif
     logger_init(BSP_LOG_LEVEL, log_puts);
 #if BSP_BUTTON_EN

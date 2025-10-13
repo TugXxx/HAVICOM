@@ -109,6 +109,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/apps/mqtt_server}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/services/cJSON}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/apps/device_state}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/board/rtc_rx8130ce}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/services/iic_master}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/board/nanomodbus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SynaptiX/board/nanomodbus/port}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1075712127" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -138,11 +142,11 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry excluding="apps/cli_shell_command.c|apps/shell_app.c|board/A7677S/|board/gas_sensor/|board/GP02/|board/IMU_BNO055/|board/SHT3x/|board/SPS30/|services/communicate/|services/lora/|services/mbport/|services/shell/|services/zigbee/|apps/app_settings.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SynaptiX"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="LWIP"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry excluding="apps/cli_shell_command.c|apps/shell_app.c|board/A7677S/|board/gas_sensor/|board/GP02/|board/IMU_BNO055/|board/rtc_rx8130ce/|board/SHT3x/|board/SPS30/|services/communicate/|services/iic_master/|services/lora/|services/mbport/|services/shell/|services/zigbee/|apps/app_settings.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SynaptiX"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
