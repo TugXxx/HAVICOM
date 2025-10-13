@@ -1,0 +1,17 @@
+../SynaptiX/board/board.c:22:10:bsp_com_write	8	static
+../SynaptiX/board/board.c:246:13:log_puts	8	static
+../SynaptiX/board/board.c:29:10:bsp_com_write_it	8	static
+../SynaptiX/board/board.c:48:6:bsp_com_set_tx_callback	0	static
+../SynaptiX/board/board.c:56:11:bsp_com_read	24	static
+../SynaptiX/board/board.c:70:10:bsp_com_available	0	static
+../SynaptiX/board/board.c:78:10:bsp_com_init	16	static
+../SynaptiX/board/board.c:88:6:HAL_UART_TxCpltCallback	8	static
+../SynaptiX/board/board.c:102:6:HAL_UART_RxCpltCallback	16	static
+../SynaptiX/board/board.c:114:6:HAL_UARTEx_RxEventCallback	16	static
+../SynaptiX/board/board.c:128:5:__io_putchar	16	static
+../SynaptiX/board/board.c:131:5:__io_getchar	16	static
+../SynaptiX/board/board.c:145:6:bsp_timer_set_handle	0	static
+../SynaptiX/board/board.c:151:6:bsp_timer_start	8	static
+../SynaptiX/board/board.c:157:6:bsp_timer_stop	8	static
+../SynaptiX/board/board.c:164:6:BSP_TIM_PeriodElapsedCallback	8	static
+../SynaptiX/board/board.c:257:6:bsp_init	8	static

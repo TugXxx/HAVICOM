@@ -1,0 +1,12 @@
+../Drivers/CMSIS/Include/core_cm7.h:2156:34:__NVIC_SystemReset	1
+../SynaptiX/apps/pppos_app.c:207:13:pppos_status_callback	2
+../SynaptiX/apps/pppos_app.c:326:13:ppp_phase_cb	15
+../SynaptiX/apps/pppos_app.c:216:13:ppp_link_status_cb	14
+../SynaptiX/apps/pppos_app.c:199:14:ppp_output_cb	1
+../SynaptiX/apps/pppos_app.c:389:13:pwr	2
+../SynaptiX/apps/pppos_app.c:409:13:rst	1
+../SynaptiX/apps/pppos_app.c:428:13:dns_initialize	1
+../SynaptiX/apps/pppos_app.c:79:6:pppos_start	1
+../SynaptiX/apps/pppos_app.c:95:6:pppos_stop	1
+../SynaptiX/apps/pppos_app.c:112:6:pppos_app_task	4
+../SynaptiX/apps/pppos_app.c:193:6:pppos_app_init	1

@@ -73,8 +73,8 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SIM_NET_Pin SIM_1V8_Pin */
-  GPIO_InitStruct.Pin = SIM_NET_Pin|SIM_1V8_Pin;
+  /*Configure GPIO pins : PI6 SIM_1V8_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|SIM_1V8_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);

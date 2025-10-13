@@ -1,0 +1,4 @@
+../SynaptiX/board/modem/modem.c:8:6:modem_init	1
+../SynaptiX/board/modem/modem.c:16:5:modem_send_cmd	9
+../SynaptiX/board/modem/modem.c:50:6:modem_set_mode	1
+../SynaptiX/board/modem/modem.c:54:16:modem_at_cmd_init	1

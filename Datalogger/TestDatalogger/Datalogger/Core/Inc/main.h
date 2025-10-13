@@ -63,8 +63,6 @@ void Error_Handler(void);
 #define LTE_RST_GPIO_Port GPIOI
 #define LTE_PWR_Pin GPIO_PIN_5
 #define LTE_PWR_GPIO_Port GPIOI
-#define SIM_NET_Pin GPIO_PIN_6
-#define SIM_NET_GPIO_Port GPIOI
 #define SIM_1V8_Pin GPIO_PIN_7
 #define SIM_1V8_GPIO_Port GPIOI
 

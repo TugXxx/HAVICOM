@@ -43,7 +43,7 @@ void MX_LPUART1_UART_Init(void)
 
   /* USER CODE END LPUART1_Init 1 */
   hlpuart1.Instance = LPUART1;
-  hlpuart1.Init.BaudRate = 209700;
+  hlpuart1.Init.BaudRate = 115200;
   hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
   hlpuart1.Init.StopBits = UART_STOPBITS_1;
   hlpuart1.Init.Parity = UART_PARITY_NONE;
@@ -311,7 +311,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**UART4 GPIO Configuration
     PI9     ------> UART4_RX
-    PA0     ------> UART4_TX
+    PA12     ------> UART4_TX
     */
     GPIO_InitStruct.Pin = GPIO_PIN_9;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -320,11 +320,11 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Alternate = GPIO_AF8_UART4;
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_0;
+    GPIO_InitStruct.Pin = GPIO_PIN_12;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF8_UART4;
+    GPIO_InitStruct.Alternate = GPIO_AF6_UART4;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* UART4 interrupt Init */
@@ -480,11 +480,11 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
     /**UART4 GPIO Configuration
     PI9     ------> UART4_RX
-    PA0     ------> UART4_TX
+    PA12     ------> UART4_TX
     */
     HAL_GPIO_DeInit(GPIOI, GPIO_PIN_9);
 
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_0);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_12);
 
     /* UART4 interrupt Deinit */
     HAL_NVIC_DisableIRQ(UART4_IRQn);

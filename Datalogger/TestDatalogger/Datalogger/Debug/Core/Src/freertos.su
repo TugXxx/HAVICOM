@@ -1,0 +1,3 @@
+../Core/Src/freertos.c:127:6:StartDefaultTask	8	static
+../Core/Src/freertos.c:72:6:vApplicationStackOverflowHook	0	static
+../Core/Src/freertos.c:85:6:MX_FREERTOS_Init	8	static

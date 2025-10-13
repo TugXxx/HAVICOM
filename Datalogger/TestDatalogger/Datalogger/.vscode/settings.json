@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "board.h": "c",
+        "stdio.h": "c",
+        "app_config.h": "c",
+        "logger.h": "c",
+        "button.h": "c",
+        "eth_custom_phy_interface.h": "c",
+        "main.h": "c",
+        "app.h": "c",
+        "cmsis_os.h": "c",
+        "lwip.h": "c",
+        "semphr.h": "c",
+        "mqtt_server_app.h": "c",
+        "config_manager.h": "c",
+        "event_groups.h": "c"
+    }
+}
