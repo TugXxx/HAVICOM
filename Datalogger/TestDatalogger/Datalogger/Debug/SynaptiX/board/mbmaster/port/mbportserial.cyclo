@@ -1,0 +1,6 @@
+../SynaptiX/board/mbmaster/port/mbportserial.c:228:1:prrvUSARTTxISR	4
+../SynaptiX/board/mbmaster/port/mbportserial.c:260:1:prrvUSARTRxISR	3
+../SynaptiX/board/mbmaster/port/mbportserial.c:67:1:eMBPSerialInit	5
+../SynaptiX/board/mbmaster/port/mbportserial.c:133:1:eMBPSerialClose	5
+../SynaptiX/board/mbmaster/port/mbportserial.c:156:1:eMBPSerialTxEnable	8
+../SynaptiX/board/mbmaster/port/mbportserial.c:198:1:eMBPSerialRxEnable	8

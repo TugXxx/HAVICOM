@@ -24,6 +24,6 @@
 ../Middlewares/Third_Party/LwIP/src/api/api_lib.c:703:1:netconn_recv_data_tcp	64	static
 ../Middlewares/Third_Party/LwIP/src/api/api_lib.c:782:1:netconn_recv_tcp_pbuf	8	static
 ../Middlewares/Third_Party/LwIP/src/api/api_lib.c:803:1:netconn_recv_tcp_pbuf_flags	8	static
-../Middlewares/Third_Party/LwIP/src/api/api_lib.c:860:1:netconn_recv	24	static
+../Middlewares/Third_Party/LwIP/src/api/api_lib.c:860:1:netconn_recv	32	static
 ../Middlewares/Third_Party/LwIP/src/api/api_lib.c:1163:1:netconn_shutdown	8	static
 ../Middlewares/Third_Party/LwIP/src/api/api_lib.c:1274:1:netconn_gethostbyname	32	static

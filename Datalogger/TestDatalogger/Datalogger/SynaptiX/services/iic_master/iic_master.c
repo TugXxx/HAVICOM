@@ -4,7 +4,7 @@
 
 static const char *TAG = "iic_master";
 
-int iic_master_bus_init(iic_bus_handle_t *bus, void *handle) {
+int iic_master_bus_init(iic_bus_handle_t *bus, int handle) {
     if (bus == NULL) {
         log_error(TAG, "iic_master_bus_init || Invalid argument");
         return -1;
@@ -33,6 +33,7 @@ int iic_master_add_dev_to_bus(iic_bus_handle_t *bus, iic_dev_handle_t *dev, uint
 }
 
 int iic_master_write(iic_dev_handle_t *dev, uint8_t *data, uint16_t size) {
+    int err = -1;
     if (dev == NULL) {
         // log_error(TAG, "iic_master_write || Invalid argument");
         return -1;
@@ -50,17 +51,17 @@ int iic_master_write(iic_dev_handle_t *dev, uint8_t *data, uint16_t size) {
         return -1; 
     }
 #endif
-    if (dev->bus_handle->handle == NULL)
-    {
-        return -1; 
-    }
+    // if (dev->bus_handle->handle == NULL)
+    // {
+    //     return -1; 
+    // }
     // IIC_Handle_t iic_bsp;
     // iic_bsp.handle = dev->bus_handle->handle;
     // log_info(TAG, "%02X %02X %d", dev->address, *data, size);
 #ifdef FREERTOS_EN
     xSemaphoreTake(dev->bus_handle->bus_lock_mux, portMAX_DELAY);
 #endif
-    int err = bsp_iic_write(&dev->bus_handle->handle, dev->address, data, size);
+    err = bsp_iic_write(dev->bus_handle->handle, dev->address, data, size);
 #ifdef FREERTOS_EN
     xSemaphoreGive(dev->bus_handle->bus_lock_mux);
 #endif
@@ -85,16 +86,16 @@ int iic_master_read(iic_dev_handle_t *dev, uint8_t *data, uint16_t size) {
         return -1; 
     }
 #endif   
-    if (dev->bus_handle->handle == NULL)
-    {
-        return -1; 
-    }
+    // if (dev->bus_handle->handle == NULL)
+    // {
+    //     return -1; 
+    // }
     // IIC_Handle_t iic_bsp;
     // iic_bsp.handle = dev->bus_handle->handle;
 #ifdef FREERTOS_EN
     xSemaphoreTake(dev->bus_handle->bus_lock_mux, portMAX_DELAY);
 #endif
-    int err = bsp_iic_read(&dev->bus_handle->handle, dev->address, data, size);
+    int err = bsp_iic_read(dev->bus_handle->handle, dev->address, data, size);
 #ifdef FREERTOS_EN
     xSemaphoreGive(dev->bus_handle->bus_lock_mux);
 #endif

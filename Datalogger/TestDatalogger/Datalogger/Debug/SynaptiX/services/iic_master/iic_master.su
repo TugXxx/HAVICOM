@@ -1,0 +1,4 @@
+../SynaptiX/services/iic_master/iic_master.c:7:5:iic_master_bus_init	8	static
+../SynaptiX/services/iic_master/iic_master.c:24:5:iic_master_add_dev_to_bus	8	static
+../SynaptiX/services/iic_master/iic_master.c:35:5:iic_master_write	16	static
+../SynaptiX/services/iic_master/iic_master.c:71:5:iic_master_read	16	static

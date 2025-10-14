@@ -1,10 +1,9 @@
-../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:612:13:ppp_log_write	8	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:87:8:ppp_strlcpy	24	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:105:8:ppp_strlcat	24	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:135:5:ppp_vslprintf	96	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:135:5:ppp_vslprintf	112	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:120:5:ppp_slprintf	16	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:605:13:ppp_logit	1032	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:572:6:ppp_print_string	24	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:572:6:ppp_print_string	40	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:632:6:ppp_fatal	16	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:645:6:ppp_error	16	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:659:6:ppp_warn	16	static

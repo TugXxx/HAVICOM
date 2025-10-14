@@ -1,0 +1,10 @@
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:70:1:vMBMMaskWriteRegisterPolled	32	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:204:1:vMBMWriteSingleRegisterPolled	32	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:328:1:vMBMReadHoldingRegistersPolled	32	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:457:1:vMBMWriteMultipleRegistersPolled	32	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:610:1:vMBMReadWriteMultipleRegistersPolled	40	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:773:1:eMBMMaskWriteRegister	56	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:787:1:eMBMWriteSingleRegister	48	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:802:1:eMBMReadHoldingRegisters	64	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:820:1:eMBMWriteMultipleRegisters	56	static
+../SynaptiX/board/mbmaster/functions/mbmfuncholding.c:837:1:eMBMReadWriteMultipleRegisters	80	static

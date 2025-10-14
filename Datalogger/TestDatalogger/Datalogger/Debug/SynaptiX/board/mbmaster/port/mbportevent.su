@@ -1,0 +1,4 @@
+../SynaptiX/board/mbmaster/port/mbportevent.c:47:1:eMBPEventCreate	16	static
+../SynaptiX/board/mbmaster/port/mbportevent.c:80:1:eMBPEventPost	16	static
+../SynaptiX/board/mbmaster/port/mbportevent.c:96:1:bMBPEventGet	16	static
+../SynaptiX/board/mbmaster/port/mbportevent.c:116:1:vMBPEventDelete	8	static

@@ -1,6 +1,6 @@
 ../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:50:7:sys_mbox_new	8	static
 ../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:77:6:sys_mbox_free	8	static
-../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:104:6:sys_mbox_post	16	static
+../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:104:6:sys_mbox_post	24	static
 ../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:116:7:sys_mbox_trypost	16	static
 ../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:143:7:sys_mbox_trypost_fromisr	8	static
 ../Middlewares/Third_Party/LwIP/system/OS/sys_arch.c:164:7:sys_arch_mbox_fetch	24	static

@@ -163,23 +163,23 @@ int __io_getchar(void){
 #if BSP_TIMER_NUM > 0
 
 static timer_handle tim_handle[BSP_TIMER_NUM] = {NULL};
-static TIM_HandleTypeDef *ptimer[BSP_TIMER_NUM] = {&htim1,&htim2,&htim3};
+static TIM_HandleTypeDef *ptimer[BSP_TIMER_NUM] = {&htim1,&htim2,&htim3,&htim4,&htim5};
 
 void bsp_timer_set_handle(int timer, timer_handle handle)
 {
-    if (0 < timer || timer >= 2)
+    if (0 > timer || timer >= BSP_TIMER_NUM)
         return;
     tim_handle[timer] = handle;
 }
 void bsp_timer_start(int timer)
 {
-    if (0 < timer || timer >= 2)
+    if (0 > timer || timer >= BSP_TIMER_NUM)
         return;
     HAL_TIM_Base_Start_IT(ptimer[timer]);
 }
 void bsp_timer_stop(int timer)
 {
-    if (0 < timer || timer >= 2)
+    if (0 > timer || timer >= BSP_TIMER_NUM)
         return;
     HAL_TIM_Base_Stop_IT(ptimer[timer]);
 }
@@ -268,7 +268,7 @@ uint8_t bsp_get_address()
 #if BSP_COM_ENABLE
 static void log_puts(const char *s)
 {
-    bsp_com_write(0, (uint8_t *)s, strlen(s));
+    bsp_com_write(BSP_DEBUG_COM_PORT, (uint8_t *)s, strlen(s));
 }
 #else
 static void log_puts(const char *s)
@@ -314,6 +314,7 @@ uint32_t bsp_iic_read(int bus_num, uint8_t address, uint8_t *data, uint16_t size
 void bsp_init()
 {
     bsp_eth_reset_on();
+    bsp_485_de_off(BSP_RS485_1_COM_PORT);
 #if BSP_UART_NUM > 0
     bsp_com_init();
 #endif

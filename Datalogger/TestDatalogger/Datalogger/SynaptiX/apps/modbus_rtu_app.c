@@ -1,290 +1,189 @@
-/* -------------------------------------- SYSTEM INCLUDES --------------------------------------*/
+/* ----------------------- System includes ----------------------------------*/
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "cJSON.h"
+
+/* ----------------------- Platform includes --------------------------------*/
 #include "FreeRTOS.h"
 #include "task.h"
-#include "semphr.h"
-#include "cJSON.h"
-/* ------------------------------------- FLATFORM INCLUDES -------------------------------------*/
-#include "nanomodbus.h"
+#include "board.h"
 #include "logger.h"
-#include <port/port.h>
+#include "semphr.h"
 
-static const char *TAG = "ModbusRTU";
-// #include "../SynaptiXThingsBoardSDK/Widgets/include/modbus_widgets.h"
-// #include "../SynaptiXThingsBoardSDK/Widgets/include/thingsboard_widgets.h"
+/* ----------------------- Modbus includes ----------------------------------*/
+#include "mbport.h"
+#include "mbm.h"
+#include "common/mbportlayer.h"
 
-#define MAX_COMMANDS 50 // Maximum number of commands
-#define MUTEX_LOCK(mutex)                                             \
-   do                                                                 \
-   {                                                                  \
-      if (xSemaphoreTake(mutex, portMAX_DELAY) != pdTRUE)             \
-      {                                                               \
-         log_error(TAG, "Error: Failed to take mutex!\r\n");                  \
-         /* Handle error appropriately, e.g., return an error code */ \
-      }                                                               \
-   } while (0)
+/* ----------------------------------------- DEFINES ------------------------------------------*/
+#define MBM_SERIAL_PORT (BSP_RS485_1_COM_PORT)
+#define MBM_SERIAL_BAUDRATE (115200)
+#define MBM_PARITY (MB_PAR_NONE)
 
-#define MUTEX_UNLOCK(mutex)                                    \
-   do                                                          \
-   {                                                           \
-      if (xSemaphoreGive(mutex) != pdTRUE)                     \
-      {                                                        \
-         log_error(TAG, "Error: Failed to give mutex!\r\n");           \
-         /* Handle error appropriately, e.g., log the error */ \
-      }                                                        \
-   } while (0)
+#define MAX_REQUESTS 18
+#define MBM_TIME_REQUEST_MS 1
 
-/* ------------------------------------- EXTERN VARIABLES --------------------------------------*/
-/* Global manager handle */
+/* ------------------------------------- TYPE DEFINATIONS --------------------------------------*/
 typedef struct
 {
     uint8_t slave_id;
-    uint8_t reg_type;
+    uint8_t function_code;
     uint16_t start_addr;
     uint8_t quantity;
     void *buffer;
+
+    // BOOL    in_use;
 } xMBMRequest_t;
 
-static nmbs_t nmbs;
-uint8_t write_data[1000];
-static SemaphoreHandle_t xRWMutex = NULL;
-/* ------------------------------------- EXTERN FUNCTION ---------------------------------------*/
+typedef struct
+{
+    uint8_t slave_id;
+    uint8_t func_code;
+    uint16_t start_addr;
+    uint16_t quantity;
+    void *w_data; // Pointer to data buffer for reading/writing
+    bool w_flag;  // when user wants to write data, rise this flag and fall it when data is written
+} xMBMWrite_t;
+
+typedef enum
+{
+    FUNC_READ_COILS = 0x01,
+    FUNC_READ_DISCRETE_INPUTS = 0x02,
+    FUNC_READ_HOLDING_REGISTERS = 0x03,
+    FUNC_READ_INPUT_REGISTERS = 0x04,
+    FUNC_WRITE_SINGLE_COIL = 0x05,
+    FUNC_WRITE_SINGLE_REGISTER = 0x06,
+    FUNC_WRITE_MULTIPLE_COILS = 0x0F,
+    FUNC_WRITE_MULTIPLE_REGISTERS = 0x10,
+    // Add more function codes as needed
+} msm_function_code_t;
+
+/* ------------------------------------- EXTERN VARIABLES --------------------------------------*/
+
+
+/* ------------------------------------- GLOBAL VARIABLES --------------------------------------*/
 uint16_t holding_register[256] = {0};
-xMBMRequest_t modbus_requests[2] = {
-    // {slave_id, reg_type, start_addr, quantity, buffer}
-    {1, 0x03, 1, 10, &holding_register[0]},
-    {1, 0x03, 2, 20, &holding_register[1]},
+
+xMBMRequest_t modbus_requests[3] = {
+    // {slave_id, function_code, start_addr, quantity, buffer}
+    {1, 0x03, 0, 5, &holding_register[0]},
+    {1, 0x03, 5, 5, &holding_register[1]},
+    {1, 0x03, 10, 5, &holding_register[2]},
+
 };
-/* ------------------------------------- STATIC FUNCTION ----------------------------------------*/
 
-/* ----------------------------------- CODE IMPLEMENTATION --------------------------------------*/
-void mbm_rtu_read_task(void *vParameters)
+xMBMWrite_t *write_req = NULL;
+xMBMaster xMBMaster_no1;
+xMBHandle xMBMHdl_no1 = NULL;
+
+static SemaphoreHandle_t xRWMutex = NULL;
+/* ------------------------------------- LOCAL VARIABLES ---------------------------------------*/
+static const char *TAG = "MBM_RTU_APP";
+
+/* ------------------------------------- STATIC FUNCTIONS --------------------------------------*/
+static BOOL mbm_de_high();
+static BOOL mbm_de_low();
+extern void mbm_write_coil(bool state);
+int tmrHdl = 0;
+int tmrTimeoutHdl = 1;
+/* ------------------------------------ START IMPLEMENTATION -----------------------------------*/
+void modbus_master_rtu_task(void *vParameters)
 {
-   // restart_modbus:
-   log_error(TAG, "mbm_rtu_read_task started\r\n");
+    eMBErrorCode eStatus;
 
+    /* Initialize the Modbus Master RTU handle. */
+    xMBMaster_no1.rs485_de_deselect = mbm_de_low;
+    xMBMaster_no1.rs485_de_select = mbm_de_high;
+    xMBMaster_no1.xTmrHdl = &tmrHdl;
+    xMBMaster_no1.xTmrTimeoutHdl = &tmrTimeoutHdl;
+    log_info(TAG, "Modbus Master RTU Task started");
 
-   // Initialize NMBS client
-   nmbs_error err = nmbs_client_init(&nmbs);
-   if (err != NMBS_ERROR_NONE)
-   {
-      log_error(TAG, "nmbs_client_init failed with status: %d\r\n", err);
-      return;
-   }
-
-   nmbs_error status = NMBS_ERROR_NONE;
-   xMBMRequest_t *current = &modbus_requests[0];
-   while (1)
-   {
-
-
-         status = NMBS_ERROR_NONE;
-
-         if (current->buffer != NULL)
-         {
-            nmbs_set_destination_rtu_address(&nmbs, current->slave_id);
-
-            switch (current->reg_type)
+    if (MB_ENOERR ==
+        (eStatus = eMBMSerialInit(&xMBMaster_no1, MB_RTU, MBM_SERIAL_PORT, MBM_SERIAL_BAUDRATE, MBM_PARITY)))
+    {
+        xMBMHdl_no1 = xMBMaster_no1.xMBMHdl;
+        log_info(TAG, "eMBMSerialInit successful");
+        // mosbus_dynamic_allocation_init();
+        do
+        {
+            eStatus = MB_ENOERR;
+            for (int i = 0; i < 2; i++)
             {
-            case 0x01:
-               // Implement reading coils if needed
-               MUTEX_LOCK(xRWMutex);
-               status = nmbs_read_coils(&nmbs,
-                                        current->start_addr,
-                                        current->quantity,
-                                        current->buffer);
-               MUTEX_UNLOCK(xRWMutex);
-               // log_error(TAG, "Read: slave id %d, coils [%s] with status: %d\r\n", current->slave_id, current->name, status);
-               // if (status != NMBS_ERROR_NONE)
-               // {
-               //    log_error(TAG, "Read coils [%s] failed with status: %d\r\n", current->name, status);
-               // }
-               // else
-               // {
-               //    uint8_t *data = (uint8_t *)current->buffer;
-               //    uint8_t buffer_size = (current->quantity + 7) / 8;
-               //    log_error(TAG, "Read coils [%s] SUCCESS - Data received:\r\n", current->name);
-               //    for (uint16_t i = 0; i < buffer_size; i++)
-               //    {
-               //       log_error(TAG, "0x%02X ", data[i]);
-               //       // uint16_t byte_index = i / 8;
-               //       // uint8_t bit_index = i % 8;
-               //       // bool bit_value = (coil_buffer[byte_index] >> bit_index) & 0x01;
+                xSemaphoreTake(xRWMutex, portMAX_DELAY);
+                eStatus = eMBMReadHoldingRegisters(xMBMHdl_no1,
+                                                   modbus_requests[i].slave_id,
+                                                   modbus_requests[i].start_addr,
+                                                   modbus_requests[i].quantity,
+                                                   (uint16_t *)modbus_requests[i].buffer);
+                xSemaphoreGive(xRWMutex);
+                 log_info(TAG, "eMBMReadHoldingRegisters: %d",eStatus);
+                if (modbus_requests[i].buffer == NULL) {
+                    continue;
+                }
 
-               //       // log_error(TAG, "%d", bit_value ? 1 : 0);
-               //       // if (i < current->quantity - 1)
-               //       // {
-               //       //    log_error(TAG, ", ");
-               //       // }
-               //    }
-               //    log_error(TAG, "\r\n");
-               // }
-               break;
-            case 0x02:
-               // Implement reading discrete inputs if needed
-               MUTEX_LOCK(xRWMutex);
-               status = nmbs_read_discrete_inputs(&nmbs,
-                                                  current->start_addr,
-                                                  current->quantity,
-                                                  current->buffer);
-               MUTEX_UNLOCK(xRWMutex);
-               // log_error(TAG, "Read: slave id %d, discrete inputs [%s] with status: %d\r\n", current->slave_id, current->name, status);
-               break;
-            case 0x03:
-               MUTEX_LOCK(xRWMutex);
-               status = nmbs_read_holding_registers(&nmbs,
-                                                    current->start_addr,
-                                                    current->quantity,
-                                                    (uint16_t *)current->buffer);
-               MUTEX_UNLOCK(xRWMutex);
-               // log_error(TAG, "Read: slave id %d, holding registers [%s] with status: %d\r\n", current->slave_id, current->name, status);
-               if (status != NMBS_ERROR_NONE)
-               {
-                  log_error(TAG, "Read holding failed with status: %d", status);
-               }
-               else
-               {
-                  log_info(TAG, "Read holding SUCCESS - Data received:");
-                  uint16_t *data = (uint16_t *)current->buffer;
-                  for (uint16_t i = 0; i < current->quantity; i++)
-                  {
-                     log_info(TAG, "Reg[%d] = 0x%04X (%d)", current->start_addr + i, data[i], data[i]);
-                  }
-               }
-               break;
-            case 0x04:
-               // Implement reading input registers if needed
-               MUTEX_LOCK(xRWMutex);
-               status = nmbs_read_input_registers(&nmbs,
-                                                  current->start_addr,
-                                                  current->quantity,
-                                                  (uint16_t *)current->buffer);
-               MUTEX_UNLOCK(xRWMutex);
-               // log_error(TAG, "Read: slave id %d, input registers [%s] with status: %d\r\n", current->slave_id, current->name, status);
-               break;
+                // switch (modbus_requests[i].function_code) {
+                //     case 0x01: // Read Coils
+                //         // if( MB_ENOERR !=  (eStatus = eMBMReadCoils( xMBMHdl_no1,
+                //         //                                         modbus_requests[i].slave_id,
+                //         //                                         modbus_requests[i].start_addr,
+                //         //                                         modbus_requests[i].quantity,
+                //         //                                         (uint8_t *) modbus_requests[i].buffer )))
+                //         // {
+                //         //     log_error(TAG, "eMBMReadCoils: %d",eStatus);
+                //         // }
+                //         // break;
 
-            default:
-               // log_error(TAG, "Please implement reading for this register type\r\n");
-               break;
-            }
-         }
-         vTaskDelay(2000);
+                //     case 0x03: // Read holding register
+                //         eStatus = eMBMReadHoldingRegisters( xMBMHdl_no1,
+                //                                             modbus_requests[i].slave_id,
+                //                                             modbus_requests[i].start_addr,
+                //                                             modbus_requests[i].quantity,
+                //                                             (uint16_t *) modbus_requests[i].buffer );
 
-   }
+                //              log_info(TAG, "eMBMReadHoldingRegisters: %d",eStatus);
+                //         break;
+
+                //     case 0x04: // Input Register
+                //         break;
+                //     default:
+
+                // } // End switch
+
+                // Delay for next request
+                vTaskDelay(3000);
+            } // End for
+        } while (TRUE);
+
+        //        mosbus_dynamic_allocation_free();
+    } // End if
+    else
+    {
+        log_info(TAG, "eMBMSerialInit failed with status: %d", eStatus);
+        MBP_ASSERT(0);
+    }
+
+    if (MB_ENOERR != (eStatus = eMBMClose(xMBMHdl_no1)))
+    {
+        MBP_ASSERT(0);
+    }
 }
 
-void mbm_rtu_write_task(void *vParameters)
-{
-//    // Initialize write request structure
-//    if (write_req == NULL) // To avoid reallocation, when restarting task
-//    {
-//       write_req = MDM_MALLOC(sizeof(mdm_write_t));
-//       if (write_req == NULL)
-//       {
-//          log_error(TAG, "Failed to allocate memory for write request\r\n");
-//          return;
-//       }
-//       write_req->w_data = &write_data;
-//       write_req->w_flag = false;
-//    }
-//    else
-//    {
-//       write_req->w_flag = false;
-//    }
-
-//    while (1)
-//    {
-// //      if (config_changed) {
-// //         log_warn(TAG, "Config changed, stopping write task to re-initialize Modbus Master RTU");
-// //         // Wait until the configuration is applied
-// //         while(config_changed) {
-// //             vTaskDelay(1000);
-// //         }
-// //      }
-//       // To prioritize write task than read task
-//       if ((nmbs.isInitialized == true) && (write_req != NULL) && write_req->w_flag)
-//       {
-//          mdm_write_registers(&nmbs, write_req);
-//          vTaskDelay(500);
-//       }
-//       vTaskDelay(1);
-//    }
-}
 
 void mbm_rtu_app_init(void)
 {
-   // To protect modbus buffers and shared resources during reads and writes
-   xRWMutex = xSemaphoreCreateMutex();
-
-   // To prioritize write task than read task
-   xTaskCreate(mbm_rtu_read_task, "mbm_rtu_read_task", 512, NULL, 4, NULL);
-   // xTaskCreate(mbm_rtu_write_task, "mbm_rtu_write_task", 512, NULL, 5, NULL);
+    xRWMutex = xSemaphoreCreateMutex();
+    xTaskCreate(modbus_master_rtu_task, "modbus_master_rtu_task", 1024 * 2, NULL, 4, NULL);
 }
 
-/**
- * @brief Main write function - dispatches to appropriate write function based on function code
- */
-// static mdm_error_t mdm_write_registers(nmbs_t *nmbs, mdm_write_t *write_req)
-// {
-//    if (write_req == NULL)
-//    {
-//       log_error(TAG, "Write request is NULL\r\n");
-//       return MDM_ERROR_NULL_POINTER;
-//    }
-
-//    if (write_req->w_data == NULL)
-//    {
-//       log_error(TAG, "Write data buffer is NULL\r\n");
-//       return MDM_ERROR_NULL_POINTER;
-//    }
-
-//    mdm_error_t result = MDM_ERROR_INVALID_PARAMETER;
-
-//    switch (write_req->func_code)
-//    {
-//    case MDM_FUNC_WRITE_SINGLE_COIL:
-//       xSemaphoreTake(xRWMutex, portMAX_DELAY);
-//       result = nmbs_write_single_coil(nmbs, write_req->start_addr, *(bool *)write_req->w_data);
-//       xSemaphoreGive(xRWMutex);
-//       log_error(TAG, "Write single coil with status: %d\r\n", result);
-//       break;
-
-//    case MDM_FUNC_WRITE_SINGLE_REGISTER:
-//       xSemaphoreTake(xRWMutex, portMAX_DELAY);
-//       result = nmbs_write_single_register(nmbs, write_req->start_addr, *(uint16_t *)write_req->w_data);
-//       xSemaphoreGive(xRWMutex);
-//       log_error(TAG, "Write single register with status: %d\r\n", result);
-//       break;
-
-//    case MDM_FUNC_WRITE_MULTIPLE_COILS:
-//       xSemaphoreTake(xRWMutex, portMAX_DELAY);
-//       result = nmbs_write_multiple_coils(nmbs, write_req->start_addr, write_req->quantity,
-//                                          (uint8_t *)write_req->w_data);
-//       xSemaphoreGive(xRWMutex);
-//       log_error(TAG, "Write multiple coil with status: %d\r\n", result);
-//       break;
-
-//    case MDM_FUNC_WRITE_MULTIPLE_REGISTERS:
-
-//       MUTEX_LOCK(xRWMutex);
-//       result = nmbs_write_multiple_registers(nmbs, write_req->start_addr, write_req->quantity,
-//                                              (uint16_t *)write_req->w_data);
-//       MUTEX_UNLOCK(xRWMutex);
-//       log_error(TAG, "Write multiple register with status: %d\r\n", result);
-//       break;
-
-//    default:
-//       log_error(TAG, "Unsupported write function code: 0x%02X\r\n", write_req->func_code);
-//       return MDM_ERROR_INVALID_PARAMETER;
-//    }
-
-//    // Clear write flag after operation
-//    if (result == MDM_OK)
-//    {
-//       write_req->w_flag = false;
-//       log_error(TAG, "Write operation completed successfully\r\n");
-//    }
-//    return result;
-// }
-
+static BOOL mbm_de_low()
+{
+    bsp_485_de_on(BSP_RS485_1_COM_PORT);
+    return 0;
+}
+static BOOL mbm_de_high()
+{
+    bsp_485_de_off(BSP_RS485_1_COM_PORT);
+    return 0;
+}
 

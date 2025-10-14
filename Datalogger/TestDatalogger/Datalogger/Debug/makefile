@@ -10,9 +10,19 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include SynaptiX/utils/subdir.mk
+-include SynaptiX/services/iic_master/subdir.mk
 -include SynaptiX/services/cJSON/subdir.mk
 -include SynaptiX/services/subdir.mk
+-include SynaptiX/board/rtc_rx8130ce/subdir.mk
 -include SynaptiX/board/modem/subdir.mk
+-include SynaptiX/board/mbmaster/udp/subdir.mk
+-include SynaptiX/board/mbmaster/tcp/subdir.mk
+-include SynaptiX/board/mbmaster/rtu/subdir.mk
+-include SynaptiX/board/mbmaster/port/subdir.mk
+-include SynaptiX/board/mbmaster/functions/subdir.mk
+-include SynaptiX/board/mbmaster/common/subdir.mk
+-include SynaptiX/board/mbmaster/ascii/subdir.mk
+-include SynaptiX/board/mbmaster/subdir.mk
 -include SynaptiX/board/dp83848/subdir.mk
 -include SynaptiX/board/A76xx/subdir.mk
 -include SynaptiX/board/subdir.mk

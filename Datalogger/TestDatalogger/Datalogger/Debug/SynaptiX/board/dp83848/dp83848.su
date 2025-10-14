@@ -1,5 +1,5 @@
 ../SynaptiX/board/dp83848/dp83848.c:60:10:DP83848_RegisterBusIO	0	static
-../SynaptiX/board/dp83848/dp83848.c:83:10:DP83848_Init	24	static
+../SynaptiX/board/dp83848/dp83848.c:83:10:DP83848_Init	32	static
 ../SynaptiX/board/dp83848/dp83848.c:138:9:DP83848_DeInit	8	static
 ../SynaptiX/board/dp83848/dp83848.c:163:9:DP83848_DisablePowerDownMode	16	static
 ../SynaptiX/board/dp83848/dp83848.c:193:9:DP83848_EnablePowerDownMode	16	static

@@ -17,4 +17,4 @@
 ../SynaptiX/board/A76xx/A76xx.c:385:5:a76xx_operation_selection	88	static
 ../SynaptiX/board/A76xx/A76xx.c:400:5:a76xx_operation_get_mode	48	static
 ../SynaptiX/board/A76xx/A76xx.c:412:5:a76xx_get_ip_context	48	static
-../SynaptiX/board/A76xx/A76xx.c:9:6:a76xx_init	16	static
+../SynaptiX/board/A76xx/A76xx.c:9:6:a76xx_init	40	static

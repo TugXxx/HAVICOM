@@ -1,5 +1,5 @@
 ../Drivers/BSP/Components/lan8742/lan8742.c:60:10:LAN8742_RegisterBusIO	0	static
-../Drivers/BSP/Components/lan8742/lan8742.c:83:10:LAN8742_Init	24	static
+../Drivers/BSP/Components/lan8742/lan8742.c:83:10:LAN8742_Init	32	static
 ../Drivers/BSP/Components/lan8742/lan8742.c:138:9:LAN8742_DeInit	8	static
 ../Drivers/BSP/Components/lan8742/lan8742.c:163:9:LAN8742_DisablePowerDownMode	16	static
 ../Drivers/BSP/Components/lan8742/lan8742.c:193:9:LAN8742_EnablePowerDownMode	16	static

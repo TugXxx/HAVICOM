@@ -1,6 +1,5 @@
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:467:14:ppp_netif_init_cb	0	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:504:14:ppp_netif_output	32	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:488:14:ppp_netif_output_ip4	8	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:488:14:ppp_netif_output_ip4	24	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:254:6:ppp_set_notify_phase_callback	8	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:393:7:ppp_free	16	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c:413:1:ppp_ioctl	0	static

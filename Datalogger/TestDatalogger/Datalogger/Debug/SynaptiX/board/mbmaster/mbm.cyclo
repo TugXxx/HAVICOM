@@ -1,0 +1,8 @@
+../SynaptiX/board/mbmaster/mbm.c:197:1:eMBMReleaseHdl	10
+../SynaptiX/board/mbmaster/mbm.c:243:1:bMBMResponseTimeoutCB	2
+../SynaptiX/board/mbmaster/mbm.c:132:1:bMBMIsHdlValid	3
+../SynaptiX/board/mbmaster/mbm.c:292:1:eMBMSetSlaveTimeout	4
+../SynaptiX/board/mbmaster/mbm.c:312:1:eMBMClose	4
+../SynaptiX/board/mbmaster/mbm.c:337:1:vMBMMasterTransactionPolled	12
+../SynaptiX/board/mbmaster/mbm.c:523:1:eMBMSerialInitExt	8
+../SynaptiX/board/mbmaster/mbm.c:513:1:eMBMSerialInit	1

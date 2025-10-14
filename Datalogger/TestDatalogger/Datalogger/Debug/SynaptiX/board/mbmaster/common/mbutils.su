@@ -1,0 +1,5 @@
+../SynaptiX/board/mbmaster/common/mbutils.c:31:1:usUtlCRC16GetTab	0	static
+../SynaptiX/board/mbmaster/common/mbutils.c:56:1:prvCRC16Update	8	static
+../SynaptiX/board/mbmaster/common/mbutils.c:230:1:bMBGuessRTUFrameIsComplete	0	static
+../SynaptiX/board/mbmaster/common/mbutils.c:241:1:eMBErrorcodeToException	0	static
+../SynaptiX/board/mbmaster/common/mbutils.c:282:1:eMBExceptionToErrorcode	0	static

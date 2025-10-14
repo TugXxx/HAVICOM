@@ -1,0 +1,6 @@
+../SynaptiX/board/mbmaster/port/mbporttimer.c:240:13:prvvTimerISR	16	static
+../SynaptiX/board/mbmaster/port/mbporttimer.c:61:1:eMBPTimerInit	32	static
+../SynaptiX/board/mbmaster/port/mbporttimer.c:179:1:vMBPTimerClose	0	static
+../SynaptiX/board/mbmaster/port/mbporttimer.c:190:1:eMBPTimerSetTimeout	16	static
+../SynaptiX/board/mbmaster/port/mbporttimer.c:207:1:eMBPTimerStart	16	static
+../SynaptiX/board/mbmaster/port/mbporttimer.c:224:1:eMBPTimerStop	16	static

@@ -1,0 +1,2 @@
+../SynaptiX/board/mbmaster/functions/mbmfunccoils.c:316:1:vMBMWriteCoilsPolled	32	static
+../SynaptiX/board/mbmaster/functions/mbmfunccoils.c:494:1:eMBMWriteCoils	56	static

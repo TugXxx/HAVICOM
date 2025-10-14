@@ -1,0 +1,8 @@
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:456:1:eMBMSerialRTUFrameReceive	24	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:332:1:eMBMSerialRTUFrameSend	24	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:977:1:bMBMSerialRTUT35CB	16	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:813:1:bMBMSerialRTUTransmitterEmptyAPIV2CB	32	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:909:1:vMBMSerialRTUReceiverAPIV2CB	24	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:608:1:eMBMSerialRTUFrameCloseInternal	16	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:591:1:eMBMSerialRTUFrameClose	8	static
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:158:1:eMBMSerialRTUInit	40	static

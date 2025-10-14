@@ -6,16 +6,17 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define FREERTOS_EN
 #ifdef FREERTOS_EN
-// #include "FreeRTOS.h"
-// #include "semphr.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 #endif
 
 typedef struct {
 #ifdef FREERTOS_EN
     SemaphoreHandle_t bus_lock_mux;
 #endif
-    void *handle;
+    int handle;
     size_t device_count;
 } iic_bus_handle_t;
 
@@ -25,7 +26,7 @@ typedef struct {
     uint8_t *reg;
 } iic_dev_handle_t;
 
-int iic_master_bus_init(iic_bus_handle_t *bus, void *handle);
+int iic_master_bus_init(iic_bus_handle_t *bus, int handle);
 int iic_master_add_dev_to_bus(iic_bus_handle_t *bus, iic_dev_handle_t *dev, uint8_t address, uint8_t *reg);
 int iic_master_write(iic_dev_handle_t *dev, uint8_t *data, uint16_t size);
 int iic_master_read(iic_dev_handle_t *dev, uint8_t *data, uint16_t size);

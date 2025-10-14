@@ -1,0 +1,8 @@
+../SynaptiX/board/mbmaster/mbm.c:197:1:eMBMReleaseHdl	16	static
+../SynaptiX/board/mbmaster/mbm.c:243:1:bMBMResponseTimeoutCB	8	static
+../SynaptiX/board/mbmaster/mbm.c:132:1:bMBMIsHdlValid	0	static
+../SynaptiX/board/mbmaster/mbm.c:292:1:eMBMSetSlaveTimeout	16	static
+../SynaptiX/board/mbmaster/mbm.c:312:1:eMBMClose	8	static
+../SynaptiX/board/mbmaster/mbm.c:337:1:vMBMMasterTransactionPolled	32	static
+../SynaptiX/board/mbmaster/mbm.c:523:1:eMBMSerialInitExt	32	static
+../SynaptiX/board/mbmaster/mbm.c:513:1:eMBMSerialInit	24	static

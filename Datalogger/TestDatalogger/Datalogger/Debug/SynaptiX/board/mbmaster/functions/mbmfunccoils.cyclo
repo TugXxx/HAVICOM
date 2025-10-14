@@ -1,0 +1,2 @@
+../SynaptiX/board/mbmaster/functions/mbmfunccoils.c:316:1:vMBMWriteCoilsPolled	20
+../SynaptiX/board/mbmaster/functions/mbmfunccoils.c:494:1:eMBMWriteCoils	2

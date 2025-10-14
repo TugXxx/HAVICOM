@@ -18,6 +18,8 @@
         "rtc_rx8130ce.h": "c",
         "time.h": "c",
         "stdbool.h": "c",
-        "iic_master.h": "c"
+        "iic_master.h": "c",
+        "mbportlayer.h": "c",
+        "mbport.h": "c"
     }
 }

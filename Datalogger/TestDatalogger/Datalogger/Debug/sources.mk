@@ -48,8 +48,18 @@ SynaptiX/apps/mqtt_server \
 SynaptiX/board/A76xx \
 SynaptiX/board \
 SynaptiX/board/dp83848 \
+SynaptiX/board/mbmaster/ascii \
+SynaptiX/board/mbmaster/common \
+SynaptiX/board/mbmaster/functions \
+SynaptiX/board/mbmaster \
+SynaptiX/board/mbmaster/port \
+SynaptiX/board/mbmaster/rtu \
+SynaptiX/board/mbmaster/tcp \
+SynaptiX/board/mbmaster/udp \
 SynaptiX/board/modem \
+SynaptiX/board/rtc_rx8130ce \
 SynaptiX/services/cJSON \
+SynaptiX/services/iic_master \
 SynaptiX/services \
 SynaptiX/utils \
 

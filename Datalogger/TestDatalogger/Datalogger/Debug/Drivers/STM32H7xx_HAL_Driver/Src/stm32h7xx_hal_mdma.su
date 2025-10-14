@@ -1,5 +1,4 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:1760:13:MDMA_SetConfig	8	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:1814:13:MDMA_Init	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:218:19:HAL_MDMA_Init	16	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:294:19:HAL_MDMA_DeInit	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:347:19:HAL_MDMA_ConfigPostRequestMask	8	static
@@ -7,7 +6,7 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:474:19:HAL_MDMA_UnRegisterCallback	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:568:19:HAL_MDMA_LinkedList_CreateNode	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:711:19:HAL_MDMA_LinkedList_AddNode	16	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:844:19:HAL_MDMA_LinkedList_RemoveNode	8	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:844:19:HAL_MDMA_LinkedList_RemoveNode	12	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:957:19:HAL_MDMA_LinkedList_EnableCircularMode	4	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:1001:19:HAL_MDMA_LinkedList_DisableCircularMode	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c:1072:19:HAL_MDMA_Start	24	static

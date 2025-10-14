@@ -1,4 +1,4 @@
 ../SynaptiX/services/logger.c:25:13:serial_write_func	1
 ../SynaptiX/services/logger.c:60:6:log_func	3
-../SynaptiX/services/logger.c:95:6:log_print_hex	4
+../SynaptiX/services/logger.c:95:6:log_print_hex	5
 ../SynaptiX/services/logger.c:120:6:logger_init	1

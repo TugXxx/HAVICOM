@@ -3,12 +3,12 @@
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:120:6:HAL_ETHEx_SetARPAddressMatch	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:138:19:HAL_ETHEx_SetL4FilterConfig	8	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:187:19:HAL_ETHEx_GetL4FilterConfig	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:238:19:HAL_ETHEx_SetL3FilterConfig	12	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:238:19:HAL_ETHEx_SetL3FilterConfig	8	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:332:19:HAL_ETHEx_GetL3FilterConfig	4	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:390:6:HAL_ETHEx_EnableL3L4Filtering	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:402:6:HAL_ETHEx_DisableL3L4Filtering	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:416:19:HAL_ETHEx_GetRxVLANConfig	0	static
-../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:451:19:HAL_ETHEx_SetRxVLANConfig	4	static
+../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:451:19:HAL_ETHEx_SetRxVLANConfig	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:479:6:HAL_ETHEx_SetVLANHashTable	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:495:19:HAL_ETHEx_GetTxVLANConfig	0	static
 ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c:530:19:HAL_ETHEx_SetTxVLANConfig	4	static

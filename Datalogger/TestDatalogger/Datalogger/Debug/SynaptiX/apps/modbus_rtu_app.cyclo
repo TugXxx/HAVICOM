@@ -1,0 +1,4 @@
+../SynaptiX/apps/modbus_rtu_app.c:91:6:modbus_master_rtu_task	5
+../SynaptiX/apps/modbus_rtu_app.c:184:13:mbm_de_high	1
+../SynaptiX/apps/modbus_rtu_app.c:179:13:mbm_de_low	1
+../SynaptiX/apps/modbus_rtu_app.c:173:6:mbm_rtu_app_init	1

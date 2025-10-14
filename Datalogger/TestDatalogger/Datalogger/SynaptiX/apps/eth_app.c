@@ -26,7 +26,6 @@ void dns_found_cb(const char *name, const ip_addr_t *ipaddr, void *callback_arg)
 
 void eth_init(void *arg)
 {
-	bsp_eth_reset_on();
 	while(gnetif.ip_addr.addr == 0){
 		vTaskDelay(1);
 	}

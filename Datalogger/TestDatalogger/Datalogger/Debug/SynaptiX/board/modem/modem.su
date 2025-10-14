@@ -1,4 +1,4 @@
 ../SynaptiX/board/modem/modem.c:8:6:modem_init	8	static
-../SynaptiX/board/modem/modem.c:16:5:modem_send_cmd	24	static
+../SynaptiX/board/modem/modem.c:16:5:modem_send_cmd	32	static
 ../SynaptiX/board/modem/modem.c:50:6:modem_set_mode	0	static
-../SynaptiX/board/modem/modem.c:54:16:modem_at_cmd_init	4	static
+../SynaptiX/board/modem/modem.c:54:16:modem_at_cmd_init	8	static

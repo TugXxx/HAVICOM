@@ -1,5 +1,3 @@
-../Middlewares/Third_Party/LwIP/src/api/tcpip.c:84:1:tcpip_timeouts_mbox_fetch	24	static
-../Middlewares/Third_Party/LwIP/src/api/tcpip.c:156:1:tcpip_thread_handle_msg	8	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:127:1:tcpip_thread	16	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:627:1:pbuf_free_int	8	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:240:1:tcpip_inpkt	24	static

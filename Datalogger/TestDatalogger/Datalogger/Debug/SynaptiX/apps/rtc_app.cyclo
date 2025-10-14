@@ -1,0 +1,2 @@
+../SynaptiX/apps/rtc_app.c:22:13:rtc_task	3
+../SynaptiX/apps/rtc_app.c:16:6:rtc_app_init	1

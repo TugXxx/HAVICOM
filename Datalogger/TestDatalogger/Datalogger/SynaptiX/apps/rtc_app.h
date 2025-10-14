@@ -1,0 +1,1 @@
+void rtc_app_init(void);

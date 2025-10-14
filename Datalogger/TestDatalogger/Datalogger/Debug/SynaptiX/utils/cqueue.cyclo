@@ -1,6 +1,6 @@
 ../SynaptiX/utils/cqueue.c:5:11:cqueue_init_static	1
 ../SynaptiX/utils/cqueue.c:14:11:cqueue_init	1
-../SynaptiX/utils/cqueue.c:51:6:cqueue_is_empty	1
 ../SynaptiX/utils/cqueue.c:28:6:cqueue_receive	2
-../SynaptiX/utils/cqueue.c:54:6:cqueue_is_full	1
 ../SynaptiX/utils/cqueue.c:39:6:cqueue_send	2
+../SynaptiX/utils/cqueue.c:51:6:cqueue_is_empty	1
+../SynaptiX/utils/cqueue.c:54:6:cqueue_is_full	1

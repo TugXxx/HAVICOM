@@ -1,0 +1,6 @@
+../SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.c:30:12:rx8130ce_write_reg	16	dynamic
+../SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.c:46:5:rx8130ce_stop	16	static
+../SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.c:24:5:rx8130ce_init	16	static
+../SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.c:117:5:rx8130ce_set_time	16	static
+../SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.c:133:5:rx8130ce_get_time	32	static
+../SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.c:167:6:convert_timestamp_to_rtc	56	static
