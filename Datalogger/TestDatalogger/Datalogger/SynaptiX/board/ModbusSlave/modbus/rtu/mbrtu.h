@@ -36,8 +36,7 @@ PR_BEGIN_EXTERN_C
 
 #include "mb.h"
 
-    eMBErrorCode eMBRTUInit(eModbus_t modbus, UCHAR slaveAddress, UCHAR ucPort, ULONG ulBaudRate,
-                             eMBParity eParity );
+eMBErrorCode    eMBRTUInit(eModbus_t modbus, UCHAR slaveAddress );
 void            eMBRTUStart( eModbus_t modbus );
 void            eMBRTUStop( eModbus_t modbus );
 eMBErrorCode    eMBRTUReceive(eModbus_t modbus, UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength );

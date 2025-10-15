@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define PW_HMI_Pin GPIO_PIN_11
+#define PW_HMI_GPIO_Port GPIOI
 #define ETH_RST_Pin GPIO_PIN_2
 #define ETH_RST_GPIO_Port GPIOH
 #define UART5_DE_Pin GPIO_PIN_12
@@ -71,7 +73,7 @@ void Error_Handler(void);
 #define SIM_1V8_GPIO_Port GPIOI
 
 /* USER CODE BEGIN Private defines */
-
+extern void MX_USART6_UART_Init(void);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

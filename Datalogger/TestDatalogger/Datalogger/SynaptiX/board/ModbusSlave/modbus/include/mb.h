@@ -30,7 +30,7 @@
 #ifndef _MB_H
 #define _MB_H
 
-#include "port.h"
+#include "../../port/port.h"
 
 #ifdef __cplusplus
 PR_BEGIN_EXTERN_C
@@ -150,8 +150,7 @@ typedef enum
  *        slave addresses are in the range 1 - 247.
  *    - eMBErrorCode::MB_EPORTERR IF the porting layer returned an error.
  */
-eMBErrorCode    eMBInit(eModbus_t modbus, eMBMode eMode, UCHAR ucSlaveAddress,
-                         UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity );
+eMBErrorCode    eMBInit(eModbus_t modbus, eMBMode eMode, UCHAR ucSlaveAddress );
 
 /*! \ingroup modbus
  * \brief Initialize the Modbus protocol stack for Modbus TCP.
@@ -213,7 +212,7 @@ eMBErrorCode    eMBDisable(eModbus_t modbus);
  *
  * This function must be called periodically. The timer interval required
  * is given by the application dependent Modbus slave timeout. Internally the
- * function calls xMBPortEventGet() and waits for an event from the receiver or
+ * function calls xMBPortEventClear() and waits for an event from the receiver or
  * transmitter state machines. 
  *
  * \return If the protocol stack is not in the enabled state the function

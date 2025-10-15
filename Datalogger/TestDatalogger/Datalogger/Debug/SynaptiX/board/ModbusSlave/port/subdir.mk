@@ -7,16 +7,19 @@
 C_SRCS += \
 ../SynaptiX/board/ModbusSlave/port/portevent.c \
 ../SynaptiX/board/ModbusSlave/port/portserial.c \
+../SynaptiX/board/ModbusSlave/port/porttcp.c \
 ../SynaptiX/board/ModbusSlave/port/porttimer.c 
 
 OBJS += \
 ./SynaptiX/board/ModbusSlave/port/portevent.o \
 ./SynaptiX/board/ModbusSlave/port/portserial.o \
+./SynaptiX/board/ModbusSlave/port/porttcp.o \
 ./SynaptiX/board/ModbusSlave/port/porttimer.o 
 
 C_DEPS += \
 ./SynaptiX/board/ModbusSlave/port/portevent.d \
 ./SynaptiX/board/ModbusSlave/port/portserial.d \
+./SynaptiX/board/ModbusSlave/port/porttcp.d \
 ./SynaptiX/board/ModbusSlave/port/porttimer.d 
 
 
@@ -27,7 +30,7 @@ SynaptiX/board/ModbusSlave/port/%.o SynaptiX/board/ModbusSlave/port/%.su Synapti
 clean: clean-SynaptiX-2f-board-2f-ModbusSlave-2f-port
 
 clean-SynaptiX-2f-board-2f-ModbusSlave-2f-port:
-	-$(RM) ./SynaptiX/board/ModbusSlave/port/portevent.cyclo ./SynaptiX/board/ModbusSlave/port/portevent.d ./SynaptiX/board/ModbusSlave/port/portevent.o ./SynaptiX/board/ModbusSlave/port/portevent.su ./SynaptiX/board/ModbusSlave/port/portserial.cyclo ./SynaptiX/board/ModbusSlave/port/portserial.d ./SynaptiX/board/ModbusSlave/port/portserial.o ./SynaptiX/board/ModbusSlave/port/portserial.su ./SynaptiX/board/ModbusSlave/port/porttimer.cyclo ./SynaptiX/board/ModbusSlave/port/porttimer.d ./SynaptiX/board/ModbusSlave/port/porttimer.o ./SynaptiX/board/ModbusSlave/port/porttimer.su
+	-$(RM) ./SynaptiX/board/ModbusSlave/port/portevent.cyclo ./SynaptiX/board/ModbusSlave/port/portevent.d ./SynaptiX/board/ModbusSlave/port/portevent.o ./SynaptiX/board/ModbusSlave/port/portevent.su ./SynaptiX/board/ModbusSlave/port/portserial.cyclo ./SynaptiX/board/ModbusSlave/port/portserial.d ./SynaptiX/board/ModbusSlave/port/portserial.o ./SynaptiX/board/ModbusSlave/port/portserial.su ./SynaptiX/board/ModbusSlave/port/porttcp.cyclo ./SynaptiX/board/ModbusSlave/port/porttcp.d ./SynaptiX/board/ModbusSlave/port/porttcp.o ./SynaptiX/board/ModbusSlave/port/porttcp.su ./SynaptiX/board/ModbusSlave/port/porttimer.cyclo ./SynaptiX/board/ModbusSlave/port/porttimer.d ./SynaptiX/board/ModbusSlave/port/porttimer.o ./SynaptiX/board/ModbusSlave/port/porttimer.su
 
 .PHONY: clean-SynaptiX-2f-board-2f-ModbusSlave-2f-port
 

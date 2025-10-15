@@ -33,6 +33,7 @@
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
+#include "logger.h"
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
@@ -41,6 +42,7 @@
 #include "mbconfig.h"
 
 /* ----------------------- Defines ------------------------------------------*/
+#define TAG "MB"
 #define MB_PDU_FUNC_READ_ADDR_OFF           ( MB_PDU_DATA_OFF )
 #define MB_PDU_FUNC_READ_DISCCNT_OFF        ( MB_PDU_DATA_OFF + 2 )
 #define MB_PDU_FUNC_READ_SIZE               ( 4 )
@@ -102,6 +104,7 @@ eMBFuncReadDiscreteInputs( UCHAR * pucFrame, USHORT * usLen )
 
             eRegStatus =
                 eMBRegDiscreteCB( pucFrameCur, usRegAddress, usDiscreteCnt );
+                log_debug(TAG, "DISCRETE READ, ADDR:%u, SIZE:%u, ErrCode = %d", usRegAddress, usDiscreteCnt, eRegStatus);
 
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )

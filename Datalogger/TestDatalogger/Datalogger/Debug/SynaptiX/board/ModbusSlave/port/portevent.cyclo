@@ -1,3 +1,5 @@
-../SynaptiX/board/ModbusSlave/port/portevent.c:32:1:xMBPortEventInit	1
-../SynaptiX/board/ModbusSlave/port/portevent.c:39:1:xMBPortEventPost	1
-../SynaptiX/board/ModbusSlave/port/portevent.c:47:1:xMBPortEventGet	2
+../SynaptiX/board/ModbusSlave/port/portevent.c:33:1:xMBPortEventInit	1
+../SynaptiX/board/ModbusSlave/port/portevent.c:40:1:xMBPortEventPost	1
+../SynaptiX/board/ModbusSlave/port/portevent.c:48:1:xMBPortEventGet	2
+../SynaptiX/board/ModbusSlave/port/portevent.c:62:1:xMBPortEventClear	2
+../SynaptiX/board/ModbusSlave/port/portevent.c:75:1:xMBPortEventLook	2

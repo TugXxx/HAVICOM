@@ -144,10 +144,10 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry excluding="apps/cli_shell_command.c|apps/shell_app.c|board/A7677S/|board/gas_sensor/|board/GP02/|board/IMU_BNO055/|board/SHT3x/|board/SPS30/|services/communicate/|services/lora/|services/mbport/|services/shell/|services/zigbee/|apps/app_settings.c|board/nanomodbus/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SynaptiX"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="LWIP"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
-						<entry excluding="apps/cli_shell_command.c|apps/shell_app.c|board/A7677S/|board/gas_sensor/|board/GP02/|board/IMU_BNO055/|board/SHT3x/|board/SPS30/|services/communicate/|services/lora/|services/mbport/|services/shell/|services/zigbee/|apps/app_settings.c|board/nanomodbus/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SynaptiX"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

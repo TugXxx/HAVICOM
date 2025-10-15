@@ -154,6 +154,7 @@
 "./SynaptiX/board/ModbusSlave/modbus/tcp/mbtcp.o"
 "./SynaptiX/board/ModbusSlave/port/portevent.o"
 "./SynaptiX/board/ModbusSlave/port/portserial.o"
+"./SynaptiX/board/ModbusSlave/port/porttcp.o"
 "./SynaptiX/board/ModbusSlave/port/porttimer.o"
 "./SynaptiX/board/board.o"
 "./SynaptiX/board/button.o"

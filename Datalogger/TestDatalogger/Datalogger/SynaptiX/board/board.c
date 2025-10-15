@@ -162,14 +162,21 @@ int __io_getchar(void){
 
 #if BSP_TIMER_NUM > 0
 
-static timer_handle tim_handle[BSP_TIMER_NUM] = {NULL};
+// static timer_handle tim_handle[BSP_TIMER_NUM] = {NULL};
 static TIM_HandleTypeDef *ptimer[BSP_TIMER_NUM] = {&htim1,&htim2,&htim3};
-
-void bsp_timer_set_handle(int timer, timer_handle handle)
+typedef struct
+{
+    /* data */
+    timer_handle cb;
+    void *arg;
+} TIM_Callback_t;
+TIM_Callback_t tim_handle[BSP_TIMER_NUM] = {0};
+void bsp_timer_set_handle(int timer, timer_handle handle, void *arg)
 {
     if (0 < timer || timer >= 2)
         return;
-    tim_handle[timer] = handle;
+    tim_handle[timer].cb = handle;
+    tim_handle[timer].arg = arg;
 }
 void bsp_timer_start(int timer)
 {
@@ -189,8 +196,8 @@ void BSP_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     for (int i = 0; i < BSP_TIMER_NUM; i++)
         if (htim == ptimer[i])
         {
-            if (tim_handle[i] != NULL)
-                tim_handle[i]();
+            if (tim_handle[i].cb != NULL)
+                tim_handle[i].cb(tim_handle[i].arg);
             return;
         }
 }

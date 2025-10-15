@@ -19,51 +19,53 @@
  * File: $Id$
  */
 
-#ifndef _PORT_H
-#define _PORT_H
+ #ifndef _PORT_H
+ #define _PORT_H
+ 
+ #include <assert.h>
+ #include <inttypes.h>
 
-#include <assert.h>
-#include <inttypes.h>
-// #include "fdk_config.h"
-
-#define	INLINE                      inline
-#define PR_BEGIN_EXTERN_C           extern "C" {
-#define	PR_END_EXTERN_C             }
-
-void __critical_enter(void);
-void __critical_exit(void);
-
-
-#define ENTER_CRITICAL_SECTION( ) //__critical_enter()
-#define EXIT_CRITICAL_SECTION( ) //__critical_exit()
-
-typedef uint8_t BOOL;
-
-typedef unsigned char UCHAR;
-typedef char CHAR;
-
-typedef uint16_t USHORT;
-typedef int16_t SHORT;
-
-typedef uint32_t ULONG;
-typedef int32_t LONG;
-
-#ifndef TRUE
-#define TRUE            1
-#endif
-
-#ifndef FALSE
-#define FALSE           0
-#endif
-
-#ifndef N_MODBUS
-#define N_MODBUS        1
-#endif
-
-#ifndef MB_PLATFORM
-#define MB_PLATFORM USER_CONFIG_PLATFORM
-#endif
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <time.h>
 
 
-
-#endif
+ #define	INLINE                      inline
+ #define PR_BEGIN_EXTERN_C           extern "C" {
+ #define	PR_END_EXTERN_C             }
+ 
+ void __critical_enter(void);
+ void __critical_exit(void);
+ 
+ 
+ #define ENTER_CRITICAL_SECTION( ) //__critical_enter()
+ #define EXIT_CRITICAL_SECTION( ) //__critical_exit()
+ 
+ typedef uint8_t BOOL;
+ 
+ typedef unsigned char UCHAR;
+ typedef char CHAR;
+ 
+ typedef uint16_t USHORT;
+ typedef int16_t SHORT;
+ 
+ typedef uint32_t ULONG;
+ typedef int32_t LONG;
+ 
+ #ifndef TRUE
+ #define TRUE            1
+ #endif
+ 
+ #ifndef FALSE
+ #define FALSE           0
+ #endif
+ 
+ #endif
+ 

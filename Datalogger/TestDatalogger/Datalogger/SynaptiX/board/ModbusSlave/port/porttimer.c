@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BARE Port
+ * FreeModbus Libary: Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -19,55 +19,58 @@
  * File: $Id$
  */
 
-/* ----------------------- Platform includes --------------------------------*/
+ /**********************************************************
+ *	Based on Walter's project. 
+ *	Modified by TungNX for Synaptix Technology JSC company.
+ ***********************************************************/
+
+/* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
 #include "port.h"
+
+/* ----------------------- Platform includes --------------------------------*/
 #include "board.h"
+#include "logger.h"
 
-extern eModbus modbus[N_MODBUS];
-
-/* ----------------------- static functions ---------------------------------*/
-static void mb_timer0_callback(){
-	modbus[0].pxMBPortCBTimerExpired(&modbus[0]);
-	return;
+/* ------------------------ Static functions --------------------------------*/
+static void vMBPortTimerISR(void * arg){	
+    eModbus_t modbus = (eModbus_t )arg;
+    modbus->pxMBPortCBTimerExpired(modbus);
 }
-// static void mb_timer1_callback(){
-// 	modbus[1].pxMBPortCBTimerExpired(&modbus[1]);
-// 	return;
-// }
-
-timer_handle timeHandle[N_MODBUS] = {mb_timer0_callback};
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
 xMBPortTimersInit(eModbus_t modbus, USHORT usTim1Timerout50us )
 {
-	// modbus->timer_handle = (void*) &mb_timer[modbus->config.ucPort];
-	bsp_timer_set_handle(BSP_TIMER_MBS_HMI,timeHandle[BSP_TIMER_MBS_HMI]);
-	// bsp_timer_set_handle(1,mb_timer1_callback);
+    bsp_timer_set_handle(modbus->timer, vMBPortTimerISR, modbus);
     return TRUE;
 }
-
 
 inline void
 vMBPortTimersEnable( eModbus_t modbus )
 {
     /* Enable the timer with the timeout passed to xMBPortTimersInit( ) */
-//	modbus->timer_start(modbus->timer_handle);
-	bsp_timer_start(BSP_TIMER_MBS_HMI);
+	// bsp_timer_start((bsp_timer_handle_t *)modbus->timer);
+    bsp_timer_start(modbus->timer);
 }
 
 inline void
 vMBPortTimersDisable( eModbus_t modbus )
 {
     /* Disable any pending timers. */
-//	modbus->timer_stop(modbus->timer_handle);
-	bsp_timer_stop(BSP_TIMER_MBS_HMI);
+	// bsp_timer_stop((bsp_timer_handle_t *)modbus->timer);
+    bsp_timer_stop(modbus->timer);
+}
+
+void            
+vMBPortTimersDelay(eModbus_t modbus, USHORT usTimeOutMS )
+{
+    /* Delay for the number of milliseconds passed to this function. */
+    bsp_delay(usTimeOutMS);
 }
 
 /* Create an ISR which is called whenever the timer has expired. This function
  * must then call pxMBPortCBTimerExpired( ) to notify the protocol stack that
  * the timer has expired.
  */
-

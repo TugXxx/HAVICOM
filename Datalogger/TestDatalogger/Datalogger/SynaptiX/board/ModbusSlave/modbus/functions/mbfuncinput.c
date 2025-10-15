@@ -33,6 +33,7 @@
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
+#include "logger.h"
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
@@ -41,6 +42,7 @@
 #include "mbconfig.h"
 
 /* ----------------------- Defines ------------------------------------------*/
+#define TAG "MB"
 #define MB_PDU_FUNC_READ_ADDR_OFF           ( MB_PDU_DATA_OFF )
 #define MB_PDU_FUNC_READ_REGCNT_OFF         ( MB_PDU_DATA_OFF + 2 )
 #define MB_PDU_FUNC_READ_SIZE               ( 4 )
@@ -93,6 +95,7 @@ eMBFuncReadInputRegister( UCHAR * pucFrame, USHORT * usLen )
 
             eRegStatus =
                 eMBRegInputCB( pucFrameCur, usRegAddress, usRegCount );
+                log_debug(TAG, "INPUT READ, ADDR:%u, SIZE:%u, ErrCode = %d", usRegAddress, usRegCount, eRegStatus);
 
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )

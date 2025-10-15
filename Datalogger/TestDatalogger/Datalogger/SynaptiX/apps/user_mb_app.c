@@ -311,29 +311,39 @@ eMBErrorCode eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT us
 
 static eModbus modbus_no1;
 static char const *TAG = "HMI";
-extern eModbus modbus[N_MODBUS];
+// extern eModbus modbus[N_MODBUS];
 void hmi_task(void *arg){
-    eMBErrorCode err = eMBInit(&modbus[0], MB_RTU, 1, BSP_MBS_HMI_PORT, 115200, MB_PAR_NONE);
+    modbus_no1.config.ucPort = BSP_MBS_HMI_PORT;
+    modbus_no1.timer = BSP_TIMER_MBS_HMI;
+    modbus_no1.config.ulBaudRate = 115200;
+
+    // eMBErrorCode err = eMBInit(&modbus_no1, MB_RTU, 1, BSP_MBS_HMI_PORT, 115200, MB_PAR_NONE);
+    eMBErrorCode err = eMBInit(&modbus_no1, MB_RTU, 1);
     if (err != MB_ENOERR) {
         log_error(TAG, "Modbus init failed: %d", err);
     }
-    err = eMBEnable(&modbus[0]);
+    err = eMBEnable(&modbus_no1);
     if (err != MB_ENOERR) {
         log_error(TAG, "Modbus enable failed: %d", err);
     }
-	usSRegHoldBuf[0] = 0x01;
+    log_info(TAG, "Power on HMI");
+
+    bsp_power_on_hmi();
+	usSRegHoldBuf[0] = 0x02;
 	usSRegHoldBuf[1] = 0x02;
-	usSRegHoldBuf[2] = 0x03;
+	usSRegHoldBuf[2] = 0x012;
 	usSRegHoldBuf[3] = 0x04;
 
 	usSRegHoldBuf[100] = 0x01;
-	usSRegHoldBuf[101] = 0x02;
-	usSRegHoldBuf[102] = 0x01;
-	usSRegHoldBuf[103] = 0x02;
+	usSRegHoldBuf[101] = 0x13;
+	usSRegHoldBuf[102] = 0x02;
+	usSRegHoldBuf[103] = 0x82;
+    usSRegHoldBuf[104] = 0x00;
+	usSRegHoldBuf[105] = 0x72;
     while(1) {
-        eMBPoll(&modbus[0]);
-        mb_uart_rx_task(&modbus[0]);
-        vTaskDelay(10);
+        eMBPoll(&modbus_no1);
+        usSRegHoldBuf[101]++;
+        vTaskDelay(1);
     }
 }
 

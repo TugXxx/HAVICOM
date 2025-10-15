@@ -37,7 +37,7 @@
 #include "mbframe.h"
 #include "mbproto.h"
 #include "mbfunc.h"
-
+#include "logger.h"
 #include "mbport.h"
 
 #include "../port/port.h"
@@ -52,9 +52,10 @@
 #endif
 
 #ifndef MB_PORT_HAS_CLOSE
-#define MB_PORT_HAS_CLOSE 0
+#define MB_PORT_HAS_CLOSE 1
 #endif
 
+static const char *TAG = "MB(mb.c)";
 /* ----------------------- Static variables ---------------------------------*/
 
 //static UCHAR    ucMBAddress;
@@ -135,15 +136,12 @@ static xMBFunctionHandler xFuncHandlers[MB_FUNC_HANDLERS_MAX] = {
 
 /* ----------------------- Start implementation -----------------------------*/
 eMBErrorCode
-eMBInit(eModbus_t modbus, eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
+eMBInit(eModbus_t modbus, eMBMode eMode, UCHAR ucSlaveAddress)
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     eModbus_Handle_t* handle = (eModbus_Handle_t*)malloc(sizeof(eModbus_Handle_t));
     if(handle == NULL) return MB_EINVAL;
 
-    modbus->config.ucPort = ucPort;
-    modbus->config.ulBaudRate = ulBaudRate;
-    modbus->config.eParity = eParity;
     handle->eMBState = STATE_NOT_INITIALIZED;
 	modbus->handle = handle;
     /* check preconditions */
@@ -169,7 +167,7 @@ eMBInit(eModbus_t modbus, eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULO
         	modbus->pxMBFrameCBTransmitterEmpty = xMBRTUTransmitFSM;
         	modbus->pxMBPortCBTimerExpired = xMBRTUTimerT35Expired;
 
-            eStatus = eMBRTUInit(modbus, modbus->config.ucMBAddress, modbus->config.ucPort, modbus->config.ulBaudRate, modbus->config.eParity );
+            eStatus = eMBRTUInit(modbus, modbus->config.ucMBAddress );
             break;
 #endif
 #if MB_ASCII_ENABLED > 0
@@ -370,14 +368,16 @@ eMBPoll( eModbus_t modbus )
 
     /* Check if there is a event available. If not return control to caller.
      * Otherwise we will handle the event. */
-    if( xMBPortEventGet(modbus, &eEvent ) == TRUE )
+    if( xMBPortEventLook(modbus, &eEvent ) == TRUE )
     {
         switch ( eEvent )
         {
         case EV_READY:
+            // xMBPortEventClear(modbus);
             break;
 
         case EV_FRAME_RECEIVED:
+            xMBPortEventClear(modbus);      
             eStatus = handle->peMBFrameReceiveCur(modbus, &ucRcvAddress, &ucMBFrame, &usLength );
             if( eStatus == MB_ENOERR )
             {
@@ -385,22 +385,35 @@ eMBPoll( eModbus_t modbus )
                 if( ( ucRcvAddress == modbus->config.ucMBAddress ) || ( ucRcvAddress == MB_ADDRESS_BROADCAST ) )
                 {
                     ( void )xMBPortEventPost(modbus, EV_EXECUTE );
+                    break;
+                }
+                else 
+                {
+                    log_error(TAG,"Err ucMBAddress");
                 }
             }
+            else
+            {
+                log_error(TAG,"Err eStatus 0x0%x", eStatus);
+            }
+            ( void )xMBPortEventPost(modbus, EV_ERR );
             break;
 
         case EV_EXECUTE:
+            xMBPortEventClear(modbus);
             eException = MB_EX_ILLEGAL_FUNCTION;
             ucFunctionCode = ucMBFrame[MB_PDU_FUNC_OFF];
             for( i = 0; i < MB_FUNC_HANDLERS_MAX; i++ )
             {
                 /* No more function handlers registered. Abort. */
-                if( xFuncHandlers[i].ucFunctionCode == 0 )
-                {
+                if( xFuncHandlers[i].ucFunctionCode == MB_FUNC_NONE )
+                {   
+                    log_error(TAG,"None function handler");
                     break;
                 }
                 else if( xFuncHandlers[i].ucFunctionCode == ucFunctionCode )
                 {
+                    log_debug(TAG,"Function handler found");
                     eException = xFuncHandlers[i].pxHandler( ucMBFrame, &usLength );
                     break;
                 }
@@ -412,6 +425,7 @@ eMBPoll( eModbus_t modbus )
             {
                 if( eException != MB_EX_NONE )
                 {
+                    log_error(TAG,"eException ErrCode: 0x0%x", eException);
                     /* An exception occured. Build an error frame. */
                     usLength = 0;
                     ucMBFrame[usLength++] = ( UCHAR )( ucFunctionCode | MB_FUNC_ERROR );
@@ -421,11 +435,35 @@ eMBPoll( eModbus_t modbus )
                 {
                     vMBPortTimersDelay(modbus, MB_ASCII_TIMEOUT_WAIT_BEFORE_SEND_MS );
                 }                
-                eStatus = handle->peMBFrameSendCur(modbus, modbus->config.ucMBAddress, ucMBFrame, usLength );
+                ( void )xMBPortEventPost(modbus, EV_FRAME_SENT ); 
+            }
+            else
+            {
+                /* The request was sent to the broadcast address. We do not
+                 * send a reply. */
+                log_debug(TAG,"Broadcast address");
+                ( void )xMBPortEventPost(modbus, EV_IDLE );
             }
             break;
 
         case EV_FRAME_SENT:
+                xMBPortEventClear(modbus);
+                eStatus = handle->peMBFrameSendCur(modbus, modbus->config.ucMBAddress, ucMBFrame, usLength );
+                if ( eStatus != MB_ENOERR )
+                {
+                    log_error(TAG,"Send failed");
+                    ( void )xMBPortEventPost(modbus, EV_ERR );
+                }
+                else
+                {
+                    ( void )xMBPortEventPost(modbus, EV_IDLE );
+                }
+            break;
+
+        case EV_IDLE:
+            break;
+
+        case EV_ERR:
             break;
         }
     }

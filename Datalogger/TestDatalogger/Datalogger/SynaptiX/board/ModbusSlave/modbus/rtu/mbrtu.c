@@ -30,8 +30,9 @@
 /* ----------------------- System includes ----------------------------------*/
 #include "stdlib.h"
 #include "string.h"
+#include "logger.h"
 
-/* ----------------------- Platform includes --------------------------------*/
+/* ----------------------- Modbus includes --------------------------------*/
 #include "mb.h"
 #include "mbrtu.h"
 #include "mbframe.h"
@@ -75,16 +76,18 @@ typedef enum
 
 /* ----------------------- Start implementation -----------------------------*/
 eMBErrorCode
-eMBRTUInit(eModbus_t modbus, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
+eMBRTUInit(eModbus_t modbus, UCHAR ucSlaveAddress )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
     ULONG           usTimerT35_50us;
+    ULONG           ulBaudRate;
 
     ( void )ucSlaveAddress;
     ENTER_CRITICAL_SECTION(  );
-
     /* Modbus RTU uses 8 Databits. */
-    if( xMBPortSerialInit(modbus, ucPort, ulBaudRate, 8, eParity ) != TRUE )
+    xMBPortSerialGetBaurate(modbus, &ulBaudRate);
+
+    if( xMBPortSerialInit(modbus) != TRUE )
     {
         eStatus = MB_EPORTERR;
     }
@@ -239,7 +242,6 @@ xMBRTUReceiveFSM( eModbus_t modbus )
 
     /* Always read the character. */
     ( void )xMBPortSerialGetByte(modbus, ( CHAR * ) & ucByte );
-
     switch ( *RcvState )
     {
         /* If we have received a character in the init state we have to
@@ -310,18 +312,21 @@ xMBRTUTransmitFSM( eModbus_t modbus )
         /* check if we are finished. */
         if( modbus->usSndBufferCount != 0 )
         {
-        	xMBPortSerialPutBytes(modbus, modbus->pucSndBufferCur, modbus->usSndBufferCount);
-//            xMBPortSerialPutByte(modbus, ( CHAR )*modbus->pucSndBufferCur );
-//            modbus->pucSndBufferCur++;  /* next byte in sendbuffer. */
-//            modbus->usSndBufferCount--;
-        	modbus->usSndBufferCount = 0;
+            USHORT usSndBufferCount = modbus->usSndBufferCount;
+            modbus->usSndBufferCount = 0;
+        	xMBPortSerialPutBytes(modbus, modbus->pucSndBufferCur, usSndBufferCount);
+         
+            // UCHAR *pucSndBufferCur = modbus->pucSndBufferCur;
+            // modbus->pucSndBufferCur++;  /* next byte in sendbuffer. */
+            // modbus->usSndBufferCount--; 
+            // xMBPortSerialPutByte(modbus, *pucSndBufferCur );              	
         }
         else
         {
-            xNeedPoll = xMBPortEventPost(modbus, EV_FRAME_SENT );
+            vMBPortSerialEnable(modbus, TRUE, FALSE );
+            xNeedPoll = xMBPortEventPost(modbus, EV_IDLE );
             /* Disable transmitter. This prevents another transmit buffer
              * empty interrupt. */
-            vMBPortSerialEnable(modbus, TRUE, FALSE );
             *SndState = STATE_TX_IDLE;
         }
         break;
@@ -357,7 +362,6 @@ xMBRTUTimerT35Expired( eModbus_t modbus )
         assert( ( *RcvState == STATE_RX_INIT ) ||
                 ( *RcvState == STATE_RX_RCV ) || ( *RcvState == STATE_RX_ERROR ) );
     }
-
     vMBPortTimersDisable( modbus );
     *RcvState = STATE_RX_IDLE;
 

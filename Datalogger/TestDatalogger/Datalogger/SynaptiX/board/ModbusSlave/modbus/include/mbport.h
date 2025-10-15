@@ -34,6 +34,7 @@
 PR_BEGIN_EXTERN_C
 #endif
 
+#include "port.h"
 
 
 /* ----------------------- Type definitions ---------------------------------*/
@@ -51,7 +52,9 @@ typedef enum
     EV_READY,                   /*!< Startup finished. */
     EV_FRAME_RECEIVED,          /*!< Frame received. */
     EV_EXECUTE,                 /*!< Execute function. */
-    EV_FRAME_SENT               /*!< Frame sent. */
+    EV_FRAME_SENT,              /*!< Frame sent. */
+	EV_IDLE,            		/*!< Idle. */
+	EV_ERR						/*!< Error. */
 } eMBEventType;
 
 /*! \ingroup modbus
@@ -73,7 +76,6 @@ typedef struct eMB_Config{
 	UCHAR ucSlaveAddress;
 	UCHAR ucPort;
 	ULONG ulBaudRate;
-	eMBParity eParity;
 }eMB_Config_t;
 
 typedef struct eModbus eModbus;
@@ -81,6 +83,8 @@ typedef eModbus* eModbus_t;
 
 struct eModbus {
 	void *handle;
+	void *uart;
+	int timer;
 	eMB_Config_t config;
 	BOOL( *pxMBFrameCBByteReceived ) ( eModbus_t modbus );
 	BOOL( *pxMBFrameCBTransmitterEmpty ) ( eModbus_t modbus );
@@ -89,16 +93,8 @@ struct eModbus {
 	BOOL( *pxMBFrameCBReceiveFSMCur ) ( eModbus_t modbus );
 	BOOL( *pxMBFrameCBTransmitFSMCur ) ( eModbus_t modbus );
 
-	void *rs485_handle;
 	BOOL(*rs485_de_select)();
 	BOOL(*rs485_de_deselect)();
-	USHORT (*rs485_send_it)(void *handle,UCHAR *buff,ULONG len);
-	USHORT (*rs485_recv_it)(void *handle,UCHAR *buff,ULONG len);
-
-	void (*timer_start)(void *handle);
-	void (*timer_stop)(void *handle);
-
-	void *timer_handle;
 	volatile BOOL tx_done;
 	volatile UCHAR  ucRTUBuf[256];
 
@@ -126,14 +122,17 @@ struct eModbus {
 /* ----------------------- Supporting functions -----------------------------*/
 BOOL            xMBPortEventInit( eModbus_t modbus );
 
-BOOL            xMBPortEventPost( eModbus_t modbus,eMBEventType eEvent );
+BOOL			xMBPortEventGet(eModbus_t modbus, eMBEventType * eEvent );
 
-BOOL            xMBPortEventGet(  /*@out@ */eModbus_t modbus, eMBEventType * eEvent );
+BOOL            xMBPortEventPost( eModbus_t modbus, eMBEventType eEvent );
+
+BOOL            xMBPortEventClear(  /*@out@ */eModbus_t modbus );
+
+BOOL			xMBPortEventLook(eModbus_t modbus, eMBEventType * eEvent );
 
 /* ----------------------- Serial port functions ----------------------------*/
 
-BOOL            xMBPortSerialInit(eModbus_t modbus, UCHAR ucPort, ULONG ulBaudRate,
-                                   UCHAR ucDataBits, eMBParity eParity );
+BOOL            xMBPortSerialInit(eModbus_t modbus );
 
 void            vMBPortClose( eModbus_t modbus );
 
@@ -144,7 +143,11 @@ void            vMBPortSerialEnable(eModbus_t modbus, BOOL xRxEnable, BOOL xTxEn
 BOOL            xMBPortSerialGetByte(eModbus_t modbus, CHAR * pucByte );
 
 BOOL            xMBPortSerialPutByte(eModbus_t modbus, CHAR ucByte );
+
 BOOL 			xMBPortSerialPutBytes(eModbus_t modbus,volatile UCHAR *ucByte, USHORT usSize);
+
+BOOL			xMBPortSerialGetBaurate(eModbus_t modbus, ULONG *ulBaudRate);
+
 /* ----------------------- Timers functions ---------------------------------*/
 BOOL            xMBPortTimersInit(eModbus_t modbus, USHORT usTimeOut50us );
 
@@ -174,7 +177,7 @@ void            vMBPortTimersDelay(eModbus_t modbus, USHORT usTimeOutMS );
 //
 //extern          BOOL( *pxMBFrameCBTransmitterEmpty ) ( void );
 //
-//extern          BOOL( *pxMBPortCBTimerExpired ) ( void );
+extern          BOOL( *pxMBPortCBTimerExpired ) ( void );
 
 /* ----------------------- TCP port functions -------------------------------*/
 BOOL            xMBTCPPortInit(eModbus_t modbus, USHORT usTCPPort );

@@ -214,6 +214,12 @@ extern "C" {
 
 #endif
 
+
+#define bsp_power_on_hmi() do { HAL_GPIO_WritePin(PW_HMI_GPIO_Port, PW_HMI_Pin, GPIO_PIN_SET); } while(0)
+#define bsp_power_off_hmi() do { HAL_GPIO_WritePin(PW_HMI_GPIO_Port, PW_HMI_Pin, GPIO_PIN_RESET); } while(0)
+
+
+
 #if BSP_SIM_ENABLE > 0
 #endif
 
@@ -364,7 +370,7 @@ void bsp_timer_start(int timer);
  */
 void bsp_timer_stop(int timer);
 
-typedef void (*timer_handle)();
+typedef void (*timer_handle)(void *arg);
 /**
  * @brief Sets the handler function for a specified timer.
  *
@@ -374,7 +380,7 @@ typedef void (*timer_handle)();
  * @param timer The identifier of the timer to set the handler for.
  * @param handle The handler function to be called when the timer event occurs.
  */
-void bsp_timer_set_handle(int timer,timer_handle handle);
+void bsp_timer_set_handle(int timer, timer_handle handle, void *arg);
 #endif
 
 #if BSP_FLASH_ENABLE > 0

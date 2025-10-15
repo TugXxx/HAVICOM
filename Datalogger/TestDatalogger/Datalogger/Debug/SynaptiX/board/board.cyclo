@@ -1,5 +1,5 @@
 ../SynaptiX/board/board.c:22:10:bsp_com_write	2
-../SynaptiX/board/board.c:269:13:log_puts	1
+../SynaptiX/board/board.c:276:13:log_puts	1
 ../SynaptiX/board/board.c:29:10:bsp_com_write_it	2
 ../SynaptiX/board/board.c:48:6:bsp_com_set_tx_callback	2
 ../SynaptiX/board/board.c:66:6:bsp_com_set_rx_callback	2
@@ -11,11 +11,11 @@
 ../SynaptiX/board/board.c:137:6:HAL_UARTEx_RxEventCallback	4
 ../SynaptiX/board/board.c:151:5:__io_putchar	1
 ../SynaptiX/board/board.c:154:5:__io_getchar	2
-../SynaptiX/board/board.c:168:6:bsp_timer_set_handle	2
-../SynaptiX/board/board.c:174:6:bsp_timer_start	2
-../SynaptiX/board/board.c:180:6:bsp_timer_stop	2
-../SynaptiX/board/board.c:187:6:BSP_TIM_PeriodElapsedCallback	4
-../SynaptiX/board/board.c:284:10:bsp_iic_bus_init	4
-../SynaptiX/board/board.c:300:10:bsp_iic_write	2
-../SynaptiX/board/board.c:307:10:bsp_iic_read	2
-../SynaptiX/board/board.c:314:6:bsp_init	1
+../SynaptiX/board/board.c:174:6:bsp_timer_set_handle	2
+../SynaptiX/board/board.c:181:6:bsp_timer_start	2
+../SynaptiX/board/board.c:187:6:bsp_timer_stop	2
+../SynaptiX/board/board.c:194:6:BSP_TIM_PeriodElapsedCallback	4
+../SynaptiX/board/board.c:291:10:bsp_iic_bus_init	4
+../SynaptiX/board/board.c:307:10:bsp_iic_write	2
+../SynaptiX/board/board.c:314:10:bsp_iic_read	2
+../SynaptiX/board/board.c:321:6:bsp_init	1

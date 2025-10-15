@@ -1,6 +1,6 @@
-../SynaptiX/apps/user_mb_app.c:315:6:hmi_task	16	static
+../SynaptiX/apps/user_mb_app.c:315:6:hmi_task	8	static
 ../SynaptiX/apps/user_mb_app.c:64:14:eMBRegInputCB	0	static
 ../SynaptiX/apps/user_mb_app.c:114:14:eMBRegHoldingCB	8	static
 ../SynaptiX/apps/user_mb_app.c:180:14:eMBRegCoilsCB	0	static
 ../SynaptiX/apps/user_mb_app.c:259:14:eMBRegDiscreteCB	0	static
-../SynaptiX/apps/user_mb_app.c:340:6:hmi_app_init	16	static
+../SynaptiX/apps/user_mb_app.c:350:6:hmi_app_init	16	static

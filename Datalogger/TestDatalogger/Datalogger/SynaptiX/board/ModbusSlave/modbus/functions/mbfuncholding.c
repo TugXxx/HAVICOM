@@ -30,6 +30,7 @@
 /* ----------------------- System includes ----------------------------------*/
 #include "stdlib.h"
 #include "string.h"
+#include "logger.h"
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
@@ -41,6 +42,8 @@
 #include "mbconfig.h"
 
 /* ----------------------- Defines ------------------------------------------*/
+#define TAG "MB"
+
 #define MB_PDU_FUNC_READ_ADDR_OFF               ( MB_PDU_DATA_OFF + 0)
 #define MB_PDU_FUNC_READ_REGCNT_OFF             ( MB_PDU_DATA_OFF + 2 )
 #define MB_PDU_FUNC_READ_SIZE                   ( 4 )
@@ -88,7 +91,7 @@ eMBFuncWriteHoldingRegister( UCHAR * pucFrame, USHORT * usLen )
         /* Make callback to update the value. */
         eRegStatus = eMBRegHoldingCB( &pucFrame[MB_PDU_FUNC_WRITE_VALUE_OFF],
                                       usRegAddress, 1, MB_REG_WRITE );
-
+        log_debug(TAG, "HOLDING WRITE SINGLE, ADDR:%u, SIZE:1, ErrCode = %d", usRegAddress, eRegStatus);
         /* If an error occured convert it into a Modbus exception. */
         if( eRegStatus != MB_ENOERR )
         {
@@ -134,6 +137,7 @@ eMBFuncWriteMultipleHoldingRegister( UCHAR * pucFrame, USHORT * usLen )
             eRegStatus =
                 eMBRegHoldingCB( &pucFrame[MB_PDU_FUNC_WRITE_MUL_VALUES_OFF],
                                  usRegAddress, usRegCount, MB_REG_WRITE );
+            log_debug(TAG, "HOLDING WRITE MULTIPLE, ADDR:%u, SIZE:%u, ErrCode = %d", usRegAddress, usRegCount, eRegStatus);
 
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )
@@ -203,6 +207,8 @@ eMBFuncReadHoldingRegister( UCHAR * pucFrame, USHORT * usLen )
 
             /* Make callback to fill the buffer. */
             eRegStatus = eMBRegHoldingCB( pucFrameCur, usRegAddress, usRegCount, MB_REG_READ );
+            log_debug(TAG, "HOLDING READ SINGLE, ADDR:%u, SIZE:%u, ErrCode = %d", usRegAddress, usRegCount, eRegStatus);
+
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )
             {
@@ -268,6 +274,7 @@ eMBFuncReadWriteMultipleHoldingRegister( UCHAR * pucFrame, USHORT * usLen )
             /* Make callback to update the register values. */
             eRegStatus = eMBRegHoldingCB( &pucFrame[MB_PDU_FUNC_READWRITE_WRITE_VALUES_OFF],
                                           usRegWriteAddress, usRegWriteCount, MB_REG_WRITE );
+            log_debug(TAG, "HOLDING WRITE MULTIPLE, ADDR:%u, SIZE:%u, ErrCode = %d", usRegWriteAddress, usRegWriteCount, eRegStatus);
 
             if( eRegStatus == MB_ENOERR )
             {
@@ -286,6 +293,8 @@ eMBFuncReadWriteMultipleHoldingRegister( UCHAR * pucFrame, USHORT * usLen )
                 /* Make the read callback. */
                 eRegStatus =
                     eMBRegHoldingCB( pucFrameCur, usRegReadAddress, usRegReadCount, MB_REG_READ );
+                log_debug(TAG, "HOLDING READ MULTIPLE, ADDR:%u, SIZE:%u, ErrCode = %d", usRegReadAddress, usRegReadCount, eRegStatus);
+
                 if( eRegStatus == MB_ENOERR )
                 {
                     *usLen += 2 * usRegReadCount;

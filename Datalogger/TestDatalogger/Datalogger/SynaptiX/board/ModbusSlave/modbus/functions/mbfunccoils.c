@@ -30,6 +30,7 @@
 /* ----------------------- System includes ----------------------------------*/
 #include "stdlib.h"
 #include "string.h"
+#include "logger.h"
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
@@ -41,6 +42,7 @@
 #include "mbconfig.h"
 
 /* ----------------------- Defines ------------------------------------------*/
+#define TAG "MB"
 #define MB_PDU_FUNC_READ_ADDR_OFF           ( MB_PDU_DATA_OFF )
 #define MB_PDU_FUNC_READ_COILCNT_OFF        ( MB_PDU_DATA_OFF + 2 )
 #define MB_PDU_FUNC_READ_SIZE               ( 4 )
@@ -114,7 +116,7 @@ eMBFuncReadCoils( UCHAR * pucFrame, USHORT * usLen )
             eRegStatus =
                 eMBRegCoilsCB( pucFrameCur, usRegAddress, usCoilCount,
                                MB_REG_READ );
-
+                log_debug(TAG, "COILS READ, ADDR:%u, SIZE:%u, ErrCode = %d", usRegAddress, usCoilCount, eRegStatus);
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )
             {
@@ -173,7 +175,7 @@ eMBFuncWriteCoil( UCHAR * pucFrame, USHORT * usLen )
             }
             eRegStatus =
                 eMBRegCoilsCB( &ucBuf[0], usRegAddress, 1, MB_REG_WRITE );
-
+                log_debug(TAG, "COILS WRITE SINGLE, ADDR:1, SIZE:%u, ErrCode = %d", usRegAddress, eRegStatus);
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )
             {
@@ -236,7 +238,7 @@ eMBFuncWriteMultipleCoils( UCHAR * pucFrame, USHORT * usLen )
             eRegStatus =
                 eMBRegCoilsCB( &pucFrame[MB_PDU_FUNC_WRITE_MUL_VALUES_OFF],
                                usRegAddress, usCoilCnt, MB_REG_WRITE );
-
+                log_debug(TAG, "COILS WRITE MULTIPLE, ADDR:%u, SIZE:%u, ErrCode = %d", usRegAddress, usCoilCnt, eRegStatus);
             /* If an error occured convert it into a Modbus exception. */
             if( eRegStatus != MB_ENOERR )
             {

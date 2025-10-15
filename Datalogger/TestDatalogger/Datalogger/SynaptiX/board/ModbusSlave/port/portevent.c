@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BARE Port
+ * FreeModbus Libary: Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -19,13 +19,14 @@
  * File: $Id$
  */
 
+ /**********************************************************
+ *	Based on Walter's project. 
+ *	Modified by TungNX for Synaptix Technology JSC company.
+ ***********************************************************/
+
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
-
-/* ----------------------- Variables ----------------------------------------*/
-//static eMBEventType eQueuedEvent;
-//static BOOL     xEventInQueue;
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
@@ -52,6 +53,32 @@ xMBPortEventGet(eModbus_t modbus, eMBEventType * eEvent )
     {
         *eEvent = modbus->eQueuedEvent;
         modbus->xEventInQueue = FALSE;
+        xEventHappened = TRUE;
+    }
+    return xEventHappened;
+}
+
+BOOL
+xMBPortEventClear(eModbus_t modbus )
+{
+    BOOL            xEventHappened = FALSE;
+
+    if( modbus->xEventInQueue )
+    {
+        modbus->xEventInQueue = FALSE;
+        xEventHappened = TRUE;
+    }
+    return xEventHappened;
+}
+
+BOOL
+xMBPortEventLook(eModbus_t modbus, eMBEventType * eEvent )
+{
+    BOOL            xEventHappened = FALSE;
+
+    if( modbus->xEventInQueue )
+    {
+        *eEvent = modbus->eQueuedEvent;
         xEventHappened = TRUE;
     }
     return xEventHappened;

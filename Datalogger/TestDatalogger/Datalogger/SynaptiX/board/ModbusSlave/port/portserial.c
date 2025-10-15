@@ -1,5 +1,5 @@
 /*
- * FreeModbus Libary: BARE Port
+ * FreeModbus Libary: Port
  * Copyright (C) 2006 Christian Walter <wolti@sil.at>
  *
  * This library is free software; you can redistribute it and/or
@@ -19,7 +19,10 @@
  * File: $Id$
  */
 
-// #include "main.h"
+ /**********************************************************
+ *	Based on Walter's project. 
+ *	Modified by TungNX for Synaptix Technology JSC company.
+ ***********************************************************/
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
@@ -30,118 +33,115 @@
 #include "main.h"
 #endif
 
+/* ----------------------- Platform includes --------------------------------*/
 #include "board.h"
 #include "logger.h"
-#include "stdio.h"
 
-static const char *TAG = "MB Slave";
+/* -------------------------- Static Variables ------------------------------*/
+static uint32_t     lock_count  = 0;
+static const char *TAG = "MBSPort";
 
-eModbus modbus[N_MODBUS] = {{.rs485_de_deselect = NULL,.rs485_de_select = NULL}};
-// UARTHandle_t mb_uart[N_MODBUS];
-
-// UCHAR singlechar[N_MODBUS];
-/* ----------------------- static functions ---------------------------------*/
-
-void mb_uart_rx_task(eModbus *mb)
+static void mb_uart_rx_cb(void *arg)
 {
-	int len = bsp_com_available(mb->config.ucPort);
-	if(len > 0){
-		log_info(TAG,"0x%08X available %ld bytes",mb,len);
-		for(int i =0;i<len;i++)
-			if(mb->pxMBFrameCBByteReceived != NULL ) mb->pxMBFrameCBByteReceived(mb);
-//		modbus[i].rs485_recv_it(modbus[i].handle,&singlechar[modbus[i].config.ucPort],1);
-		return;
-	}
+	eModbus_t modbus = (eModbus_t )arg;
+	modbus->pxMBFrameCBByteReceived(modbus);
 }
 
-void mb_uart_tx_task(void *arg){
-	eModbus *mb = (eModbus*)arg;
-	if(mb->pxMBFrameCBTransmitterEmpty != NULL){
-		mb->pxMBFrameCBTransmitterEmpty(mb);
-		return;
-	}
+static void mb_uart_tx_cb(void *arg){
+	eModbus_t modbus = (eModbus_t )arg;
+	modbus->pxMBFrameCBTransmitterEmpty(modbus);
 }
 
-/* ----------------------- Start implementation -----------------------------*/
-void
-vMBPortSerialEnable(eModbus_t modbus, BOOL xRxEnable, BOOL xTxEnable )
+/* ----------------------- MB Port Initialization -------------------------- */
+BOOL 
+xMBPortSerialInit(eModbus_t modbus)
+{
+    bsp_com_set_rx_callback(modbus->config.ucPort, mb_uart_rx_cb, modbus);
+	bsp_com_set_tx_callback(modbus->config.ucPort, mb_uart_tx_cb, modbus);
+
+	log_info(TAG,"Init port %d success", modbus->config.ucPort);
+    return TRUE;
+}
+
+/* ----------------------- Enable UART RX/TX ----------------------------- */
+void 
+vMBPortSerialEnable(eModbus_t modbus, BOOL xRxEnable, BOOL xTxEnable)
 {
     /* If xRXEnable enable serial receive interrupts. If xTxENable enable
      * transmitter empty interrupts.
      */
-	if(xRxEnable)
-	{
-// 		if(modbus->rs485_de_deselect != NULL) modbus->rs485_de_deselect();
-// 		// User code begin
-// //		modbus->rs485_recv_it(modbus->handle,&singlechar[modbus->config.ucPort],1);
-// 		// User code end
-	}
-	else
-	{
+    if (xRxEnable)
+    {
+        if (modbus->rs485_de_deselect != NULL) modbus->rs485_de_deselect();       
+    }
+    else
+    {
 		// User code begin
-//		bsp_uart_rx_about(modbus->handle);
+        // bsp_uart_rx_about(modbus->uart);
 		// User code end
-	}
+    }
 
-	if(xTxEnable)
-	{
-		// if(modbus->rs485_de_select != NULL) modbus->rs485_de_select();
-		 modbus->pxMBFrameCBTransmitterEmpty(modbus);
-	}
-	else
-	{
+    if (xTxEnable)
+    {
+        if (modbus->rs485_de_select != NULL)  modbus->rs485_de_select();
+        modbus->pxMBFrameCBTransmitterEmpty(modbus);
+    }
+    else
+    {
 		// User code begin
-//		bsp_uart_rx_about(modbus->handle);
+        // bsp_uart_rx_about(modbus->uart);
 		// User code end
 	}
 }
 
-BOOL
-xMBPortSerialInit(eModbus_t modbus, UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity eParity )
-{
+/* ----------------------- Close UART ----------------------------- */
+void 
+vMBPortClose(eModbus_t modbus) {
+    // bsp_uart_deinit((bsp_uart_handle_t *)modbus->uart);
+}  
 
-	modbus->config.ucPort = ucPORT;
-	log_info(TAG,"Init port %d success",ucPORT);
-	bsp_com_set_tx_callback(ucPORT,mb_uart_tx_task,modbus);
-	// modbus->rs485_handle = (void*) &mb_uart[ucPORT];
-	// bsp_uart_set_rx_callback(modbus->rs485_handle, mb_uart_rx_cb, modbus->rs485_handle);
-	// bsp_uart_set_tx_callback(modbus->rs485_handle, mb_uart_tx_cb, modbus->rs485_handle);
-    return TRUE;
-}
-
-BOOL
-xMBPortSerialPutByte(eModbus_t modbus, CHAR ucByte )
+/* ----------------------- Send a Byte ----------------------------- */
+BOOL 
+xMBPortSerialPutByte(eModbus_t modbus, CHAR ucByte)
 {
     /* Put a byte in the UARTs transmit buffer. This function is called
      * by the protocol stack if pxMBFrameCBTransmitterEmpty( ) has been
      * called. */
-	modbus->tx_done = FALSE;
-	bsp_com_write_it(modbus->config.ucPort,(uint8_t*) &ucByte, 1);
+    modbus->tx_done = FALSE;
+    bsp_com_write_it(modbus->config.ucPort,(uint8_t*) ucByte, 1);
     return TRUE;
+
 }
 
-BOOL
-xMBPortSerialGetByte(eModbus_t modbus, CHAR * pucByte )
+/* ----------------------- Send Multiple Bytes ----------------------------- */
+BOOL 
+xMBPortSerialPutBytes(eModbus_t modbus, volatile UCHAR *ucByte, USHORT usSize)
+{
+	bsp_com_write_it(modbus->config.ucPort,(uint8_t*) ucByte, usSize);
+    return TRUE;
+
+}
+
+
+/* ----------------------- Receive a Byte ----------------------------- */
+BOOL 
+xMBPortSerialGetByte(eModbus_t modbus, CHAR *pucByte)
 {
     /* Return the byte in the UARTs receive buffer. This function is called
      * by the protocol stack after pxMBFrameCBByteReceived( ) has been called.
      */
-//	*pucByte = (uint8_t)(singlechar[modbus->config.ucPort]);
-	// bsp_uart_read(modbus->rs485_handle,(uint8_t*)pucByte, 1);
 	uint8_t res = bsp_com_read(modbus->config.ucPort,(uint8_t*)pucByte,1);
     return (1 == res ) ? TRUE : FALSE;
 }
-BOOL xMBPortSerialPutBytes(eModbus_t modbus,volatile UCHAR *ucByte, USHORT usSize)
-{
-//	modbus->rs485_send_it(modbus->rs485_handle,(UCHAR*)ucByte,usSize);
-	// log_info(TAG,"Write : %d bytes",usSize);
-	// log_print_hex(LOGGER_INFO,TAG,(uint8_t*)ucByte,(uint16_t)usSize);
-	bsp_com_write_it(modbus->config.ucPort,(uint8_t*) ucByte, usSize);
-	// mb_uart_tx_task(modbus);
-	return TRUE;
-}
 
-static uint32_t lock_count = 0;
+BOOL 
+xMBPortSerialGetBaurate(eModbus_t modbus, ULONG *ulBaudRate)
+{
+    /* Return the baudrate of the UART. This function is called by the
+     * protocol stack to get the baudrate of the UART. */
+    *ulBaudRate = modbus->config.ulBaudRate;
+    return TRUE;
+}
 
 void __critical_enter(void)
 {

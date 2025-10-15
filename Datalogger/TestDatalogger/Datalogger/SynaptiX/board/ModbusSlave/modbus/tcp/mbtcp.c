@@ -31,13 +31,13 @@
 #include "stdlib.h"
 #include "string.h"
 
-/* ----------------------- Platform includes --------------------------------*/
+/* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbconfig.h"
 #include "mbtcp.h"
 #include "mbframe.h"
 #include "mbport.h"
-#include "../../port/port.h"
+#include "port.h"
 
 #if MB_TCP_ENABLED > 0
 
@@ -71,7 +71,6 @@
 #define MB_TCP_FUNC         7
 
 #define MB_TCP_PROTOCOL_ID  0   /* 0 = Modbus Protocol */
-
 
 /* ----------------------- Start implementation -----------------------------*/
 eMBErrorCode
@@ -124,7 +123,7 @@ eMBTCPReceive(eModbus_t modbus, UCHAR * pucRcvAddress, UCHAR ** ppucFrame, USHOR
         }
     }
     else
-    {
+    {     
         eStatus = MB_EIO;
     }
     return eStatus;
