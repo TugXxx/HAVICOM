@@ -1,0 +1,8 @@
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:78:1:eMBRTUInit	4
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:130:1:eMBRTUStart	1
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:147:1:eMBRTUStop	1
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:156:1:eMBRTUReceive	3
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:192:1:eMBRTUSend	2
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:232:1:xMBRTUReceiveFSM	6
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:293:1:xMBRTUTransmitFSM	4
+../SynaptiX/board/ModbusSlave/modbus/rtu/mbrtu.c:334:1:xMBRTUTimerT35Expired	5

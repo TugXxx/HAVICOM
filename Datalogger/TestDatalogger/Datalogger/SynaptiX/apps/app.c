@@ -9,8 +9,9 @@
 #include "semphr.h"
 #include "device_state.h"
 #include "config_manager.h"
-#include "rtc_app.h"
-#include "modbus_rtu_app.h"
+//#include "rtc_app.h"
+//#include "modbus_rtu_app.h"
+#include "user_mb_app.h"
 //static const char *TAG = "APP";
 
 extern void shell_app_init();
@@ -25,9 +26,10 @@ void app_init()
 {
    bsp_init();
    device_state_init();
+   hmi_app_init();
    // rtc_app_init();
    // eth_init();
-   mbm_rtu_app_init();
+   // mbm_rtu_app_init();
    // pppos_app_init();
 #if BUTTON_ENABLE
    // button_init();
@@ -37,6 +39,7 @@ void app_init()
 //static char taskListBuff[1024];
 void app_poll()
 {
+
 #if BUTTON_ENABLE
    // button_poll(1);
 #endif

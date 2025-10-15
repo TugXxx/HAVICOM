@@ -35,7 +35,7 @@ SynaptiX/apps/app.o: ../SynaptiX/apps/app.c ../SynaptiX/apps/app.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Core/Inc/gpio.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/tim.h \
+ ../Core/Inc/i2c.h ../Core/Inc/tim.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h \
  ../SynaptiX/apps/app_config.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/button.h \
@@ -53,7 +53,15 @@ SynaptiX/apps/app.o: ../SynaptiX/apps/app.c ../SynaptiX/apps/app.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h \
- D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h \
+ ../SynaptiX/apps/user_mb_app.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mb.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/port/port.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbport.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbproto.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbconfig.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbframe.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbutils.h
 ../SynaptiX/apps/app.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h:
 ../Core/Inc/main.h:
@@ -94,6 +102,7 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Core/Inc/gpio.h:
 ../Core/Inc/main.h:
 ../Core/Inc/usart.h:
+../Core/Inc/i2c.h:
 ../Core/Inc/tim.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h:
 ../SynaptiX/apps/app_config.h:
@@ -113,3 +122,11 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h:
+../SynaptiX/apps/user_mb_app.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mb.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/port/port.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbport.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbproto.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbconfig.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbframe.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbutils.h:

@@ -1,0 +1,4 @@
+../SynaptiX/services/iic_master/iic_master.c:7:5:iic_master_bus_init	2
+../SynaptiX/services/iic_master/iic_master.c:24:5:iic_master_add_dev_to_bus	2
+../SynaptiX/services/iic_master/iic_master.c:35:5:iic_master_write	4
+../SynaptiX/services/iic_master/iic_master.c:70:5:iic_master_read	4

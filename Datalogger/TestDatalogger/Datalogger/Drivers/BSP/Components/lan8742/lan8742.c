@@ -99,7 +99,7 @@ int32_t  LAN8742_RegisterBusIO(lan8742_Object_t *pObj, lan8742_IOCtx_t *ioctx)
      /* Get the device address from special mode register */
      for(addr = 0; addr <= LAN8742_MAX_DEV_ADDR; addr ++)
      {
-       if(pObj->IO.ReadReg(addr, LAN8742_TCSR, &regvalue) < 0)
+       if(pObj->IO.ReadReg(addr, LAN8742_SMR, &regvalue) < 0)
        {
          status = LAN8742_STATUS_READ_ERROR;
          /* Can't read from this device address

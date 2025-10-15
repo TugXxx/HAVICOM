@@ -34,9 +34,9 @@
 #include "logger.h"
 #include "stdio.h"
 
-static const char *TAG = "MB Serial Driver";
+static const char *TAG = "MB Slave";
 
-eModbus modbus[N_MODBUS] = {{.rs485_de_deselect = bsp_de_off,.rs485_de_select = bsp_de_on},{.rs485_de_deselect = NULL,.rs485_de_select = NULL}};
+eModbus modbus[N_MODBUS] = {{.rs485_de_deselect = NULL,.rs485_de_select = NULL}};
 // UARTHandle_t mb_uart[N_MODBUS];
 
 // UCHAR singlechar[N_MODBUS];
@@ -44,8 +44,11 @@ eModbus modbus[N_MODBUS] = {{.rs485_de_deselect = bsp_de_off,.rs485_de_select = 
 
 void mb_uart_rx_task(eModbus *mb)
 {
-	if(bsp_com_available(mb->config.ucPort) > 0){
-		if(mb->pxMBFrameCBByteReceived != NULL ) mb->pxMBFrameCBByteReceived(mb);
+	int len = bsp_com_available(mb->config.ucPort);
+	if(len > 0){
+		log_info(TAG,"0x%08X available %ld bytes",mb,len);
+		for(int i =0;i<len;i++)
+			if(mb->pxMBFrameCBByteReceived != NULL ) mb->pxMBFrameCBByteReceived(mb);
 //		modbus[i].rs485_recv_it(modbus[i].handle,&singlechar[modbus[i].config.ucPort],1);
 		return;
 	}
@@ -68,10 +71,10 @@ vMBPortSerialEnable(eModbus_t modbus, BOOL xRxEnable, BOOL xTxEnable )
      */
 	if(xRxEnable)
 	{
-		if(modbus->rs485_de_deselect != NULL) modbus->rs485_de_deselect();
-		// User code begin
-//		modbus->rs485_recv_it(modbus->handle,&singlechar[modbus->config.ucPort],1);
-		// User code end
+// 		if(modbus->rs485_de_deselect != NULL) modbus->rs485_de_deselect();
+// 		// User code begin
+// //		modbus->rs485_recv_it(modbus->handle,&singlechar[modbus->config.ucPort],1);
+// 		// User code end
 	}
 	else
 	{
@@ -82,8 +85,8 @@ vMBPortSerialEnable(eModbus_t modbus, BOOL xRxEnable, BOOL xTxEnable )
 
 	if(xTxEnable)
 	{
-		if(modbus->rs485_de_select != NULL) modbus->rs485_de_select();
-		modbus->pxMBFrameCBTransmitterEmpty(modbus);
+		// if(modbus->rs485_de_select != NULL) modbus->rs485_de_select();
+		 modbus->pxMBFrameCBTransmitterEmpty(modbus);
 	}
 	else
 	{

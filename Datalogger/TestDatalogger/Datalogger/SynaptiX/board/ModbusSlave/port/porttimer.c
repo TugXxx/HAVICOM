@@ -32,17 +32,20 @@ static void mb_timer0_callback(){
 	modbus[0].pxMBPortCBTimerExpired(&modbus[0]);
 	return;
 }
-static void mb_timer1_callback(){
-	modbus[1].pxMBPortCBTimerExpired(&modbus[1]);
-	return;
-}
+// static void mb_timer1_callback(){
+// 	modbus[1].pxMBPortCBTimerExpired(&modbus[1]);
+// 	return;
+// }
+
+timer_handle timeHandle[N_MODBUS] = {mb_timer0_callback};
+
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
 xMBPortTimersInit(eModbus_t modbus, USHORT usTim1Timerout50us )
 {
 	// modbus->timer_handle = (void*) &mb_timer[modbus->config.ucPort];
-	bsp_timer_set_handle(0,mb_timer0_callback);
-	bsp_timer_set_handle(1,mb_timer1_callback);
+	bsp_timer_set_handle(BSP_TIMER_MBS_HMI,timeHandle[BSP_TIMER_MBS_HMI]);
+	// bsp_timer_set_handle(1,mb_timer1_callback);
     return TRUE;
 }
 
@@ -52,11 +55,7 @@ vMBPortTimersEnable( eModbus_t modbus )
 {
     /* Enable the timer with the timeout passed to xMBPortTimersInit( ) */
 //	modbus->timer_start(modbus->timer_handle);
-	if(modbus->config.ucPort == BSP_RS485_COM_PORT){
-		bsp_timer0_start();
-	}else if(modbus->config.ucPort == BSP_RF_COM_PORT){
-		bsp_timer1_start();
-	}
+	bsp_timer_start(BSP_TIMER_MBS_HMI);
 }
 
 inline void
@@ -64,11 +63,7 @@ vMBPortTimersDisable( eModbus_t modbus )
 {
     /* Disable any pending timers. */
 //	modbus->timer_stop(modbus->timer_handle);
-	if(modbus->config.ucPort == BSP_RS485_COM_PORT){
-		bsp_timer0_stop();
-	}else if(modbus->config.ucPort == BSP_RF_COM_PORT){
-		bsp_timer1_stop();
-	}
+	bsp_timer_stop(BSP_TIMER_MBS_HMI);
 }
 
 /* Create an ISR which is called whenever the timer has expired. This function

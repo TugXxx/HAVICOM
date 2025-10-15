@@ -46,10 +46,18 @@ SynaptiX/apps/config \
 SynaptiX/apps/device_state \
 SynaptiX/apps/mqtt_server \
 SynaptiX/board/A76xx \
+SynaptiX/board/ModbusSlave/modbus/ascii \
+SynaptiX/board/ModbusSlave/modbus/functions \
+SynaptiX/board/ModbusSlave/modbus \
+SynaptiX/board/ModbusSlave/modbus/rtu \
+SynaptiX/board/ModbusSlave/modbus/tcp \
+SynaptiX/board/ModbusSlave/port \
 SynaptiX/board \
 SynaptiX/board/dp83848 \
 SynaptiX/board/modem \
+SynaptiX/board/rtc_rx8130ce \
 SynaptiX/services/cJSON \
+SynaptiX/services/iic_master \
 SynaptiX/services \
 SynaptiX/utils \
 

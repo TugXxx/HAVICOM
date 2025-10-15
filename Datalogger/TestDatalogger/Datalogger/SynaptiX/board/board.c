@@ -17,7 +17,7 @@ static bool uart_tranfer_done[BSP_UART_NUM] = {false};
 static uint8_t uart_data[BSP_UART_NUM];
 static uint8_t uart_data_dma[BSP_UART_NUM][MAX_UART_BUFF_SIZE];
 
-UART_HandleTypeDef *puart[BSP_UART_NUM] = {&hlpuart1, &huart8, &huart4, &huart5};// &huart4,&huart5};
+UART_HandleTypeDef *puart[BSP_UART_NUM] = {&hlpuart1, &huart8, &huart4, &huart5, &huart6};// &huart4,&huart5};
 
 uint32_t bsp_com_write(int com_num, uint8_t *buff, uint32_t len)
 {
@@ -268,7 +268,7 @@ uint8_t bsp_get_address()
 #if BSP_COM_ENABLE
 static void log_puts(const char *s)
 {
-    bsp_com_write(0, (uint8_t *)s, strlen(s));
+    bsp_com_write(BSP_COM_PORT, (uint8_t *)s, strlen(s));
 }
 #else
 static void log_puts(const char *s)

@@ -36,7 +36,7 @@ SynaptiX/apps/device_state/device_state.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Core/Inc/gpio.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/tim.h \
+ ../Core/Inc/i2c.h ../Core/Inc/tim.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
@@ -90,6 +90,7 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Core/Inc/gpio.h:
 ../Core/Inc/main.h:
 ../Core/Inc/usart.h:
+../Core/Inc/i2c.h:
 ../Core/Inc/tim.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:

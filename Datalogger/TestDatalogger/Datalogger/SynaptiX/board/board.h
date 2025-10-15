@@ -87,7 +87,14 @@ extern "C" {
  * interfaces supported by the board. It is used for configuring and managing UART resources
  * in the application.
  */
-#define BSP_UART_NUM 3
+#define BSP_TIMER_ENABLES 1
+#if BSP_TIMER_ENABLES
+#define BSP_TIMER_NUM 3
+#define BSP_TIMER_MBS_HMI 0
+#define BSP_TIMER_MBM_PORT1 1
+#endif
+
+#define BSP_UART_NUM 5
 
 #if BSP_UART_NUM > 0
 #ifndef BSP_COM_ENABLE
@@ -95,7 +102,7 @@ extern "C" {
 #define BSP_COM_PORT 0
 #endif
 #endif
-#define BSP_TIMER_NUM 3
+
 /**
  * @def BSP_DEBUG_COM_PORT
  * @brief Defines the communication port number used for debugging purposes.
@@ -112,9 +119,11 @@ extern "C" {
  * on the board. Update this value if the RS485 interface is connected to a
  * different port.
  */
+#define BSP_SIM_COM_PORT 1
 #define BSP_RS485_1_COM_PORT 2
 #define BSP_RS485_2_COM_PORT 3
-#define BSP_SIM_COM_PORT 1
+#define BSP_MBS_HMI_PORT 4
+
 // #define BSP_GPS_COM_PORT 2
 // #define BSP_SPS30_COM_PORT 3
 // #define BSP_GAS_COM_PORT 4

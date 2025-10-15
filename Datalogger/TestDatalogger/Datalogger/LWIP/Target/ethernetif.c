@@ -91,7 +91,7 @@ typedef enum
 typedef struct
 {
   struct pbuf_custom pbuf_custom;
-  uint8_t buff[(1056 + 31) & ~31] __ALIGNED(32);
+  uint8_t buff[(ETH_RX_BUFFER_SIZE + 31) & ~31] __ALIGNED(32);
 } RxBuff_t;
 
 /* Memory Pool Declaration */

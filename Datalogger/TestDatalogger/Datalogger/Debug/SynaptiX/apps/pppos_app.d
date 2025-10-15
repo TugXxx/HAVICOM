@@ -95,7 +95,7 @@ SynaptiX/apps/pppos_app.o: ../SynaptiX/apps/pppos_app.c \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/modem/modem.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h \
  ../Core/Inc/gpio.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/tim.h \
+ ../Core/Inc/i2c.h ../Core/Inc/tim.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/A76xx/A76xx.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/modem/apn.h \
  ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppapi.h \
@@ -222,6 +222,7 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Core/Inc/gpio.h:
 ../Core/Inc/main.h:
 ../Core/Inc/usart.h:
+../Core/Inc/i2c.h:
 ../Core/Inc/tim.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/A76xx/A76xx.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/modem/apn.h:

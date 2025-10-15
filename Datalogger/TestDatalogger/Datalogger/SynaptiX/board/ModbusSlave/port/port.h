@@ -57,7 +57,7 @@ typedef int32_t LONG;
 #endif
 
 #ifndef N_MODBUS
-#define N_MODBUS        2
+#define N_MODBUS        1
 #endif
 
 #ifndef MB_PLATFORM

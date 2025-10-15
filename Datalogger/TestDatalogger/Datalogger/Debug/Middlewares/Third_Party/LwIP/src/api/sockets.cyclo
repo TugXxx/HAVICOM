@@ -20,8 +20,8 @@
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:1088:1:lwip_recvfrom_udp_raw	15
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:2576:13:select_check_waiters	19
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:2477:1:event_callback	15
-../Middlewares/Third_Party/LwIP/src/api/sockets.c:2882:1:lwip_getsockopt_impl	65
-../Middlewares/Third_Party/LwIP/src/api/sockets.c:3303:1:lwip_setsockopt_impl	65
+../Middlewares/Third_Party/LwIP/src/api/sockets.c:2882:1:lwip_getsockopt_impl	47
+../Middlewares/Third_Party/LwIP/src/api/sockets.c:3303:1:lwip_setsockopt_impl	43
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:320:1:lwip_socket_thread_init	1
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:327:1:lwip_socket_thread_cleanup	1
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:422:1:lwip_socket_dbg_get_socket	1
@@ -48,7 +48,7 @@
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:2753:1:lwip_getsockname	1
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:2759:1:lwip_getsockopt	4
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:3205:1:lwip_setsockopt	4
-../Middlewares/Third_Party/LwIP/src/api/sockets.c:3743:1:lwip_ioctl	10
+../Middlewares/Third_Party/LwIP/src/api/sockets.c:3743:1:lwip_ioctl	5
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:3836:1:lwip_fcntl	10
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:3919:1:lwip_inet_ntop	4
 ../Middlewares/Third_Party/LwIP/src/api/sockets.c:3952:1:lwip_inet_pton	2

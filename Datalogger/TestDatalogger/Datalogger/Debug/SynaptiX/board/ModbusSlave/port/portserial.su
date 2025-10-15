@@ -1,0 +1,9 @@
+../SynaptiX/board/ModbusSlave/port/portserial.c:57:6:mb_uart_tx_task	8	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:45:6:mb_uart_rx_task	24	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:67:1:vMBPortSerialEnable	8	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:100:1:xMBPortSerialInit	16	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:113:1:xMBPortSerialPutByte	16	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:124:1:xMBPortSerialGetByte	8	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:134:6:xMBPortSerialPutBytes	8	static
+../SynaptiX/board/ModbusSlave/port/portserial.c:146:6:__critical_enter	0	static,ignoring_inline_asm
+../SynaptiX/board/ModbusSlave/port/portserial.c:154:6:__critical_exit	0	static,ignoring_inline_asm

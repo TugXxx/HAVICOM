@@ -87,7 +87,8 @@ SynaptiX/apps/eth_app.o: ../SynaptiX/apps/eth_app.c \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/tcpip.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h \
  ../Core/Inc/gpio.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/tim.h ../Middlewares/Third_Party/LwIP/src/include/lwip/dns.h
+ ../Core/Inc/i2c.h ../Core/Inc/tim.h \
+ ../Middlewares/Third_Party/LwIP/src/include/lwip/dns.h
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h:
 ../LWIP/App/lwip.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h:
@@ -179,5 +180,6 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Core/Inc/gpio.h:
 ../Core/Inc/main.h:
 ../Core/Inc/usart.h:
+../Core/Inc/i2c.h:
 ../Core/Inc/tim.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/dns.h:
