@@ -137,6 +137,7 @@
 "./SynaptiX/apps/user_mb_app.o"
 "./SynaptiX/apps/config/config_manager.o"
 "./SynaptiX/apps/device_state/device_state.o"
+"./SynaptiX/apps/mqtt_server/environment.o"
 "./SynaptiX/apps/mqtt_server/mqtt_interface.o"
 "./SynaptiX/apps/mqtt_server/mqtt_server_app.o"
 "./SynaptiX/board/A76xx/A76xx.o"

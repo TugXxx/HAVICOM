@@ -91,10 +91,6 @@ Middlewares/Third_Party/LwIP/src/netif/ppp/pppapi.o: \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/tcp.h \
  ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppos.h \
  ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppoe.h \
- ../Middlewares/Third_Party/LwIP/src/include/lwip/etharp.h \
- ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ethernet.h \
- ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ieee.h \
- ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/etharp.h \
  ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppol2tp.h
 ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/ppp_opts.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h:
@@ -188,8 +184,4 @@ Middlewares/Third_Party/LwIP/src/netif/ppp/pppapi.o: \
 ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/tcp.h:
 ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppos.h:
 ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppoe.h:
-../Middlewares/Third_Party/LwIP/src/include/lwip/etharp.h:
-../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ethernet.h:
-../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ieee.h:
-../Middlewares/Third_Party/LwIP/src/include/lwip/prot/etharp.h:
 ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/pppol2tp.h:

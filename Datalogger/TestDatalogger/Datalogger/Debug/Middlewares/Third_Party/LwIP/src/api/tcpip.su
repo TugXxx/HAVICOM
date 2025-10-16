@@ -6,6 +6,8 @@
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:283:1:tcpip_input	8	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:309:1:tcpip_callback	16	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:345:1:tcpip_try_callback	16	static
+../Middlewares/Third_Party/LwIP/src/api/tcpip.c:377:1:tcpip_timeout	24	static
+../Middlewares/Third_Party/LwIP/src/api/tcpip.c:404:1:tcpip_untimeout	16	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:437:1:tcpip_send_msg_wait_sem	16	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:473:1:tcpip_api_call	16	static
 ../Middlewares/Third_Party/LwIP/src/api/tcpip.c:531:1:tcpip_callbackmsg_new	16	static

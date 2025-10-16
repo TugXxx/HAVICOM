@@ -7,7 +7,7 @@
 ../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:1853:1:tcp_output_alloc_header	40	static
 ../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:132:1:tcp_route	8	static
 ../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:1455:1:tcp_output_segment	40	static
-../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:1921:1:tcp_output_control_segment	40	static
+../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:1921:1:tcp_output_control_segment	48	static
 ../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:390:1:tcp_write	104	static
 ../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:827:1:tcp_split_unsent_seg	48	static
 ../Middlewares/Third_Party/LwIP/src/core/tcp_out.c:1032:1:tcp_enqueue_flags	40	static

@@ -1,4 +1,3 @@
-../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:612:13:ppp_log_write	8	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:87:8:ppp_strlcpy	24	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:105:8:ppp_strlcat	24	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c:135:5:ppp_vslprintf	96	static

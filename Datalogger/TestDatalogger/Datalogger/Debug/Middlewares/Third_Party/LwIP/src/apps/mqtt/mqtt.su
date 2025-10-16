@@ -1,4 +1,3 @@
-../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:153:1:mqtt_msg_type_to_str	0	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:170:1:msg_generate_packet_id	0	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:184:1:mqtt_ringbuf_put	0	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:195:1:mqtt_ringbuf_get_ptr	0	static
@@ -18,11 +17,11 @@
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:420:1:mqtt_clear_requests	16	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:356:1:mqtt_take_request	16	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:436:1:mqtt_init_requests	16	static
-../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:234:1:mqtt_output_send	32	static
+../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:234:1:mqtt_output_send	24	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:1027:1:mqtt_tcp_poll_cb	8	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:976:1:mqtt_tcp_sent_cb	16	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:635:1:pub_ack_rec_rel_response	40	static
-../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:672:1:mqtt_message_received	56	static
+../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:672:1:mqtt_message_received	48	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:537:1:mqtt_close	16	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:1009:1:mqtt_tcp_err_cb	8	static
 ../Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c:576:1:mqtt_cyclic_timer	32	static

@@ -5,14 +5,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../SynaptiX/apps/mqtt_server/environment.c \
 ../SynaptiX/apps/mqtt_server/mqtt_interface.c \
 ../SynaptiX/apps/mqtt_server/mqtt_server_app.c 
 
 OBJS += \
+./SynaptiX/apps/mqtt_server/environment.o \
 ./SynaptiX/apps/mqtt_server/mqtt_interface.o \
 ./SynaptiX/apps/mqtt_server/mqtt_server_app.o 
 
 C_DEPS += \
+./SynaptiX/apps/mqtt_server/environment.d \
 ./SynaptiX/apps/mqtt_server/mqtt_interface.d \
 ./SynaptiX/apps/mqtt_server/mqtt_server_app.d 
 
@@ -24,7 +27,7 @@ SynaptiX/apps/mqtt_server/%.o SynaptiX/apps/mqtt_server/%.su SynaptiX/apps/mqtt_
 clean: clean-SynaptiX-2f-apps-2f-mqtt_server
 
 clean-SynaptiX-2f-apps-2f-mqtt_server:
-	-$(RM) ./SynaptiX/apps/mqtt_server/mqtt_interface.cyclo ./SynaptiX/apps/mqtt_server/mqtt_interface.d ./SynaptiX/apps/mqtt_server/mqtt_interface.o ./SynaptiX/apps/mqtt_server/mqtt_interface.su ./SynaptiX/apps/mqtt_server/mqtt_server_app.cyclo ./SynaptiX/apps/mqtt_server/mqtt_server_app.d ./SynaptiX/apps/mqtt_server/mqtt_server_app.o ./SynaptiX/apps/mqtt_server/mqtt_server_app.su
+	-$(RM) ./SynaptiX/apps/mqtt_server/environment.cyclo ./SynaptiX/apps/mqtt_server/environment.d ./SynaptiX/apps/mqtt_server/environment.o ./SynaptiX/apps/mqtt_server/environment.su ./SynaptiX/apps/mqtt_server/mqtt_interface.cyclo ./SynaptiX/apps/mqtt_server/mqtt_interface.d ./SynaptiX/apps/mqtt_server/mqtt_interface.o ./SynaptiX/apps/mqtt_server/mqtt_interface.su ./SynaptiX/apps/mqtt_server/mqtt_server_app.cyclo ./SynaptiX/apps/mqtt_server/mqtt_server_app.d ./SynaptiX/apps/mqtt_server/mqtt_server_app.o ./SynaptiX/apps/mqtt_server/mqtt_server_app.su
 
 .PHONY: clean-SynaptiX-2f-apps-2f-mqtt_server
 

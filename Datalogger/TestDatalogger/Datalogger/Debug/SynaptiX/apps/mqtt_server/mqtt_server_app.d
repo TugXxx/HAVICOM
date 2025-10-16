@@ -90,7 +90,10 @@ SynaptiX/apps/mqtt_server/mqtt_server_app.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h \
- D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/cJSON/cJSON.h
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/cJSON/cJSON.h \
+ ../SynaptiX/apps/mqtt_server/thingsboard.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h \
+ ../SynaptiX/apps/mqtt_server/environment.h
 ../SynaptiX/apps/mqtt_server/mqtt_server_app.h:
 ../SynaptiX/apps/mqtt_server/mqtt_interface.h:
 ../Middlewares/Third_Party/LwIP/src/include/lwip/apps/mqtt.h:
@@ -183,3 +186,6 @@ SynaptiX/apps/mqtt_server/mqtt_server_app.o: \
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/logger.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/services/cJSON/cJSON.h:
+../SynaptiX/apps/mqtt_server/thingsboard.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h:
+../SynaptiX/apps/mqtt_server/environment.h:

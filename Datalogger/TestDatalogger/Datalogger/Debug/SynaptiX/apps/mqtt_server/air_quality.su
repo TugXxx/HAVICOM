@@ -1,0 +1,2 @@
+../SynaptiX/apps/mqtt_server/air_quality.c:50:12:calculateAQI	0	static
+../SynaptiX/apps/mqtt_server/air_quality.c:54:5:getAQI	8	static

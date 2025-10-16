@@ -47,6 +47,9 @@
 #define CHECKSUM_BY_HARDWARE 1
 /*-----------------------------------------------------------------------------*/
 
+/* LWIP_SO_RCVBUF is enabled => this requires INT_MAX definition in limits.h --*/
+#include "limits.h"
+
 /* LwIP Stack Parameters (modified compared to initialization value in opt.h) -*/
 /* Parameters set in STM32CubeMX LwIP Configuration GUI -*/
 /*----- Value in opt.h for LWIP_DHCP: 0 -----*/
@@ -55,10 +58,18 @@
 #define ETH_RX_BUFFER_SIZE 1536
 /*----- Default Value for LWIP_DNS: 0 ---*/
 #define LWIP_DNS 1
+/*----- Default Value for MEMP_NUM_UDP_PCB: 4 ---*/
+#define MEMP_NUM_UDP_PCB 20
+/*----- Default Value for MEMP_NUM_TCP_PCB: 5 ---*/
+#define MEMP_NUM_TCP_PCB 20
+/*----- Default Value for LWIP_TCPIP_CORE_LOCKING: 0 ---*/
+#define LWIP_TCPIP_CORE_LOCKING 1
+/*----- Default Value for LWIP_TCPIP_CORE_LOCKING_INPUT: 0 ---*/
+#define LWIP_TCPIP_CORE_LOCKING_INPUT 1
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
 /*----- Default Value for MEM_SIZE: 1600 ---*/
-#define MEM_SIZE 131048
+#define MEM_SIZE (10 * 1024)
 /*----- Default Value for H7 devices: 0x30004000 -----*/
 #define LWIP_RAM_HEAP_POINTER 0x30020000
 /*----- Value supported for H7 devices: 1 -----*/
@@ -78,17 +89,17 @@
 /*----- Value in opt.h for LWIP_NETIF_LINK_CALLBACK: 0 -----*/
 #define LWIP_NETIF_LINK_CALLBACK 1
 /*----- Value in opt.h for TCPIP_THREAD_STACKSIZE: 0 -----*/
-#define TCPIP_THREAD_STACKSIZE 1024
+#define TCPIP_THREAD_STACKSIZE 2048
 /*----- Value in opt.h for TCPIP_THREAD_PRIO: 1 -----*/
 #define TCPIP_THREAD_PRIO 24
 /*----- Value in opt.h for TCPIP_MBOX_SIZE: 0 -----*/
 #define TCPIP_MBOX_SIZE 6
 /*----- Value in opt.h for SLIPIF_THREAD_STACKSIZE: 0 -----*/
-#define SLIPIF_THREAD_STACKSIZE 1024
+#define SLIPIF_THREAD_STACKSIZE 2048
 /*----- Value in opt.h for SLIPIF_THREAD_PRIO: 1 -----*/
 #define SLIPIF_THREAD_PRIO 3
 /*----- Value in opt.h for DEFAULT_THREAD_STACKSIZE: 0 -----*/
-#define DEFAULT_THREAD_STACKSIZE 1024
+#define DEFAULT_THREAD_STACKSIZE 2048
 /*----- Value in opt.h for DEFAULT_THREAD_PRIO: 1 -----*/
 #define DEFAULT_THREAD_PRIO 3
 /*----- Value in opt.h for DEFAULT_UDP_RECVMBOX_SIZE: 0 -----*/
@@ -97,36 +108,46 @@
 #define DEFAULT_TCP_RECVMBOX_SIZE 6
 /*----- Value in opt.h for DEFAULT_ACCEPTMBOX_SIZE: 0 -----*/
 #define DEFAULT_ACCEPTMBOX_SIZE 6
+/*----- Default Value for LWIP_TCPIP_TIMEOUT: 0 ---*/
+#define LWIP_TCPIP_TIMEOUT 1
+/*----- Default Value for LWIP_TCP_KEEPALIVE: 0 ---*/
+#define LWIP_TCP_KEEPALIVE 1
+/*----- Default Value for LWIP_SO_SNDTIMEO: 0 ---*/
+#define LWIP_SO_SNDTIMEO 1
+/*----- Default Value for LWIP_SO_RCVTIMEO: 0 ---*/
+#define LWIP_SO_RCVTIMEO 1
+/*----- Default Value for LWIP_SO_SNDRCVTIMEO_NONSTANDARD: 0 ---*/
+#define LWIP_SO_SNDRCVTIMEO_NONSTANDARD 1
+/*----- Default Value for LWIP_SO_RCVBUF: 0 ---*/
+#define LWIP_SO_RCVBUF 1
+/*----- Default Value for LWIP_SO_LINGER: 0 ---*/
+#define LWIP_SO_LINGER 1
 /*----- Value in opt.h for RECV_BUFSIZE_DEFAULT: INT_MAX -----*/
 #define RECV_BUFSIZE_DEFAULT 2000000000
-/*----- Default Value for PPP_SUPPORT: 0 ---*/
-#define PPP_SUPPORT 1
-/*----- Default Value for PPPOE_SUPPORT: 0 ---*/
-#define PPPOE_SUPPORT 1
-/*----- Default Value for PPP_NOTIFY_PHASE: 0 ---*/
-#define PPP_NOTIFY_PHASE 1
-/*----- Default Value for LWIP_SNTP: 0 ---*/
-#define LWIP_SNTP 1
-/*----- Default Value for LWIP_STATS: 0 ---*/
-#define LWIP_STATS 1
-/*----- Value in opt.h for MIB2_STATS: 0 or SNMP_LWIP_MIB2 -----*/
-#define MIB2_STATS 0
+/*----- Default Value for LWIP_TCP_CLOSE_TIMEOUT_MS_DEFAULT: 20000 ---*/
+#define LWIP_TCP_CLOSE_TIMEOUT_MS_DEFAULT 2000
+/*----- Value in opt.h for LWIP_STATS: 1 -----*/
+#define LWIP_STATS 0
 /*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/
-#define CHECKSUM_GEN_IP 0
+#define CHECKSUM_GEN_IP 1
 /*----- Value in opt.h for CHECKSUM_GEN_UDP: 1 -----*/
-#define CHECKSUM_GEN_UDP 0
+#define CHECKSUM_GEN_UDP 1
 /*----- Value in opt.h for CHECKSUM_GEN_TCP: 1 -----*/
-#define CHECKSUM_GEN_TCP 0
+#define CHECKSUM_GEN_TCP 1
+/*----- Value in opt.h for CHECKSUM_GEN_ICMP: 1 -----*/
+#define CHECKSUM_GEN_ICMP 1
 /*----- Value in opt.h for CHECKSUM_GEN_ICMP6: 1 -----*/
-#define CHECKSUM_GEN_ICMP6 0
+#define CHECKSUM_GEN_ICMP6 1
 /*----- Value in opt.h for CHECKSUM_CHECK_IP: 1 -----*/
-#define CHECKSUM_CHECK_IP 0
+#define CHECKSUM_CHECK_IP 1
 /*----- Value in opt.h for CHECKSUM_CHECK_UDP: 1 -----*/
-#define CHECKSUM_CHECK_UDP 0
+#define CHECKSUM_CHECK_UDP 1
 /*----- Value in opt.h for CHECKSUM_CHECK_TCP: 1 -----*/
-#define CHECKSUM_CHECK_TCP 0
+#define CHECKSUM_CHECK_TCP 1
+/*----- Value in opt.h for CHECKSUM_CHECK_ICMP: 1 -----*/
+#define CHECKSUM_CHECK_ICMP 1
 /*----- Value in opt.h for CHECKSUM_CHECK_ICMP6: 1 -----*/
-#define CHECKSUM_CHECK_ICMP6 0
+#define CHECKSUM_CHECK_ICMP6 1
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
 #define MEMP_NUM_SYS_TIMEOUT        16
@@ -138,7 +159,7 @@
 #define MQTT_REQ_MAX_IN_FLIGHT 8 //4
 // #define MQTT_REQ_TIMEOUT 50
 #define MQTT_CONNECT_TIMOUT 20
-#define MEM_SIZE                (10 * 1024)      // Nếu bạn có RAM đủ, có thể tăng đến 20–24KB
+// #define MEM_SIZE                (10 * 1024)      // Nếu bạn có RAM đủ, có thể tăng đến 20–24KB
 #define MEMP_NUM_PBUF           32
 #define MEMP_NUM_TCP_SEG        32
 #define PBUF_POOL_SIZE          8
@@ -152,11 +173,11 @@
 #define PPPOS_SUPPORT 1
 // #define MEMP_NUM_SYS_TIMEOUT        16
 #define PPP_NOTIFY_PHASE 1
-#define LWIP_STATS 0
+#define LWIP_STATS 1
 /*----- Default Value for PPP_DEBUG: LWIP_DBG_OFF ---*/
-#define PPP_DEBUG LWIP_DBG_ON
-#define PPPOS_DEBUG LWIP_DBG_ON
-#define MQTT_DEBUG LWIP_DBG_ON
+#define PPP_DEBUG LWIP_DBG_OFF
+#define PPPOS_DEBUG LWIP_DBG_OFF
+#define MQTT_DEBUG LWIP_DBG_OFF
 // #include "sntp_app.h"
 // #define SNTP_SET_SYSTEM_TIME    sntp_set_time
 /* USER CODE END 1 */

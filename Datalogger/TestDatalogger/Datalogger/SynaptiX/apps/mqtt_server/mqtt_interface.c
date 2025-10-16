@@ -70,17 +70,18 @@ static void MQTTClientProcess(void *arg)
 	EventBits_t mqtt_publish_event;
 	client->events = xEventGroupCreate();
 
-connecting:
+
 	Device_State_t state = device_get_state();
 
 	while(state != CONNECTED_NETWORK)
 	{
-		vTaskDelay(1000);
+		vTaskDelay(3000);
 		log_info(TAG, "Waiting for network...%d", state);
 		state = device_get_state();
 	}
-	
-	device_set_state(CONNECT_SERVER);
+
+	device_set_state(CONNECTING_SERVER);
+connecting:
 	log_info(TAG, "Connecting to %s , port %d", client->configs->host, client->configs->port);
 	client->ip.addr = 0;
 	err_t err = dns_gethostbyname((const char *)client->configs->host, &client->ip,
@@ -94,7 +95,7 @@ connecting:
 		mqtt_do_connect(client);
 	else
 	{
-		log_error(TAG, "Can't get ip from host %s", client->configs->host);
+		log_error(TAG, "Can't get ip from host %s. Error: %d", client->configs->host, err);
 		goto connecting;
 	}
 	while (1)
@@ -111,24 +112,19 @@ connecting:
 
 			if (mqtt_publish_event & MQTT_PUBLISH_SUCCESS_BIT || mqtt_publish_event & MQTT_CONNECTED_BIT) 
 			{
-				// if (client->telemetry.get_telemetry != NULL)
 				if(client->msgPub.state == MQTT_PUB_DOING)
 				{
-					// char *payload = client->telemetry.get_telemetry();
 					char *payload = client->msgPub.payload;
 					char *topic = client->msgPub.topic;
 					uint8_t qos = client->msgPub.qos;
 					if ((payload != NULL) && (topic != NULL ))
 					{
-						// log_info(TAG, "Get telemetry %s", payload);
+						log_info(TAG, "Pub payload: %s", payload);
 						xEventGroupClearBits(client->events, mqtt_publish_event);
-						// if (mqtt_publish(p_client(client), TELEMETRY_API, payload,
 						if (mqtt_publish(p_client(client), topic, payload,
 										strlen(payload), qos, 0, mqtt_pub_request_cb, client) != 0)
 						{
 							log_error(TAG, "Publish false");
-							//  vTaskDelay(pdMS_TO_TICKS(2000));
-							//  client->msgPub.payload_len = 0;
 
 						}
 						client->msgPub.state = MQTT_PUB_WAITING;
@@ -137,7 +133,6 @@ connecting:
 					else {
 						log_error(TAG, "Topic or payload are NULL!");
 					}
-					// client->msgPub.payload_len = 0;
 				}
 				vTaskDelay(1);
 

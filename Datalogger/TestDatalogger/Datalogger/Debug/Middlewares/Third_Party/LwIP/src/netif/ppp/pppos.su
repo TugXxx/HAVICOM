@@ -1,10 +1,10 @@
+../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:738:1:pppos_send_config	0	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:758:1:pppos_recv_config	0	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:823:1:pppos_output_append	32	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:399:1:pppos_destroy	8	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:758:1:pppos_recv_config	16	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:738:1:pppos_send_config	16	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:857:1:pppos_output_last	40	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:253:1:pppos_netif_output	56	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:200:1:pppos_write	48	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:253:1:pppos_netif_output	48	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:200:1:pppos_write	40	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:783:1:pppos_input_free_current_packet	8	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:377:1:pppos_disconnect	8	static
 ../Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c:313:1:pppos_connect	16	static

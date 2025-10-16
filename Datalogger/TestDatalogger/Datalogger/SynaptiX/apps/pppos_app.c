@@ -34,7 +34,7 @@
 #define MODEM_SEND_RETRY_TIME        3
 
 
-#define MAX_TIMEOUT_CHECK_CONNECT_PPPOS_mS (90 * 1000) // Note: This parameter must be greater than THINGSBOARD_KEEP_ALIVE_S
+#define MAX_TIMEOUT_CHECK_CONNECT_PPPOS_mS (180 * 1000) // Note: This parameter must be greater than THINGSBOARD_KEEP_ALIVE_S
 #define UART_MD_BUFF_SIZE 1024
 /* ----------------------------- Extern Variables ----------------------------- */
 
@@ -70,11 +70,8 @@ static void ppp_phase_cb(ppp_pcb *pcb, u8_t phase, void *ctx);
 
 /* ----------------------------- Public Functions ----------------------------- */
 extern void dns_get_mqtt_host();
-extern void mqtt_app_destroy();
-extern bool mqtt_app_is_running();
-extern void mqtt_app_init();
 void pppos_stop();
-extern char *modbus_create_json(void);
+
 /* -----------------------------  Start programming ----------------------------- */
 void pppos_start() {
 	// 1. Initialize TCP/IP stack
@@ -147,7 +144,7 @@ void pppos_app_task(void *arg) {
 modem_init_retry:
    // Initialize Modem
 	device_set_state(REQUEST_NETWORK);
-   a76xx_init(&a76xx, BSP_SIM_COM_PORT, rst, pwr);
+    a76xx_init(&a76xx, BSP_SIM_COM_PORT, rst, pwr);
 //	strcpy(sys_config.dev.imei, a76xx.imei);
 //	strcpy(sys_config.dev.ccid, a76xx.ccid);
 //	sys_config.dev.signalLV = a76xx.rssi_level;
@@ -166,15 +163,15 @@ modem_init_retry:
 			 	timer_check_connect = 0;
 			 	pppos_input(ppp, a76xx.modem.buff, len);
 			 }
-			//  if(timer_check_connect < MAX_TIMEOUT_CHECK_CONNECT_PPPOS_mS)
-			//  	timer_check_connect += 10;
-			//  if (timer_check_connect == MAX_TIMEOUT_CHECK_CONNECT_PPPOS_mS){
-			//  	log_warn(TAG, "Timeout check connect pppos");
-			//  	 netif_set_link_down(&pppos_netif);
-			//  	 pppos_input(ppp, "DISCONNECT", strlen("NO CARRIER"));
-			//  	ppp_close(ppp,0);
-			//  	a76xx.modem.mode = MD_ERROR;
-			//  }
+			 if(timer_check_connect < MAX_TIMEOUT_CHECK_CONNECT_PPPOS_mS)
+			 	timer_check_connect += 10;
+			 if (timer_check_connect == MAX_TIMEOUT_CHECK_CONNECT_PPPOS_mS){
+			 	log_warn(TAG, "Timeout check connect pppos");
+			 	//  netif_set_link_down(&pppos_netif);
+			 	//  pppos_input(ppp, "DISCONNECT", strlen("NO CARRIER"));
+			 	ppp_close(ppp,0);
+			 	a76xx.modem.mode = MD_ERROR;
+			 }
 			break;
 		case MD_Command_Mode:
 			 log_info(TAG, "Restart Modem");

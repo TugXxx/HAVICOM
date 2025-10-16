@@ -1,0 +1,3 @@
+../SynaptiX/apps/mqtt_server/environment.c:52:12:calculateAQI	0	static
+../SynaptiX/apps/mqtt_server/environment.c:56:12:getAQI_	8	static
+../SynaptiX/apps/mqtt_server/environment.c:65:5:getAQI	40	static
