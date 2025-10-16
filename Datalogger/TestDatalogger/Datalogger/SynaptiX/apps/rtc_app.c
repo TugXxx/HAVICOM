@@ -25,7 +25,7 @@ static void rtc_task(void *arg)
 
     iic_master_bus_init(&bus, 0);
 
-    while (rx8130ce_init(&bus, &rtc_dev, 0x32, NULL) != 0)
+    while (rx8130ce_init(&bus, &rtc_dev, 0x32 << 1, NULL) != 0)
     {
         log_info(TAG, "RTC init failed\n"); 
         vTaskDelay(1000);
@@ -33,9 +33,9 @@ static void rtc_task(void *arg)
 
     RTCTime_t set_time = {
         .tm_sec  = 0,
-        .tm_min  = 12,
-        .tm_hour = 12,
-        .tm_mday = 13,
+        .tm_min  = 15,
+        .tm_hour = 17,
+        .tm_mday = 16,
         .tm_mon  = 10,    // January (0-11)
         .tm_year = 2025,  // Year since 1900 (2024-1900)
     };
@@ -48,8 +48,8 @@ static void rtc_task(void *arg)
         if (rx8130ce_get_time(&rtc_dev, &current_time) == 0)
         {
             log_info(TAG, "Current RTC Time: %04d-%02d-%02d %02d:%02d:%02d",
-                     current_time.tm_year + 1900,
-                     current_time.tm_mon + 1,
+                     current_time.tm_year,
+                     current_time.tm_mon,
                      current_time.tm_mday,
                      current_time.tm_hour,
                      current_time.tm_min,

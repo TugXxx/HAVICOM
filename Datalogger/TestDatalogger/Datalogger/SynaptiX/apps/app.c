@@ -25,9 +25,9 @@ void app_init()
 {
    bsp_init();
    device_state_init();
-   // rtc_app_init();
+   rtc_app_init();
    // eth_init();
-   mbm_rtu_app_init();
+   // mbm_rtu_app_init();
    // pppos_app_init();
 #if BUTTON_ENABLE
    // button_init();

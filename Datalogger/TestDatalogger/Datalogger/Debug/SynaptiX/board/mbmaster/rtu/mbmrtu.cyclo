@@ -1,8 +1,8 @@
 ../SynaptiX/board/mbmaster/rtu/mbmrtu.c:456:1:eMBMSerialRTUFrameReceive	10
 ../SynaptiX/board/mbmaster/rtu/mbmrtu.c:332:1:eMBMSerialRTUFrameSend	9
-../SynaptiX/board/mbmaster/rtu/mbmrtu.c:977:1:bMBMSerialRTUT35CB	11
-../SynaptiX/board/mbmaster/rtu/mbmrtu.c:813:1:bMBMSerialRTUTransmitterEmptyAPIV2CB	17
-../SynaptiX/board/mbmaster/rtu/mbmrtu.c:909:1:vMBMSerialRTUReceiverAPIV2CB	9
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:975:1:bMBMSerialRTUT35CB	11
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:813:1:bMBMSerialRTUTransmitterEmptyAPIV2CB	13
+../SynaptiX/board/mbmaster/rtu/mbmrtu.c:907:1:vMBMSerialRTUReceiverAPIV2CB	9
 ../SynaptiX/board/mbmaster/rtu/mbmrtu.c:608:1:eMBMSerialRTUFrameCloseInternal	8
 ../SynaptiX/board/mbmaster/rtu/mbmrtu.c:591:1:eMBMSerialRTUFrameClose	2
 ../SynaptiX/board/mbmaster/rtu/mbmrtu.c:158:1:eMBMSerialRTUInit	7
