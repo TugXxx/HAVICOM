@@ -1,2 +1,2 @@
 ../SynaptiX/apps/app.c:25:6:app_init	8	static
-../SynaptiX/apps/app.c:40:6:app_poll	0	static
+../SynaptiX/apps/app.c:40:6:app_poll	4	static

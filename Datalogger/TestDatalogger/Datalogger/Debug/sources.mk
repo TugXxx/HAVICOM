@@ -55,6 +55,8 @@ SynaptiX/board/ModbusSlave/port \
 SynaptiX/board \
 SynaptiX/board/dp83848 \
 SynaptiX/board/modem \
+SynaptiX/board/nanomodbus \
+SynaptiX/board/nanomodbus/port \
 SynaptiX/board/rtc_rx8130ce \
 SynaptiX/services/cJSON \
 SynaptiX/services/iic_master \

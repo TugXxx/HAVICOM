@@ -1,4 +1,4 @@
-#include <port/port.h>
+#include <port/master_port.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include <string.h>
@@ -215,13 +215,14 @@ static int32_t read_serial(uint8_t* buf, uint16_t count, int32_t byte_timeout_ms
     return count;
 #else
     // HAL_StatusTypeDef status = HAL_UART_Receive(&MB_UART, buf, count, byte_timeout_ms);
-    uint32_t status = bsp_com_read(MB_UART, buf, count);
-    if (status == 0) {
-        return count;
-    }
-    else {
-        return 0;
-    }
+    uint32_t len = bsp_com_read(MB_UART, buf, count);
+//    if (len == count) {
+//        return count;
+//    }
+//    else {
+//        return 0;
+//    }
+    return len;
 #endif
 }
 static int32_t write_serial(const uint8_t* buf, uint16_t count, int32_t byte_timeout_ms, void* arg) {
@@ -264,11 +265,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef* huart, uint16_t Size) {
 
 
 static bool rs485_de_low(){
-    bsp_485_de_off(MB_UART);	
+    bsp_485_de_on(MB_UART);
 	return 0;
 }
 static bool rs485_de_high(){
-    bsp_485_de_on(MB_UART);	
+    bsp_485_de_off(MB_UART);
 return 0;
 }
 #endif

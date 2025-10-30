@@ -1,6 +1,6 @@
 ../SynaptiX/board/ModbusSlave/modbus/mb.c:139:1:eMBInit	24	static
-../SynaptiX/board/ModbusSlave/modbus/mb.c:245:1:eMBRegisterCB	0	static
-../SynaptiX/board/ModbusSlave/modbus/mb.c:292:1:eMBClose	8	static
-../SynaptiX/board/ModbusSlave/modbus/mb.c:311:1:eMBEnable	8	static
-../SynaptiX/board/ModbusSlave/modbus/mb.c:329:1:eMBDisable	16	static
-../SynaptiX/board/ModbusSlave/modbus/mb.c:351:1:eMBPoll	24	static
+../SynaptiX/board/ModbusSlave/modbus/mb.c:245:1:eMBRegisterCB	32	static
+../SynaptiX/board/ModbusSlave/modbus/mb.c:292:1:eMBClose	24	static
+../SynaptiX/board/ModbusSlave/modbus/mb.c:311:1:eMBEnable	24	static
+../SynaptiX/board/ModbusSlave/modbus/mb.c:329:1:eMBDisable	24	static
+../SynaptiX/board/ModbusSlave/modbus/mb.c:351:1:eMBPoll	40	static

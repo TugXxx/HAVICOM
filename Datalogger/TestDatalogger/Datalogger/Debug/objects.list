@@ -162,6 +162,8 @@
 "./SynaptiX/board/dp83848/dp83848.o"
 "./SynaptiX/board/modem/apn.o"
 "./SynaptiX/board/modem/modem.o"
+"./SynaptiX/board/nanomodbus/nanomodbus.o"
+"./SynaptiX/board/nanomodbus/port/master_port.o"
 "./SynaptiX/board/rtc_rx8130ce/rtc_rx8130ce.o"
 "./SynaptiX/services/cJSON/cJSON.o"
 "./SynaptiX/services/cJSON/cJSON_Utils.o"

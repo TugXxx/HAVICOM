@@ -1,3 +1,3 @@
 ../SynaptiX/apps/eth_app.c:17:6:dns_found_cb	1
-../SynaptiX/apps/eth_app.c:43:13:eth_app_task	1
 ../SynaptiX/apps/eth_app.c:27:6:eth_init	4
+../SynaptiX/apps/eth_app.c:43:13:eth_app_task	1

@@ -14,6 +14,8 @@ RM := rm -rf
 -include SynaptiX/services/cJSON/subdir.mk
 -include SynaptiX/services/subdir.mk
 -include SynaptiX/board/rtc_rx8130ce/subdir.mk
+-include SynaptiX/board/nanomodbus/port/subdir.mk
+-include SynaptiX/board/nanomodbus/subdir.mk
 -include SynaptiX/board/modem/subdir.mk
 -include SynaptiX/board/dp83848/subdir.mk
 -include SynaptiX/board/ModbusSlave/port/subdir.mk

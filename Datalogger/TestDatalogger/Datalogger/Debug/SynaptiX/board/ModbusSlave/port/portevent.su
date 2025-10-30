@@ -1,5 +1,5 @@
-../SynaptiX/board/ModbusSlave/port/portevent.c:33:1:xMBPortEventInit	0	static
-../SynaptiX/board/ModbusSlave/port/portevent.c:40:1:xMBPortEventPost	0	static
-../SynaptiX/board/ModbusSlave/port/portevent.c:48:1:xMBPortEventGet	0	static
-../SynaptiX/board/ModbusSlave/port/portevent.c:62:1:xMBPortEventClear	0	static
-../SynaptiX/board/ModbusSlave/port/portevent.c:75:1:xMBPortEventLook	0	static
+../SynaptiX/board/ModbusSlave/port/portevent.c:33:1:xMBPortEventInit	16	static
+../SynaptiX/board/ModbusSlave/port/portevent.c:40:1:xMBPortEventPost	16	static
+../SynaptiX/board/ModbusSlave/port/portevent.c:48:1:xMBPortEventGet	24	static
+../SynaptiX/board/ModbusSlave/port/portevent.c:62:1:xMBPortEventClear	24	static
+../SynaptiX/board/ModbusSlave/port/portevent.c:75:1:xMBPortEventLook	24	static

@@ -1,4 +1,4 @@
 ../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:79:1:eMBFuncWriteHoldingRegister	3
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:112:1:eMBFuncWriteMultipleHoldingRegister	5
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:173:1:eMBFuncReadHoldingRegister	4
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:240:1:eMBFuncReadWriteMultipleHoldingRegister	7
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:112:1:eMBFuncWriteMultipleHoldingRegister	6
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:173:1:eMBFuncReadHoldingRegister	5
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:240:1:eMBFuncReadWriteMultipleHoldingRegister	10

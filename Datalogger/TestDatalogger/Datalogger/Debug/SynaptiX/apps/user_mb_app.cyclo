@@ -1,6 +1,6 @@
-../SynaptiX/apps/user_mb_app.c:315:6:hmi_task	3
 ../SynaptiX/apps/user_mb_app.c:64:14:eMBRegInputCB	1
-../SynaptiX/apps/user_mb_app.c:114:14:eMBRegHoldingCB	6
+../SynaptiX/apps/user_mb_app.c:114:14:eMBRegHoldingCB	7
 ../SynaptiX/apps/user_mb_app.c:180:14:eMBRegCoilsCB	1
 ../SynaptiX/apps/user_mb_app.c:259:14:eMBRegDiscreteCB	1
+../SynaptiX/apps/user_mb_app.c:315:6:hmi_task	3
 ../SynaptiX/apps/user_mb_app.c:350:6:hmi_app_init	1

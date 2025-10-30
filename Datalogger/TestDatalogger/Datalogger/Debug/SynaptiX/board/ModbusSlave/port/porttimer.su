@@ -1,5 +1,5 @@
-../SynaptiX/board/ModbusSlave/port/porttimer.c:37:13:vMBPortTimerISR	8	static
-../SynaptiX/board/ModbusSlave/port/porttimer.c:44:1:xMBPortTimersInit	8	static
-../SynaptiX/board/ModbusSlave/port/porttimer.c:51:1:vMBPortTimersEnable	8	static
-../SynaptiX/board/ModbusSlave/port/porttimer.c:59:1:vMBPortTimersDisable	8	static
-../SynaptiX/board/ModbusSlave/port/porttimer.c:67:1:vMBPortTimersDelay	8	static
+../SynaptiX/board/ModbusSlave/port/porttimer.c:37:13:vMBPortTimerISR	24	static
+../SynaptiX/board/ModbusSlave/port/porttimer.c:44:1:xMBPortTimersInit	16	static
+../SynaptiX/board/ModbusSlave/port/porttimer.c:51:1:vMBPortTimersEnable	16	static
+../SynaptiX/board/ModbusSlave/port/porttimer.c:59:1:vMBPortTimersDisable	16	static
+../SynaptiX/board/ModbusSlave/port/porttimer.c:67:1:vMBPortTimersDelay	16	static

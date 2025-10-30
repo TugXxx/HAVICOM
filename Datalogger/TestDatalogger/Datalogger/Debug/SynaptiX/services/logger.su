@@ -1,4 +1,4 @@
-../SynaptiX/services/logger.c:25:13:serial_write_func	8	static
+../SynaptiX/services/logger.c:25:13:serial_write_func	16	static
 ../SynaptiX/services/logger.c:60:6:log_func	32	static
-../SynaptiX/services/logger.c:95:6:log_print_hex	40	static
+../SynaptiX/services/logger.c:95:6:log_print_hex	48	static
 ../SynaptiX/services/logger.c:120:6:logger_init	16	static

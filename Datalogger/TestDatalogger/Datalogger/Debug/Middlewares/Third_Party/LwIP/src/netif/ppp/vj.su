@@ -1,5 +1,5 @@
-../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:48:1:vj_compress_init	0	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:160:1:vj_compress_tcp	80	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:448:1:vj_uncompress_err	0	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:459:1:vj_uncompress_uncomp	24	static
-../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:497:1:vj_uncompress_tcp	56	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:48:1:vj_compress_init	24	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:160:1:vj_compress_tcp	96	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:448:1:vj_uncompress_err	16	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:459:1:vj_uncompress_uncomp	32	static
+../Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c:497:1:vj_uncompress_tcp	96	static

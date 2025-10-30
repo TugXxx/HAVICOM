@@ -4,8 +4,8 @@
 ../SynaptiX/board/dp83848/dp83848.c:163:9:DP83848_DisablePowerDownMode	3
 ../SynaptiX/board/dp83848/dp83848.c:193:9:DP83848_EnablePowerDownMode	3
 ../SynaptiX/board/dp83848/dp83848.c:223:9:DP83848_StartAutoNego	3
-../SynaptiX/board/dp83848/dp83848.c:259:9:DP83848_GetLinkState	14
-../SynaptiX/board/dp83848/dp83848.c:351:9:DP83848_SetLinkState	6
+../SynaptiX/board/dp83848/dp83848.c:259:9:DP83848_GetLinkState	15
+../SynaptiX/board/dp83848/dp83848.c:351:9:DP83848_SetLinkState	7
 ../SynaptiX/board/dp83848/dp83848.c:403:9:DP83848_EnableLoopbackMode	3
 ../SynaptiX/board/dp83848/dp83848.c:433:9:DP83848_DisableLoopbackMode	3
 ../SynaptiX/board/dp83848/dp83848.c:473:9:DP83848_EnableIT	3

@@ -1,4 +1,4 @@
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:79:1:eMBFuncWriteHoldingRegister	24	static
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:79:1:eMBFuncWriteHoldingRegister	32	static
 ../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:112:1:eMBFuncWriteMultipleHoldingRegister	32	static
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:173:1:eMBFuncReadHoldingRegister	32	static
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:173:1:eMBFuncReadHoldingRegister	40	static
 ../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncholding.c:240:1:eMBFuncReadWriteMultipleHoldingRegister	40	static

@@ -1,5 +1,5 @@
-../SynaptiX/board/ModbusSlave/modbus/mb.c:139:1:eMBInit	7
-../SynaptiX/board/ModbusSlave/modbus/mb.c:245:1:eMBRegisterCB	9
+../SynaptiX/board/ModbusSlave/modbus/mb.c:139:1:eMBInit	9
+../SynaptiX/board/ModbusSlave/modbus/mb.c:245:1:eMBRegisterCB	10
 ../SynaptiX/board/ModbusSlave/modbus/mb.c:292:1:eMBClose	3
 ../SynaptiX/board/ModbusSlave/modbus/mb.c:311:1:eMBEnable	2
 ../SynaptiX/board/ModbusSlave/modbus/mb.c:329:1:eMBDisable	3

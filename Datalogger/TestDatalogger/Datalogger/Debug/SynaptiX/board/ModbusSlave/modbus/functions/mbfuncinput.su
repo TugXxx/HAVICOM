@@ -1,1 +1,1 @@
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncinput.c:60:1:eMBFuncReadInputRegister	32	static
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncinput.c:60:1:eMBFuncReadInputRegister	40	static

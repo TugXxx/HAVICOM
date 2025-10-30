@@ -54,7 +54,7 @@ SynaptiX/apps/app.o: ../SynaptiX/apps/app.c ../SynaptiX/apps/app.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h \
- ../SynaptiX/apps/user_mb_app.h \
+ ../SynaptiX/apps/modbus_rtu_app.h ../SynaptiX/apps/user_mb_app.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mb.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/../../port/port.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbport.h \
@@ -123,6 +123,7 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h:
+../SynaptiX/apps/modbus_rtu_app.h:
 ../SynaptiX/apps/user_mb_app.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mb.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/../../port/port.h:

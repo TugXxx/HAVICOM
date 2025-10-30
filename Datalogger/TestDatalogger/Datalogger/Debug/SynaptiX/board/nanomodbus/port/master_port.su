@@ -1,0 +1,13 @@
+../SynaptiX/board/nanomodbus/port/master_port.c:39:12:nmbs_server_init	104	static
+../SynaptiX/board/nanomodbus/port/master_port.c:81:12:nmbs_client_init	48	static
+../SynaptiX/board/nanomodbus/port/master_port.c:108:23:get_server	16	static
+../SynaptiX/board/nanomodbus/port/master_port.c:117:19:server_read_coils	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:131:19:server_read_holding_registers	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:144:19:server_write_single_coil	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:152:19:server_write_multiple_coils	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:166:19:server_write_single_register	40	static
+../SynaptiX/board/nanomodbus/port/master_port.c:171:19:server_write_multiple_registers	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:201:16:read_serial	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:228:16:write_serial	32	static
+../SynaptiX/board/nanomodbus/port/master_port.c:267:13:rs485_de_low	8	static
+../SynaptiX/board/nanomodbus/port/master_port.c:271:13:rs485_de_high	8	static

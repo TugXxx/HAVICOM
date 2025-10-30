@@ -14,7 +14,6 @@ extern "C" {
 // NanoModbus include
 #include "nanomodbus.h"
 #include "board.h"
-
 #ifdef NMBS_TCP
 // modbus tcp
 #define MB_SOCKET 1
@@ -22,7 +21,7 @@ extern "C" {
 #endif
 #ifdef NMBS_RTU
 // modbus rtu
-#define MB_UART BSP_RS485_1_COM_PORT
+#define MB_UART BSP_RS485_2_COM_PORT
 #define MB_RS485 1
 #define MB_UART_DMA 0
 #define MB_RX_BUF_SIZE 256

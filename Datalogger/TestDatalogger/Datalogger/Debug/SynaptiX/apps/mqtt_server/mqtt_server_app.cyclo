@@ -1,4 +1,6 @@
-../SynaptiX/apps/mqtt_server/mqtt_server_app.c:123:12:create_msu_json	10
-../SynaptiX/apps/mqtt_server/mqtt_server_app.c:288:13:mqtt_public	6
-../SynaptiX/apps/mqtt_server/mqtt_server_app.c:77:13:data_packet_task	3
 ../SynaptiX/apps/mqtt_server/mqtt_server_app.c:35:6:mqtt_server_init	3
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:77:13:data_packet_task	3
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:101:13:heartbeat_task	2
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:123:12:create_msu_json	11
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:203:12:create_heartbeat_json	8
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:288:13:mqtt_public	7

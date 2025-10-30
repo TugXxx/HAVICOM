@@ -1,2 +1,2 @@
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncother.c:50:1:eMBSetSlaveID	8	static
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncother.c:50:1:eMBSetSlaveID	32	static
 ../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncother.c:78:1:eMBFuncReportSlaveID	16	static

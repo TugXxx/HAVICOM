@@ -1,1 +1,1 @@
-../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncdisc.c:59:1:eMBFuncReadDiscreteInputs	32	static
+../SynaptiX/board/ModbusSlave/modbus/functions/mbfuncdisc.c:59:1:eMBFuncReadDiscreteInputs	40	static

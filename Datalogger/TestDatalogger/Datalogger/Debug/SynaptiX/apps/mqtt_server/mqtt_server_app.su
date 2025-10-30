@@ -1,4 +1,6 @@
-../SynaptiX/apps/mqtt_server/mqtt_server_app.c:123:12:create_msu_json	56	static
-../SynaptiX/apps/mqtt_server/mqtt_server_app.c:288:13:mqtt_public	144	static
-../SynaptiX/apps/mqtt_server/mqtt_server_app.c:77:13:data_packet_task	1040	static
 ../SynaptiX/apps/mqtt_server/mqtt_server_app.c:35:6:mqtt_server_init	32	static
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:77:13:data_packet_task	1048	static
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:101:13:heartbeat_task	1048	static
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:123:12:create_msu_json	56	static
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:203:12:create_heartbeat_json	88	static
+../SynaptiX/apps/mqtt_server/mqtt_server_app.c:288:13:mqtt_public	160	static

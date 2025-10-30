@@ -10,7 +10,7 @@
 #include "device_state.h"
 #include "config_manager.h"
 //#include "rtc_app.h"
-//#include "modbus_rtu_app.h"
+#include "modbus_rtu_app.h"
 #include "user_mb_app.h"
 //static const char *TAG = "APP";
 
@@ -26,10 +26,10 @@ void app_init()
 {
    bsp_init();
    device_state_init();
-   hmi_app_init();
+   hmi_app_init(); // user_mb_app
    // rtc_app_init();
    // eth_init();
-   // mbm_rtu_app_init();
+   mbm_rtu_app_init();
    pppos_app_init();
 #if BUTTON_ENABLE
    // button_init();
