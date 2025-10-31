@@ -40,8 +40,8 @@ void mqtt_server_init(device_config_t *sys_config)
 		strcpy(client_cfg.clientID,"SynaptiX" );
 		// strcpy(client_cfg.host,"27.71.27.73");
         strcpy(client_cfg.host,"demo.thingsboard.io");
-		strcpy(client_cfg.username, "root");
-		strcpy(client_cfg.password, "lottte135@");
+		strcpy(client_cfg.username, "kyezemnr48njppn92e3v");
+		strcpy(client_cfg.password, "b8nishqt7g3usc259ixp");
 		strcpy(client.pub_topic, TB_PUB_TOPIC_HEARDER);
 		strcpy(client.sub_topic, TB_SUB_TOPIC_ATTRIBUTES);
 		client_cfg.port = MQTT_PORT;

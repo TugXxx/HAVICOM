@@ -309,10 +309,101 @@ eMBErrorCode eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT us
 #include "FreeRTOS.h"
 #include "task.h"
 
+
+// Baseline cho nhà thi đấu/hội chợ triển lãm
+uint16_t baseline[6] = {
+    18,   // PM2.5 (µg/m³)
+    30,   // PM10  (µg/m³)
+    450,  // CO    (ppb)
+    10,   // SO₂   (ppb)
+    20,   // NO₂   (ppb)
+    20    // O₃    (ppb)
+};
+
+// Biên dao động ± cho từng chỉ số
+uint16_t delta[6] = {
+    1,    // PM2.5
+    1,    // PM10
+    2, //30,   // CO
+    1,    // SO₂
+    1,    // NO₂
+    1     // O₃
+};
+
+static uint16_t rand_int(uint16_t min, uint16_t max) {
+    return min + rand() % (max - min + 1);
+}
+
+static void generate_air_data(uint16_t *air_data, uint16_t i) {
+        uint16_t min = baseline[i] - delta[i];
+        uint16_t max = baseline[i] + delta[i];
+        *air_data = rand_int(min, max);
+}
+
+typedef struct {
+    uint16_t concentration;   // Giá trị đo được
+    const char* name;    // Tên chất
+    uint16_t breakpoints[7];  // Ngưỡng nồng độ
+    uint16_t aqi_levels[7];   // Ngưỡng AQI tương ứng
+} Pollutant;
+
+// Tính AQI theo công thức tuyến tính giữa các ngưỡng
+uint16_t calculate_aqi(uint16_t C, const uint16_t* bp, const uint16_t* aqi) {
+    for (uint8_t i = 0; i < 6; i++) {
+        if (C <= bp[i + 1]) {
+            uint16_t Clow = bp[i];
+            uint16_t Chigh = bp[i + 1];
+            uint16_t Ilow = aqi[i];
+            uint16_t Ihigh = aqi[i + 1];
+            return ((Ihigh - Ilow) * (C - Clow)) / (Chigh - Clow) + Ilow;
+        }
+    }
+    return aqi[6]; // Nếu vượt ngưỡng cao nhất
+}
+
+Pollutant pollutants[] = {
+    {0, "PM2.5", {0, 12, 35, 55, 150, 250, 500}, {0, 50, 100, 150, 200, 300, 500}},
+    {0, "PM10",  {0, 54, 154, 254, 354, 424, 604}, {0, 50, 100, 150, 200, 300, 500}},
+    {0, "CO",    {0, 4, 9, 12, 15, 30, 50},        {0, 50, 100, 150, 200, 300, 500}}, // ppm
+    {0, "SO2",   {0, 35, 75, 185, 304, 604, 1004}, {0, 50, 100, 150, 200, 300, 500}}, // ppb
+    {0, "NO2",   {0, 53, 100, 360, 649, 1249, 2049}, {0, 50, 100, 150, 200, 300, 500}}, // ppb
+    {0, "O3",    {0, 54, 70, 85, 105, 200, 400},   {0, 50, 100, 150, 200, 300, 500}} // ppb (8h)
+};
+
+typedef struct {
+	uint16_t aqi;
+    const char* pollutant;
+} AQI_Result;
+
+AQI_Result compute_aqi_us(uint16_t pm25, uint16_t pm10, uint16_t co_ppb, uint16_t so2, uint16_t no2, uint16_t o3) {
+    uint16_t max_aqi = 0;
+    const char* main_pollutant = "";
+
+    // Gán giá trị đo vào cấu trúc
+    pollutants[0].concentration = pm25;
+    pollutants[1].concentration = pm10;
+    pollutants[2].concentration = co_ppb / 1000; // CO: ppb → ppm
+    pollutants[3].concentration = so2;
+    pollutants[4].concentration = no2;
+    pollutants[5].concentration = o3;
+
+    for (uint8_t i = 0; i < 6; i++) {
+        uint16_t aqi = calculate_aqi(pollutants[i].concentration, pollutants[i].breakpoints, pollutants[i].aqi_levels);
+        if (aqi > max_aqi) {
+            max_aqi = aqi;
+            main_pollutant = pollutants[i].name;
+        }
+    }
+
+    AQI_Result result = {max_aqi, main_pollutant};
+    return result;
+}
+
+
 static eModbus modbus_no1;
 static char const *TAG = "HMI";
 // extern eModbus modbus[N_MODBUS];
-void hmi_task(void *arg){
+static void hmi_task(void *arg){
     modbus_no1.config.ucPort = BSP_MBS_HMI_PORT;
     modbus_no1.timer = BSP_TIMER_MBS_HMI;
     modbus_no1.config.ulBaudRate = 115200;
@@ -333,23 +424,42 @@ void hmi_task(void *arg){
 	usSRegHoldBuf[1] = 0x02;
 	usSRegHoldBuf[2] = 0x012;
 	usSRegHoldBuf[3] = 0x04;
+	usSRegHoldBuf[130] = 32;
+	usSRegHoldBuf[131] = 80;
+	usSRegHoldBuf[101] = 1110;
+	usSRegHoldBuf[103] = 1130;
+	usSRegHoldBuf[105] = 1150;
+	usSRegHoldBuf[107] = 1170;
+    usSRegHoldBuf[109] = 1190;
+	usSRegHoldBuf[111] = 1210;
 
-	usSRegHoldBuf[100] = 0x01;
-	usSRegHoldBuf[101] = 0x13;
-	usSRegHoldBuf[102] = 0x02;
-	usSRegHoldBuf[103] = 0x82;
-    usSRegHoldBuf[104] = 0x00;
-	usSRegHoldBuf[105] = 0x72;
+
     while(1) {
         eMBPoll(&modbus_no1);
-        usSRegHoldBuf[101]++;
+        // usSRegHoldBuf[101]++;
         vTaskDelay(1);
+    }
+}
+
+static void sensor_task(void *arg){
+    while(1)
+    {
+        generate_air_data(&usSRegHoldBuf[101], 0);
+        generate_air_data(&usSRegHoldBuf[103], 1);
+        generate_air_data(&usSRegHoldBuf[105], 2);
+        generate_air_data(&usSRegHoldBuf[107], 3);
+        generate_air_data(&usSRegHoldBuf[109], 4);
+        generate_air_data(&usSRegHoldBuf[111], 5);
+        AQI_Result result = compute_aqi_us(usSRegHoldBuf[101], usSRegHoldBuf[103], usSRegHoldBuf[105], usSRegHoldBuf[107], usSRegHoldBuf[109], usSRegHoldBuf[111]);
+        usSRegHoldBuf[113] = result.aqi;
+        vTaskDelay(2000);
     }
 }
 
 void hmi_app_init(){
 
     xTaskCreate(hmi_task, "hmi_task", 512, NULL, 4, NULL);
+    xTaskCreate(sensor_task, "sensor_task", 128, NULL, 4, NULL);
 }
 
 

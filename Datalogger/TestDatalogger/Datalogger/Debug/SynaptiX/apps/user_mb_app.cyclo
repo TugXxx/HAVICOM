@@ -2,5 +2,10 @@
 ../SynaptiX/apps/user_mb_app.c:114:14:eMBRegHoldingCB	7
 ../SynaptiX/apps/user_mb_app.c:180:14:eMBRegCoilsCB	1
 ../SynaptiX/apps/user_mb_app.c:259:14:eMBRegDiscreteCB	1
-../SynaptiX/apps/user_mb_app.c:315:6:hmi_task	3
-../SynaptiX/apps/user_mb_app.c:350:6:hmi_app_init	1
+../SynaptiX/apps/user_mb_app.c:333:17:rand_int	1
+../SynaptiX/apps/user_mb_app.c:337:13:generate_air_data	1
+../SynaptiX/apps/user_mb_app.c:351:10:calculate_aqi	3
+../SynaptiX/apps/user_mb_app.c:378:12:compute_aqi_us	3
+../SynaptiX/apps/user_mb_app.c:406:13:hmi_task	3
+../SynaptiX/apps/user_mb_app.c:444:13:sensor_task	1
+../SynaptiX/apps/user_mb_app.c:459:6:hmi_app_init	1
