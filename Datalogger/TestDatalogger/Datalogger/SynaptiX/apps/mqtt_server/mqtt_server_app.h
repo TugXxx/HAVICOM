@@ -7,6 +7,7 @@ extern "C" {
 
 #include "mqtt_interface.h"
 #include "config_manager.h"
+#include "environment.h"
 
 #define MQTT_PERIOD_s                 30
 #define MQTT_PUB_MSG_SIZE             1024//SERVER_MQTT_PAYLOAD_SIZE//2048
@@ -17,7 +18,7 @@ extern "C" {
 
 
 void mqtt_server_init(device_config_t *sys_config);
-
+extern MSU_t msu;
 #ifdef __cplusplus
 }
 #endif

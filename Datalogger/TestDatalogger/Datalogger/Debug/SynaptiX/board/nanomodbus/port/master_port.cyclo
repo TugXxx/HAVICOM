@@ -7,7 +7,7 @@
 ../SynaptiX/board/nanomodbus/port/master_port.c:152:19:server_write_multiple_coils	4
 ../SynaptiX/board/nanomodbus/port/master_port.c:166:19:server_write_single_register	1
 ../SynaptiX/board/nanomodbus/port/master_port.c:171:19:server_write_multiple_registers	3
-../SynaptiX/board/nanomodbus/port/master_port.c:201:16:read_serial	1
-../SynaptiX/board/nanomodbus/port/master_port.c:228:16:write_serial	2
-../SynaptiX/board/nanomodbus/port/master_port.c:267:13:rs485_de_low	1
-../SynaptiX/board/nanomodbus/port/master_port.c:271:13:rs485_de_high	1
+../SynaptiX/board/nanomodbus/port/master_port.c:201:16:read_serial	2
+../SynaptiX/board/nanomodbus/port/master_port.c:226:16:write_serial	2
+../SynaptiX/board/nanomodbus/port/master_port.c:265:13:rs485_de_low	1
+../SynaptiX/board/nanomodbus/port/master_port.c:269:13:rs485_de_high	1

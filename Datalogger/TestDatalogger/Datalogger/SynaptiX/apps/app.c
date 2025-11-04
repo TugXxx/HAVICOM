@@ -24,6 +24,7 @@ device_config_t sys_config;
 
 void app_init()
 {
+   bsp_power_off_hmi();
    bsp_init();
    device_state_init();
    hmi_app_init(); // user_mb_app
@@ -31,6 +32,7 @@ void app_init()
    // eth_init();
    mbm_rtu_app_init();
    pppos_app_init();
+   bsp_power_on_hmi();
 #if BUTTON_ENABLE
    // button_init();
 #endif

@@ -47,7 +47,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#define NMBS_DEBUG
+
 /**
  * nanoMODBUS errors.
  * Values <= 0 are library errors, > 0 are modbus exceptions.
@@ -82,8 +82,8 @@ typedef enum nmbs_error {
 /**
  * Bitfield consisting of 2000 coils/discrete inputs
  */
-// typedef uint8_t nmbs_bitfield[250];
-typedef uint8_t *nmbs_bitfield;
+typedef uint8_t nmbs_bitfield[250];
+
 /**
  * Bitfield consisting of 256 values
  */

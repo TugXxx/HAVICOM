@@ -51,7 +51,16 @@ SynaptiX/apps/modbus_rtu_app.o: ../SynaptiX/apps/modbus_rtu_app.c \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Core/Inc/gpio.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/i2c.h ../Core/Inc/tim.h
+ ../Core/Inc/i2c.h ../Core/Inc/tim.h ../SynaptiX/apps/user_mb_app.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mb.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/../../port/port.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbport.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/port/port.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbproto.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbconfig.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbframe.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbutils.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -109,3 +118,13 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/board.h
 ../Core/Inc/usart.h:
 ../Core/Inc/i2c.h:
 ../Core/Inc/tim.h:
+../SynaptiX/apps/user_mb_app.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mb.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/../../port/port.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbport.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/port/port.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbproto.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbconfig.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbframe.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/board/ModbusSlave/modbus/include/mbutils.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h:

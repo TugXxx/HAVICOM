@@ -32,8 +32,6 @@
 
 #define NMBS_UNUSED_PARAM(x) ((x) = (x))
 
-
-#define NMBS_DEBUG
 #ifdef NMBS_DEBUG
 #include <stdio.h>
 #define NMBS_DEBUG_PRINT(...) printf(__VA_ARGS__)
@@ -282,7 +280,6 @@ uint16_t nmbs_crc_calc(const uint8_t* data, uint32_t length, void* arg) {
     NMBS_UNUSED_PARAM(arg);
     uint16_t crc = 0xFFFF;
     for (uint32_t i = 0; i < length; i++) {
-        NMBS_DEBUG_PRINT("0x%02X ", data[i]);
         crc ^= (uint16_t) data[i];
         for (int j = 8; j != 0; j--) {
             if ((crc & 0x0001) != 0) {
@@ -293,7 +290,7 @@ uint16_t nmbs_crc_calc(const uint8_t* data, uint32_t length, void* arg) {
                 crc >>= 1;
         }
     }
-    NMBS_DEBUG_PRINT("\n");
+
     return (uint16_t) (crc << 8) | (uint16_t) (crc >> 8);
 }
 
@@ -308,7 +305,7 @@ static nmbs_error recv_msg_footer(nmbs_t* nmbs) {
             return err;
 
         uint16_t recv_crc = get_2(nmbs);
-        NMBS_DEBUG_PRINT("crc calc: 0x%04X, crc recv: 0x%04X\n", crc, recv_crc);
+
         if (recv_crc != crc)
             return NMBS_ERROR_CRC;
     }

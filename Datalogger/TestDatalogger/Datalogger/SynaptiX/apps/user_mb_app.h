@@ -33,6 +33,7 @@ extern USHORT *input_reg;
 #define S_REG_HOLDING_NREGS           200
 #if S_REG_HOLDING_NREGS > 0
 extern USHORT *hoding_reg;
+extern USHORT   usSRegHoldBuf[S_REG_HOLDING_NREGS];
 #endif
 /* salve mode: holding register's all address */
 #define          S_HD_RESERVE                     0

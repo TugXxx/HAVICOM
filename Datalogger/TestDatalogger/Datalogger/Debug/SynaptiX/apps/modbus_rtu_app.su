@@ -1,3 +1,3 @@
-../SynaptiX/apps/modbus_rtu_app.c:61:6:mbm_rtu_read_task	48	static
-../SynaptiX/apps/modbus_rtu_app.c:176:6:mbm_rtu_write_task	16	static
-../SynaptiX/apps/modbus_rtu_app.c:214:6:mbm_rtu_app_init	16	static
+../SynaptiX/apps/modbus_rtu_app.c:62:6:mbm_rtu_read_task	24	static
+../SynaptiX/apps/modbus_rtu_app.c:179:6:mbm_rtu_write_task	16	static
+../SynaptiX/apps/modbus_rtu_app.c:217:6:mbm_rtu_app_init	16	static

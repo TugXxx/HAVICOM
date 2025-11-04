@@ -16,7 +16,7 @@ extern "C" {
 #include <string.h>
 #include "logger.h"
 
-#define BSP_LOG_LEVEL LOGGER_DEBUG
+#define BSP_LOG_LEVEL LOGGER_INFO
 #define BSP_BUTTON_EN 1
 
 #define BSP_ANALOG_ENABLE 0
@@ -121,8 +121,8 @@ extern "C" {
  */
 #define BSP_SIM_COM_PORT 1
 #define BSP_RS485_1_COM_PORT 2
-#define BSP_RS485_2_COM_PORT 3
-#define BSP_MBS_HMI_PORT 4
+#define BSP_RS485_2_COM_PORT 4
+#define BSP_MBS_HMI_PORT 3
 
 // #define BSP_GPS_COM_PORT 2
 // #define BSP_SPS30_COM_PORT 3
@@ -215,8 +215,8 @@ extern "C" {
 #endif
 
 
-#define bsp_power_on_hmi() do { HAL_GPIO_WritePin(PW_HMI_GPIO_Port, PW_HMI_Pin, GPIO_PIN_SET); } while(0)
-#define bsp_power_off_hmi() do { HAL_GPIO_WritePin(PW_HMI_GPIO_Port, PW_HMI_Pin, GPIO_PIN_RESET); } while(0)
+#define bsp_power_on_hmi() do { HAL_GPIO_WritePin(PW_HMI_GPIO_Port, PW_HMI_Pin, GPIO_PIN_RESET); } while(0)
+#define bsp_power_off_hmi() do { HAL_GPIO_WritePin(PW_HMI_GPIO_Port, PW_HMI_Pin, GPIO_PIN_SET); } while(0)
 
 
 

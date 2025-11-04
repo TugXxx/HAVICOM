@@ -105,6 +105,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  bsp_power_off_hmi();
   MX_I2C1_Init();
   MX_LPUART1_UART_Init();
   MX_UART4_Init();

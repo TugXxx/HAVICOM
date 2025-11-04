@@ -18,11 +18,12 @@ extern "C" {
         float so2;
         float co;
         float o3;
+        int  aqi;
     } SensorData;
 
     typedef struct {
         float temperature;
-        int humidity;
+        float humidity;
     } EnvironmentData;
 
     typedef struct {

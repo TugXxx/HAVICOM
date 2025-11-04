@@ -8,7 +8,8 @@
 #include "nanomodbus.h"
 #include "logger.h"
 #include <port/master_port.h>
-
+#include "user_mb_app.h"
+#include "device_state.h"
 static const char *TAG = "ModbusRTU";
 // #include "../SynaptiXThingsBoardSDK/Widgets/include/modbus_widgets.h"
 // #include "../SynaptiXThingsBoardSDK/Widgets/include/thingsboard_widgets.h"
@@ -49,11 +50,11 @@ static nmbs_t nmbs;
 uint8_t write_data[1000];
 static SemaphoreHandle_t xRWMutex = NULL;
 /* ------------------------------------- EXTERN FUNCTION ---------------------------------------*/
-uint16_t holding_register[256] = {0};
+// uint16_t holding_register[256] = {0};
 xMBMRequest_t modbus_requests[2] = {
    // {slave_id, reg_type, start_addr, quantity, buffer}
-   {1, 0x03, 1, 10, &holding_register[0]},
-   {1, 0x03, 2, 20, &holding_register[1]},
+   {1, 0x03, 0, 4, &usSRegHoldBuf[114]},
+   // {1, 0x03, 2, 20, &holding_register[1]},
 };
 /* ------------------------------------- STATIC FUNCTION ----------------------------------------*/
 
@@ -74,6 +75,8 @@ void mbm_rtu_read_task(void *vParameters)
 
   nmbs_error status = NMBS_ERROR_NONE;
   xMBMRequest_t *current = &modbus_requests[0];
+  nmbs_set_destination_rtu_address(&nmbs, current->slave_id);
+
   while (1)
   {
 
@@ -82,7 +85,7 @@ void mbm_rtu_read_task(void *vParameters)
 
         if (current->buffer != NULL)
         {
-           nmbs_set_destination_rtu_address(&nmbs, current->slave_id);
+           
 
            switch (current->reg_type)
            {
@@ -144,12 +147,12 @@ void mbm_rtu_read_task(void *vParameters)
               }
               else
               {
-                 log_info(TAG, "Read holding SUCCESS - Data received:");
-                 uint16_t *data = (uint16_t *)current->buffer;
-                 for (uint16_t i = 0; i < current->quantity; i++)
-                 {
-                    log_info(TAG, "Reg[%d] = 0x%04X (%d)", current->start_addr + i, data[i], data[i]);
-                 }
+               //   log_info(TAG, "Read holding SUCCESS - Data received:");
+               //   uint16_t *data = (uint16_t *)current->buffer;
+               //   for (uint16_t i = 0; i < current->quantity; i++)
+               //   {
+               //      log_info(TAG, "Reg[%d] = 0x%04X (%d)", current->start_addr + i, data[i], data[i]);
+               //   }
               }
               break;
            case 0x04:
@@ -217,7 +220,7 @@ void mbm_rtu_app_init(void)
   xRWMutex = xSemaphoreCreateMutex();
 
   // To prioritize write task than read task
-  xTaskCreate(mbm_rtu_read_task, "mbm_rtu_read_task", 512, NULL, 4, NULL);
+  xTaskCreate(mbm_rtu_read_task, "mbm_rtu_read_task", 512, NULL, 20, NULL);
   // xTaskCreate(mbm_rtu_write_task, "mbm_rtu_write_task", 512, NULL, 5, NULL);
 }
 

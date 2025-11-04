@@ -308,7 +308,7 @@ eMBErrorCode eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT us
 #include "app_config.h"
 #include "FreeRTOS.h"
 #include "task.h"
-
+#include "mqtt_server_app.h"
 
 // Baseline cho nhà thi đấu/hội chợ triển lãm
 uint16_t baseline[6] = {
@@ -418,20 +418,13 @@ static void hmi_task(void *arg){
         log_error(TAG, "Modbus enable failed: %d", err);
     }
     log_info(TAG, "Power on HMI");
-
+    bsp_delay(5000);
     bsp_power_on_hmi();
-	usSRegHoldBuf[0] = 0x02;
-	usSRegHoldBuf[1] = 0x02;
-	usSRegHoldBuf[2] = 0x012;
-	usSRegHoldBuf[3] = 0x04;
-	usSRegHoldBuf[130] = 32;
-	usSRegHoldBuf[131] = 80;
-	usSRegHoldBuf[101] = 1110;
-	usSRegHoldBuf[103] = 1130;
-	usSRegHoldBuf[105] = 1150;
-	usSRegHoldBuf[107] = 1170;
-    usSRegHoldBuf[109] = 1190;
-	usSRegHoldBuf[111] = 1210;
+	usSRegHoldBuf[0] = 0x03;
+	usSRegHoldBuf[1] = 0x00;
+	usSRegHoldBuf[2] = 0x00;
+	// usSRegHoldBuf[3] = 0x04;
+
 
 
     while(1) {
@@ -440,7 +433,7 @@ static void hmi_task(void *arg){
         vTaskDelay(1);
     }
 }
-
+extern MSU_t msu;
 static void sensor_task(void *arg){
     while(1)
     {
@@ -450,8 +443,31 @@ static void sensor_task(void *arg){
         generate_air_data(&usSRegHoldBuf[107], 3);
         generate_air_data(&usSRegHoldBuf[109], 4);
         generate_air_data(&usSRegHoldBuf[111], 5);
+
         AQI_Result result = compute_aqi_us(usSRegHoldBuf[101], usSRegHoldBuf[103], usSRegHoldBuf[105], usSRegHoldBuf[107], usSRegHoldBuf[109], usSRegHoldBuf[111]);
         usSRegHoldBuf[113] = result.aqi;
+
+        msu.data_packet.sensors.pm25 = usSRegHoldBuf[101];
+        msu.data_packet.sensors.pm10 = usSRegHoldBuf[103];
+        msu.data_packet.sensors.co = usSRegHoldBuf[105];
+        msu.data_packet.sensors.so2 = usSRegHoldBuf[107];
+        msu.data_packet.sensors.co2 = usSRegHoldBuf[109];
+        msu.data_packet.sensors.o3 = usSRegHoldBuf[111];
+        msu.data_packet.sensors.aqi = usSRegHoldBuf[113];
+
+        union {
+            float f;
+            uint16_t reg[2];
+        } u;
+
+        
+        u.reg[0] = usSRegHoldBuf[115];         // LSB hoặc MSB tùy thiết bị
+        u.reg[1] = usSRegHoldBuf[114];
+        msu.data_packet.environment.temperature = u.f;
+        
+        u.reg[0] = usSRegHoldBuf[117];
+        u.reg[1] = usSRegHoldBuf[116];
+        msu.data_packet.environment.humidity = u.f;
         vTaskDelay(2000);
     }
 }

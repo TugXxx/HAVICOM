@@ -119,7 +119,7 @@ connecting:
 					uint8_t qos = client->msgPub.qos;
 					if ((payload != NULL) && (topic != NULL ))
 					{
-						log_info(TAG, "Pub payload: %s", payload);
+						// log_info(TAG, "Pub payload: %s", payload);
 						xEventGroupClearBits(client->events, mqtt_publish_event);
 						if (mqtt_publish(p_client(client), topic, payload,
 										strlen(payload), qos, 0, mqtt_pub_request_cb, client) != 0)
@@ -180,7 +180,7 @@ static err_t mqtt_do_connect(mqtt_interface_t *client)
 	ci.client_id = client->configs->clientID;
 	ci.client_user = client->configs->username;
 	ci.client_pass = client->configs->password;
-	ci.keep_alive = client->configs->keepAlive;
+	ci.keep_alive = 60;
 	// ci.will_msg = "{\"method\": \"thing.event.evt_Offline.post\"}";
 	// ci.will_qos = 1;
 	// ci.will_retain = 1;

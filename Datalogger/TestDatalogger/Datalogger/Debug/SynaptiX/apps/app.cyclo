@@ -1,2 +1,2 @@
 ../SynaptiX/apps/app.c:25:6:app_init	1
-../SynaptiX/apps/app.c:40:6:app_poll	1
+../SynaptiX/apps/app.c:42:6:app_poll	1

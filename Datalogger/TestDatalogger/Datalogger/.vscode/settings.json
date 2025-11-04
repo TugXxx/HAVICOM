@@ -21,6 +21,9 @@
         "iic_master.h": "c",
         "stat.h": "c",
         "user_mb_app.h": "c",
-        "master_port.h": "c"
+        "master_port.h": "c",
+        "nanomodbus.h": "c",
+        "socket.h": "c",
+        "device_state.h": "c"
     }
 }

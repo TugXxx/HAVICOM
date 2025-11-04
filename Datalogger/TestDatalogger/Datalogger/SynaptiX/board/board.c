@@ -17,7 +17,7 @@ static bool uart_tranfer_done[BSP_UART_NUM] = {false};
 static uint8_t uart_data[BSP_UART_NUM];
 static uint8_t uart_data_dma[BSP_UART_NUM][MAX_UART_BUFF_SIZE];
 
-UART_HandleTypeDef *puart[BSP_UART_NUM] = {&hlpuart1, &huart8, &huart4, &huart5, &huart6};// &huart4,&huart5};
+UART_HandleTypeDef *puart[BSP_UART_NUM] = {&hlpuart1, &huart8, &huart4, &huart6, &huart5};// &huart4,&huart5};
 
 uint32_t bsp_com_write(int com_num, uint8_t *buff, uint32_t len)
 {
@@ -97,6 +97,7 @@ uint32_t bsp_com_init()
 {
     for (int i = 0; i < BSP_UART_NUM; i++)
     {
+        if ( i == BSP_RS485_2_COM_PORT) continue;
         HAL_UART_Receive_IT(puart[i], &uart_data[i], 1);
         cqueue_init_static(&uart_queue[i], uart_buff[i], MAX_UART_BUFF_SIZE, sizeof(uint8_t));
         bsp_com_set_rx_callback(i, NULL, NULL);
@@ -318,6 +319,8 @@ uint32_t bsp_iic_read(int bus_num, uint8_t address, uint8_t *data, uint16_t size
     return HAL_I2C_Master_Receive(bus_iic[bus_num], address, data, size, HAL_MAX_DELAY);
 }
 #endif
+
+
 void bsp_init()
 {
     bsp_eth_reset_on();

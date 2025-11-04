@@ -80,7 +80,7 @@ nmbs_error nmbs_server_init(nmbs_t* nmbs, nmbs_server_t* _server) {
 
 nmbs_error nmbs_client_init(nmbs_t* nmbs) {
     nmbs_platform_conf conf;
-    nmbs->isInitialized = false;
+
     nmbs_platform_conf_create(&conf);
 #ifdef NMBS_TCP
     conf.transport = NMBS_TRANSPORT_TCP;
@@ -98,8 +98,8 @@ nmbs_error nmbs_client_init(nmbs_t* nmbs) {
         return status;
     }
 
-    nmbs_set_byte_timeout(nmbs, 1000);
-    nmbs_set_read_timeout(nmbs, 5000);
+    nmbs_set_byte_timeout(nmbs, 100);
+    nmbs_set_read_timeout(nmbs, 1000);
 
     return NMBS_ERROR_NONE;
 }
@@ -214,15 +214,13 @@ static int32_t read_serial(uint8_t* buf, uint16_t count, int32_t byte_timeout_ms
     }
     return count;
 #else
-    // HAL_StatusTypeDef status = HAL_UART_Receive(&MB_UART, buf, count, byte_timeout_ms);
-    uint32_t len = bsp_com_read(MB_UART, buf, count);
-//    if (len == count) {
-//        return count;
-//    }
-//    else {
-//        return 0;
-//    }
-    return len;
+    HAL_StatusTypeDef status = HAL_UART_Receive(&huart5, buf, count, byte_timeout_ms);
+    if (status == HAL_OK) {
+        return count;
+    }
+    else {
+        return 0;
+    }
 #endif
 }
 static int32_t write_serial(const uint8_t* buf, uint16_t count, int32_t byte_timeout_ms, void* arg) {

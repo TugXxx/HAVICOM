@@ -98,7 +98,7 @@ main-build: Datalogger.elf secondary-outputs
 
 # Tool invocations
 Datalogger.elf Datalogger.map: $(OBJS) $(USER_OBJS) D:\Local\Git\HAVICOM\Datalogger\TestDatalogger\Datalogger\STM32H743IITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Datalogger.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Local\Git\HAVICOM\Datalogger\TestDatalogger\Datalogger\STM32H743IITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Datalogger.map" -Wl,--gc-sections -static --data-sections --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Datalogger.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Local\Git\HAVICOM\Datalogger\TestDatalogger\Datalogger\STM32H743IITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Datalogger.map" -Wl,--gc-sections -static --data-sections -u _printf_float --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

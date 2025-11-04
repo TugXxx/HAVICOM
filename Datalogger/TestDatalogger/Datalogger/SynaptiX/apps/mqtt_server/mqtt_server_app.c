@@ -37,11 +37,11 @@ void mqtt_server_init(device_config_t *sys_config)
     memset(&client_cfg, 0, sizeof(struct mqtt_client_cfg));
 	// if ((sys_config->mqtt.url[0] == '\0') || (sys_config->mqtt.username[0] == '\0') || (sys_config->mqtt.password[0] == '\0')) {
 		log_warn(TAG, "MQTT configuration is not set in sys_config");
-		strcpy(client_cfg.clientID,"SynaptiX" );
+		strcpy(client_cfg.clientID,"synaptix" );
 		// strcpy(client_cfg.host,"27.71.27.73");
         strcpy(client_cfg.host,"demo.thingsboard.io");
-		strcpy(client_cfg.username, "kyezemnr48njppn92e3v");
-		strcpy(client_cfg.password, "b8nishqt7g3usc259ixp");
+		strcpy(client_cfg.username, "synaptix");
+		strcpy(client_cfg.password, "synaptix");
 		strcpy(client.pub_topic, TB_PUB_TOPIC_HEARDER);
 		strcpy(client.sub_topic, TB_SUB_TOPIC_ATTRIBUTES);
 		client_cfg.port = MQTT_PORT;
@@ -64,7 +64,7 @@ void mqtt_server_init(device_config_t *sys_config)
         return;
     }
 
-    xTaskCreate(data_packet_task, "data_packet_task", 256*4, &msu, 6, &data_packet_handle);
+    xTaskCreate(data_packet_task, "data_packet_task", 256*8, &msu, 6, &data_packet_handle);
     if(data_packet_handle == NULL){
         log_error(TAG,"data_packet_task task create false");
     }
@@ -84,7 +84,7 @@ static void data_packet_task(void *arg)
 		vTaskDelay(1000);
 		state = device_get_state();
 	}
-device->data_packet.environment.temperature = -25;
+
     while (1)
     {
         char msg[MQTT_PUB_MSG_SIZE] = {0};
@@ -146,7 +146,7 @@ static int create_msu_json(
     }
 
     cJSON_AddStringToObject(root, "deviceID", packet->deviceID);
-    cJSON_AddStringToObject(root, "timestamp", timestamp);
+    // cJSON_AddStringToObject(root, "timestamp", timestamp);
     // cJSON_AddStringToObject(root, "motionState", packet->motionState);
 
     // GPS
@@ -156,8 +156,8 @@ static int create_msu_json(
     //     log_error(TAG, "Failed to create cJson for device [%s]", packet->deviceID);
     //     return -1;
     // }
-    // cJSON_AddNumberToObject(location, "latitude", packet->location.latitude);
-    // cJSON_AddNumberToObject(location, "longitude", packet->location.longitude);
+    // cJSON_AddNumberToObject(location, "latitude", ((float)1078 * 0.1));
+    // cJSON_AddNumberToObject(location, "longitude", ((float)1078 * 0.1));
     // cJSON_AddItemToObject(root, "location", location);
     // cJSON_AddNumberToObject(root, "latitude", packet->location.latitude);
     // cJSON_AddNumberToObject(root, "longitude", packet->location.longitude);
@@ -168,8 +168,8 @@ static int create_msu_json(
     //     log_error(TAG, "Failed to create cJson for device [%s]", packet->deviceID);
     //     return -1;
     // }
-    // CHECK_NULL(cJSON_AddNumberToObject(root, "latitude", (double)21.0376));
-    // CHECK_NULL(cJSON_AddNumberToObject(root, "longitude", (double)105.7256));
+    CHECK_NULL(cJSON_AddNumberToObject(root, "latitude", ((double)21.1885740)));
+    CHECK_NULL(cJSON_AddNumberToObject(root, "longitude", ((double)106.0791578)));
     // cJSON_AddNumberToObject(sensors, "pm25", 12);
     // cJSON_AddNumberToObject(sensors, "pm10", packet->sensors.pm10);
     // cJSON_AddNumberToObject(sensors, "co2", packet->sensors.co2);
@@ -184,13 +184,13 @@ static int create_msu_json(
     CHECK_NULL(cJSON_AddNumberToObject(root, "co", packet->sensors.co));
     CHECK_NULL(cJSON_AddNumberToObject(root, "o3", packet->sensors.o3));
     // CHECK_NULL(cJSON_AddNumberToObject(root, "AQI", getAQI(&packet->sensors)));
-    CHECK_NULL(cJSON_AddNumberToObject(root, "AQI", packet->environment.temperature));
+    CHECK_NULL(cJSON_AddNumberToObject(root, "AQI", packet->sensors.aqi));
     // Environment data
     // cJSON *environment = cJSON_CreateObject();
     // cJSON_AddNumberToObject(environment, "temperature", 57);
     // cJSON_AddNumberToObject(environment, "humidity", packet->environment.humidity);
     // cJSON_AddItemToObject(root, "environment", environment);
-    cJSON_AddNumberToObject(root, "temperature", packet->environment.temperature++);
+    cJSON_AddNumberToObject(root, "temperature", packet->environment.temperature);
     cJSON_AddNumberToObject(root, "humidity", packet->environment.humidity);
 
     cJSON_PrintPreallocated(root, json, len, false);

@@ -7,5 +7,5 @@
 ../SynaptiX/apps/user_mb_app.c:351:10:calculate_aqi	40	static
 ../SynaptiX/apps/user_mb_app.c:378:12:compute_aqi_us	48	static
 ../SynaptiX/apps/user_mb_app.c:406:13:hmi_task	24	static
-../SynaptiX/apps/user_mb_app.c:444:13:sensor_task	56	static
-../SynaptiX/apps/user_mb_app.c:459:6:hmi_app_init	16	static
+../SynaptiX/apps/user_mb_app.c:437:13:sensor_task	64	static
+../SynaptiX/apps/user_mb_app.c:475:6:hmi_app_init	16	static

@@ -122,6 +122,7 @@ SynaptiX/apps/pppos_app.o: ../SynaptiX/apps/pppos_app.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h \
+ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/mqtt_server/environment.h \
  D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h
 ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/ppp.h:
 ../Middlewares/Third_Party/LwIP/src/include/netif/ppp/ppp_opts.h:
@@ -250,4 +251,5 @@ D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/mqtt_ser
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/config/config_manager.h:
+D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/mqtt_server/environment.h:
 D:/Local/Git/HAVICOM/Datalogger/TestDatalogger/Datalogger/SynaptiX/apps/device_state/device_state.h:
